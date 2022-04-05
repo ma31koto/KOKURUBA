@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   belongs_to :customer
-  has_many :post_tags, dependet: :destroy
+  has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   belongs_to :area
   
