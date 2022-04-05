@@ -1,0 +1,8 @@
+ja:
+  enums:
+    customer:
+      gender:
+        man: "男性"
+        woman: "女性"
+        another: "その他"
+        no_answer: "無回答"

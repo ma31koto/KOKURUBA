@@ -1,29 +1,65 @@
-<h2>Sign up</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h2>新規会員登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "publics/shared/error_messages", resource: resource %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render 'layouts/error_messages', resource: @customer %>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= f.label :name, "名前" %></td>
+              <td><%= f.text_field :name, autofocus: true, :placeholder =>"東京太郎" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :email, "メールアドレス" %></td>
+              <td><%= f.email_field :email, :placeholder =>"sample@example.com" %></td>
+            </tr>
+            <tr>
+              <td>性別</td>
+              <td>
+                <%= f.radio_button :gender, Customer.genders.key(0) %>
+                <%= f.label :gender, Customer.genders_i18n[:man] %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                <%= f.radio_button :gender, Customer.genders.key(1) %>
+                <%= f.label :gender, Customer.genders_i18n[:woman] %>
+
+                <%= f.radio_button :gender, Customer.genders.key(2) %>
+                <%= f.label :gender, Customer.genders_i18n[:another] %>
+
+                <%= f.radio_button :gender, Customer.genders.key(3) %>
+                <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
+              </td>
+            </tr>
+            <tr>
+              <td><%= f.label :age, "年齢" %></td>
+              <td><%= f.text_field :age, autofocus: true, :placeholder =>"27" %>歳</td>
+            </tr>
+            <tr>
+              <td><%= f.label :password, "パスワード(#{@minimum_password_length}文字以上)" %></td>
+              <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :password_confirmation, "パスワード(確認用)" %></td>
+              <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= f.submit "新規登録", class: "btn btn-success" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+
+      <p>既に登録済みの方</p>
+      <p><%= link_to "こちら", new_customer_session_path %>からログインしてください。</p>
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "publics/shared/links" %>
+</div>

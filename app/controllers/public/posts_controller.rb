@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
   def map_search
   end
-  
+
   def index
   end
 
