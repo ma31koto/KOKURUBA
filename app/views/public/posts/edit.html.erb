@@ -1,2 +1,64 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h1>投稿フォーム</h1>
+      <%= form_with model:@post, url: posts_path, method: :patch, local: true do |f| %>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= f.label :title, "タイトル" %></td>
+              <td><%= f.text_field :title %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :introduction, "説明文" %></td>
+              <td><%= f.text_area :introduction %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :postal_code, "郵便番号" %></td>
+              <td><%= f.text_field :postal_code %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :address, "住所" %></td>
+              <td><%= f.text_field :address %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :area_id, "エリア" %></td>
+              <td><%= f.collection_select :area_id, @area, :id, :name, include_blank: "----", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :spot_image, "スポット画像" %></td>
+              <td><%= f.file_field :spot_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :tag_name, "タグ (,で区切ると複数タグ登録できます)" %></td>
+              <td><%= f.text_field :tag_name, value: @tag_list, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :confession_result, "告白結果" %></td>
+              <td>
+                <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
+
+                <%= f.radio_button :confession_result, Post.confession_results.key(1) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:no] %>
+
+                <%= f.radio_button :confession_result, Post.confession_results.key(2) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:no_answer] %>
+              </td>
+            </tr>
+            <tr>
+              <td><%= f.submit "変更", class: "btn btn-success" %></td>
+              <td><%= link_to "削除", posts_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

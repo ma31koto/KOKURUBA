@@ -23,8 +23,8 @@ Rails.application.routes.draw do
     get 'homes/about' => 'homes#about'
     resources :customers, only: [:show, :edit, :update] do
       collection do
-        get 'unsubscribe' => 'customers#unsubscribe', as: 'confirm_unsubscribe'
-        patch 'withdraw' => 'customers#withdraw', as: 'withdraw_customer'
+        get 'unsubscribe' => 'customers#unsubscribe'
+        patch 'withdraw' => 'customers#withdraw'
       end
       resources :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings'

@@ -1,2 +1,67 @@
-<h1>Public::Posts#new</h1>
-<p>Find me in app/views/public/posts/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h1>投稿フォーム</h1>
+      <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= f.label :title, "タイトル" %></td>
+              <td><%= f.text_field :title, :placeholder =>"東京タワー" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :introduction, "説明文" %></td>
+              <td><%= f.text_area :introduction, :placeholder =>"夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :postal_code, "郵便番号" %></td>
+              <td><%= f.text_field :postal_code, :placeholder =>"000000" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :address, "住所" %></td>
+              <td><%= f.text_field :address, :placeholder =>"東京都港区芝公園４丁目２−８" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :area_id, "エリア" %></td>
+              <td><%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :spot_image, "スポット画像" %></td>
+              <td><%= f.file_field :spot_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :tag_name,"タグ (,で区切ると複数タグ登録できます)" %></td>
+              <td><%= f.text_field :tag_name, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :confession_result, "告白結果" %></td>
+              <td>
+                <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
+
+                <%= f.radio_button :confession_result, Post.confession_results.key(1) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:no] %>
+
+                <%= f.radio_button :confession_result, Post.confession_results.key(2) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:no_answer] %>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= f.submit "投稿", class: "btn btn-primary" %></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+      <% end %>
+    </div>
+  </div>
+</div>

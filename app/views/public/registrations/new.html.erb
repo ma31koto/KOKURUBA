@@ -22,7 +22,7 @@
               <td><%= f.email_field :email, :placeholder =>"sample@example.com" %></td>
             </tr>
             <tr>
-              <td>性別</td>
+              <td><%= f.label :gender, "性別" %></td>
               <td>
                 <%= f.radio_button :gender, Customer.genders.key(0) %>
                 <%= f.label :gender, Customer.genders_i18n[:man] %>

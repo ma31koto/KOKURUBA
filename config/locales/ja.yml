@@ -6,3 +6,15 @@ ja:
         woman: "女性"
         another: "その他"
         no_answer: "無回答"
+
+    post:
+      confession_result:
+        yes: "成功"
+        no: "失敗"
+        no_answer: "告白していない"
+
+    post_comment:
+      confession_result:
+        yes: "成功"
+        no: "失敗"
+        no_answer: "告白していない"

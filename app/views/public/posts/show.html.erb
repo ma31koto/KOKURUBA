@@ -1,2 +1,4 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<h1>投稿詳細</h1>
+<% @post_tags.each do |tag| %>
+  <%=tag.name%><%="(#{tag.posts.count})" %>
+<% end %>
