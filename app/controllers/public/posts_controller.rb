@@ -11,8 +11,6 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @post_comment=PostComment.new
-    @post_tags = @post.tags
   end
 
   def new
@@ -22,7 +20,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    tag_list = params[:post][:tag_name].split(',')
+    tag_list = params[:post][:name].split(',')
     if @post.save
       @post.save_tag(tag_list)
       redirect_to post_path(@post), notice:'投稿完了しました'
@@ -32,12 +30,13 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @tag_list = @post.tags.pluck(:tag_name).join(',')
+    @tag_list = @post.tags.pluck(:name).join(',')
+    @post = Post.find(params[:id])
   end
 
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:tag_name].split(',')
+    tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
        @post.save_tag(tag_list)
        redirect_to post_path(@post),notice:'投稿を変更しました'
@@ -47,6 +46,7 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
     redirect_to map_search_posts_path
   end
@@ -54,12 +54,12 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :introduction, :postal_code, :address, :area_id, :spot_image, :confession_result)
+    params.require(:post).permit(:title, :introduction, :postal_code, :address, :longitude, :latitude, :area_id, :spot_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
   end
 
   def ensure_correct_customer
     @post = Post.find(params[:id])
-    unless @post.customer == current_user
+    unless @post.customer == current_customer
       redirect_to map_search_posts_path
     end
   end

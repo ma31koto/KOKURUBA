@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8 mx-auto">
-      <h1>投稿フォーム</h1>
+      <h1>スポット投稿フォーム</h1>
       <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
         <table>
           <thead>
@@ -36,8 +36,8 @@
               <td><%= f.file_field :spot_image, accept: "image/*" %></td>
             </tr>
             <tr>
-              <td><%= f.label :tag_name,"タグ (,で区切ると複数タグ登録できます)" %></td>
-              <td><%= f.text_field :tag_name, class: "form-control" %></td>
+              <td><%= f.label :name,"タグ (,で区切ると複数タグ登録できます)" %></td>
+              <td><%= f.text_field :name, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :confession_result, "告白結果" %></td>
@@ -53,14 +53,100 @@
               </td>
             </tr>
             <tr>
+              <td>
+                雰囲気</br>
+                人の少なさ</br>
+                定番度</br>
+              </td>
+              <td>
+                <div class="form-group" id="atmosphere_rate">
+                  <%= f.label :atmosphere_rate %>
+                  <%= f.hidden_field :atmosphere_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#atmosphere_rate').empty();
+                  $('#atmosphere_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[atmosphere_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+
+                <div class="form-group" id="few_people_rate">
+                  <%= f.label :few_people_rate %>
+                  <%= f.hidden_field :few_people_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#few_people_rate').empty();
+                  $('#few_people_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[few_people_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+
+                <div class="form-group" id="standard_rate">
+                  <%= f.label :standard_rate %>
+                  <%= f.hidden_field :standard_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#standard_rate').empty();
+                  $('#standard_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[standard_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+              </td>
+            </tr>
+            <tr>
+              <td>総合評価</td>
+              <td>
+                <div class="form-group" id="all_rate">
+                  <%= f.label :all_rate %>
+                  <%= f.hidden_field :all_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#all_rate').empty();
+                  $('#all_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[all_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+              </td>
+            </tr>
+            <tr>
               <td></td>
               <td><%= f.submit "投稿", class: "btn btn-primary" %></td>
             </tr>
           </tbody>
         </table>
-
-
-
+        <!--後で消す-->
+        <%= f.label :longitude, "緯度" %></td>
+        <%= f.text_field :longitude %>
+        <%= f.label :latitude, "経度" %></td>
+        <%= f.text_field :latitude %>
       <% end %>
     </div>
   </div>

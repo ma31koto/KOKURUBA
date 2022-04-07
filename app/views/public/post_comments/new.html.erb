@@ -1,2 +1,133 @@
-<h1>Public::PostComments#new</h1>
-<p>Find me in app/views/public/post_comments/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h1>コメント投稿フォーム</h1>
+      <%= form_with model:@post_comment, url: post_post_comments_path(@post), method: :post, local: true do |f| %>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= f.label :title, "タイトル" %></td>
+              <td><%= f.text_field :title, :placeholder =>"クリスマスシーズンの東京タワー" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :comment, "コメント" %></td>
+              <td><%= f.text_area :comment, :placeholder =>"クリスマスシーズンの東京タワーは色がクリスマスカラーに変わります！" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :comment_image, "コメント画像" %></td>
+              <td><%= f.file_field :comment_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :confession_result, "告白結果" %></td>
+              <td>
+                <%= f.radio_button :confession_result, PostComment.confession_results.key(0) %>
+                <%= f.label :confession_result, PostComment.confession_results_i18n[:yes] %>
+
+                <%= f.radio_button :confession_result, PostComment.confession_results.key(1) %>
+                <%= f.label :confession_result, PostComment.confession_results_i18n[:no] %>
+
+                <%= f.radio_button :confession_result, PostComment.confession_results.key(2) %>
+                <%= f.label :confession_result, PostComment.confession_results_i18n[:no_answer] %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                雰囲気</br>
+                人の少なさ</br>
+                定番度</br>
+              </td>
+              <td>
+                <div class="form-group" id="atmosphere_rate">
+                  <%= f.label :atmosphere_rate %>
+                  <%= f.hidden_field :atmosphere_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#atmosphere_rate').empty();
+                  $('#atmosphere_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post_comment[atmosphere_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+
+                <div class="form-group" id="few_people_rate">
+                  <%= f.label :few_people_rate %>
+                  <%= f.hidden_field :few_people_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#few_people_rate').empty();
+                  $('#few_people_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post_comment[few_people_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+
+                <div class="form-group" id="standard_rate">
+                  <%= f.label :standard_rate %>
+                  <%= f.hidden_field :standard_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#standard_rate').empty();
+                  $('#standard_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post_comment[standard_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+              </td>
+            </tr>
+            <tr>
+              <td>総合評価</td>
+              <td>
+                <div class="form-group" id="all_rate">
+                  <%= f.label :all_rate %>
+                  <%= f.hidden_field :all_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#all_rate').empty();
+                  $('#all_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post_comment[all_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= f.submit "投稿", class: "btn btn-primary" %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
+

@@ -1,4 +1,130 @@
-<h1>投稿詳細</h1>
-<% @post_tags.each do |tag| %>
-  <%=tag.name%><%="(#{tag.posts.count})" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h1>投稿詳細</h1>
+
+
+      <h2><%= @post.title %></h2>
+
+      <div id="favorite_buttons">
+        <%= render "public/favorites/btn", post: @post %>
+      </div>
+
+      <% @post.tags.each do |tag| %>
+        <%=tag.name%>
+      <% end %>
+
+      <p>投稿者</p>
+      <%= link_to customer_path(@post.customer) do %>
+        <%= @post.customer.name %>
+      <% end %>
+
+      <% if @post.customer == current_customer %>
+        <%= link_to "編集する", edit_post_path(@post), class: "btn btn-success" %>
+      <% end %>
+
+      <%= image_tag @post.get_spot_image, size: "200x200" %>
+
+      <p>総合評価</p>
+      <%= @post.all_rate.round(1).to_f %>
+      <div id="all_rate_<%= @post.id %>" class="form-group"></div>
+      <p>雰囲気</p>
+      <%= @post.atmosphere_rate.round(1).to_f %>
+      <div id="atmosphere_rate_<%= @post.id %>" class="form-group"></div>
+      <p>人の少なさ</p>
+      <%= @post.few_people_rate.round(1).to_f %>
+      <div id="few_people_rate_<%= @post.id %>" class="form-group"></div>
+      <p>定番度</p>
+      <%= @post.standard_rate.round(1).to_f %>
+      <div id="standard_rate_<%= @post.id %>" class="form-group"></div>
+
+      <script>
+      $(document).on('turbolinks:load', function() {
+        $('#all_rate_<%= @post.id %>').empty();
+        $('#all_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.all_rate %>,
+        });
+
+        $('#atmosphere_rate_<%= @post.id %>').empty();
+        $('#atmosphere_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.atmosphere_rate %>,
+        });
+
+        $('#few_people_rate_<%= @post.id %>').empty();
+        $('#few_people_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.few_people_rate %>,
+        });
+
+        $('#standard_rate_<%= @post.id %>').empty();
+        $('#standard_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.standard_rate %>,
+        });
+      });
+      </script>
+
+      告白成功率90％
+
+      <% if @post.customer != current_customer %>
+        <%= link_to "コメントする", new_post_post_comment_path(@post) %>
+      <% end %>
+
+
+      <html lang="ja">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+          <title>11章【タブメニューを作ってみよう】</title>
+          <link rel="stylesheet" href="scss/style.css" />
+        </head>
+        <body>
+          <h1>11章【タブメニューを作ってみよう】</h1>
+
+          <div class="wrap">
+            <ul id="tab-menu">
+              <li><a href="#tab1" class="active">TAB1</a></li>
+              <li><a href="#tab2" class="">TAB2</a></li>
+            </ul>
+
+            <div id="tab-contents">
+              <div id="tab1" class="tab">
+                <p>TAB1のテキストが入ります。</p>
+              </div>
+
+              <div id="tab2" class="tab">
+                <p>TAB2のテキストが入ります。TAB2のテキストが入ります。</p>
+              </div>
+            </div>
+          </div>
+          <script src="js/jquery.min.js"></script>
+          <script src="js/script.js"></script>
+        </body>
+      </html>
+
+    </div>
+  </div>
+</div>
+

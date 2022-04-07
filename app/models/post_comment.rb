@@ -6,7 +6,7 @@ class PostComment < ApplicationRecord
   validates :comment, presence: true
   validates :confession_result, presence: true
 
-  enum confession_result: { yes: 0, no: 1, no_answer: 3 }
+  enum confession_result: { yes: 0, no: 1, no_answer: 2 }
 
   has_one_attached :comment_image
 

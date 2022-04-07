@@ -31,12 +31,13 @@ Rails.application.routes.draw do
       get 'followers' => 'relationships#followers'
     end
     resources :posts do
+      resources :post_comments, only: [:new, :create, :edit, :update, :destroy]
+      resource :favorites, only: [:create, :destroy]
       collection do
         get 'map_search' => 'posts#map_search'
+        get 'favorites_list',to: 'favorites#index', as: 'favorites_list'
       end
     end
-    resources :post_comments, only: [:new, :create, :edit, :update, :destroy]
-    resources :favorites, only: [:index, :create, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

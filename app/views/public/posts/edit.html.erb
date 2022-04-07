@@ -29,7 +29,7 @@
             </tr>
             <tr>
               <td><%= f.label :area_id, "エリア" %></td>
-              <td><%= f.collection_select :area_id, @area, :id, :name, include_blank: "----", class: "form-control" %></td>
+              <td><%= f.collection_select :area_id, Area.all, :id, :name, class: "form-control" %></td>
             </tr>
             <tr>
               <td><%= f.label :spot_image, "スポット画像" %></td>
@@ -53,8 +53,11 @@
               </td>
             </tr>
             <tr>
-              <td><%= f.submit "変更", class: "btn btn-success" %></td>
-              <td><%= link_to "削除", posts_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %></td></td>
+              <td></td>
+              <td>
+                <%= f.submit "変更", class: "btn btn-success" %>
+                <%= link_to "削除", post_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+              </td>
             </tr>
           </tbody>
         </table>

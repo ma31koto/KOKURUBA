@@ -1,0 +1,101 @@
+<script>$(document).on('turbolinks:load', function() {});</script>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>エリア</th>
+      <th>関連タグ</th>
+      <th>総合評価</th>
+      <th>雰囲気</th>
+      <th>人の少なさ</th>
+      <th>定番度</th>
+      <th>告白成功率</th>
+      <th>コメント数</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% posts.each do |post| %>
+    <tr>
+      <td>
+        <%= image_tag post.get_spot_image, size: "50x50" %></br>
+        <%= post.title %>
+      </td>
+      <td><%= post.area.name %></td>
+      <td>
+        <% post.tags.each do |tag| %>
+          <%= tag.name %></br>
+        <% end %>
+      </td>
+      <td>
+        <%= post.all_rate.round(1).to_f %>
+        <div id="all_rate_<%= post.id %>" class="form-group"></div>
+        <script>
+          $('#all_rate_<%= post.id %>').empty();
+          $('#all_rate_<%= post.id %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            core: <%= post.all_rate %>,
+          });
+        </script>
+      </td>
+      <td>
+        <%= post.atmosphere_rate.round(1).to_f %>
+        <div id="atmosphere_rate_<%= post.id %>" class="form-group"></div>
+        <script>
+            $('#atmosphere_rate_<%= post.id %>').empty();
+            $('#atmosphere_rate_<%= post.id %>').raty({
+              size: 20,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: <%= post.atmosphere_rate %>,
+            });
+        </script>
+      </td>
+      <td>
+        <%= post.few_people_rate.round(1).to_f %>
+        <div id="few_people_rate_<%= post.id %>" class="form-group"></div>
+        <script>
+          $('#few_people_rate_<%= post.id %> %>').empty();
+          $('#few_people_rate_<%= post.id %> %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= post.few_people_rate %>,
+          });
+        </script>
+      </td>
+      <td>
+        <%= post.standard_rate.round(1).to_f %>
+        <div id="standard_rate_<%= post.id %>" class="form-group"></div>
+        <script>
+          $('#standard_rate_<%= post.id %> %>').empty();
+          $('#standard_rate_<%= post.id %> %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= post.standard_rate %>,
+          });
+        </script>
+      </td>
+      <td>90%(編集中)</td>
+      <td><%= post.post_comments.count %>件</td>
+      <td><%= link_to "表示する", post_path(post), class: "btn btn-success" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
