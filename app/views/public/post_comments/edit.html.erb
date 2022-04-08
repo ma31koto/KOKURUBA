@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-8 mx-auto">
       <h1>コメント編集フォーム</h1>
-      <%= form_with model:@post_comment, url: edit_post_post_comment_path(@post, @post_comment), method: :patch, local: true do |f| %>
+  
+      <%= form_with model:@post_comment, url: post_post_comment_path(@post_comment.post, @post_comment), method: :patch, local: true do |f| %>
         <table>
           <thead>
             <tr>
@@ -123,8 +124,8 @@
             <tr>
               <td></td>
               <td>
-                <%= f.submit "投稿", class: "btn btn-primary" %>
-                <%= link_to "削除", post_post_commnet_path(@post, @post_comment),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+                <%= f.submit "変更", class: "btn btn-success" %>
+                <%= link_to "削除", post_post_comment_path(@post_comment.post, @post_comment),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
               </td>
             </tr>
           </tbody>

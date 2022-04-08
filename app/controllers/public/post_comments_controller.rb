@@ -7,30 +7,30 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def create
-    @post = Post.find(params[:post_id])
+    post = Post.find(params[:post_id])
     comment = current_customer.post_comments.new(post_comment_params)
-    comment.post_id = @post.id
+    comment.post_id = post.id
     comment.save
-    redirect_to post_path(@post)
+    redirect_to post_path(post)
 
   end
 
   def edit
-    @post_comment = PostComent.find(params[:id])
   end
 
   def update
-    @post_comment = PostComent.find(params[:id])
+    post = Post.find(params[:post_id])
     if @post_comment.update(post_comment_params)
-       redirect_to post_path(@post),notice:'投稿を変更しました'
+       redirect_to post_path(post),notice:'投稿を変更しました'
     else
       render :edit
     end
   end
 
   def destroy
+    post = Post.find(params[:post_id])
     PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-    redirect_to post_path(@post)
+    redirect_to post_path(post)
   end
 
   private
@@ -40,8 +40,8 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def ensure_correct_customer
-    @post = Post.find(params[:post_id])
-    unless @post.customer == current_customer
+    @post_comment = PostComment.find(params[:id])
+    unless @post_comment.customer == current_customer
       redirect_to map_search_posts_path
     end
   end

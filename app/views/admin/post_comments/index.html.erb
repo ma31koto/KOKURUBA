@@ -1,2 +1,104 @@
-<h1>Admin::PostComments#index</h1>
-<p>Find me in app/views/admin/post_comments/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <h1>コメント一覧</h1>
+      <script>$(document).on('turbolinks:load', function() {});</script>
+
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>コメント投稿者</th>
+            <th>総合評価</th>
+            <th>雰囲気</th>
+            <th>人の少なさ</th>
+            <th>定番度</th>
+            <th>コメント</th>
+            <th>告白結果</th>
+            <th>投稿日</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @post_comments.each do |post_comment| %>
+          <tr>
+            <td>
+              <%= image_tag post_comment.get_comment_image, size: "50x50" %></br>
+              <%= post_comment.title %>
+            </td>
+            <td><%= post_comment.customer.name %></td>
+            <td>
+              <%= post_comment.all_rate.round(1).to_f %>
+              <div id="all_rate_<%= post_comment.id %>" class="form-group"></div>
+              <script>
+                $('#all_rate_<%= post_comment.id %>').empty();
+                $('#all_rate_<%= post_comment.id %>').raty({
+                  size: 20,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  core: <%= post_comment.all_rate %>,
+                });
+              </script>
+            </td>
+            <td>
+              <%= post_comment.atmosphere_rate.round(1).to_f %>
+              <div id="atmosphere_rate_<%= post_comment.id %>" class="form-group"></div>
+              <script>
+                $('#atmosphere_rate_<%= post_comment.id %>').empty();
+                $('#atmosphere_rate_<%= post_comment.id %>').raty({
+                  size: 20,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  score: <%= post_comment.atmosphere_rate %>,
+                });
+              </script>
+            </td>
+            <td>
+              <%= post_comment.few_people_rate.round(1).to_f %>
+              <div id="few_people_rate_<%= post_comment.id %>" class="form-group"></div>
+              <script>
+                $('#few_people_rate_<%= post_comment.id %> %>').empty();
+                $('#few_people_rate_<%= post_comment.id %> %>').raty({
+                  size: 20,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  score: <%= post_comment.few_people_rate %>,
+                });
+              </script>
+            </td>
+            <td>
+              <%= post_comment.standard_rate.round(1).to_f %>
+              <div id="standard_rate_<%= post_comment.id %>" class="form-group"></div>
+              <script>
+                $('#standard_rate_<%= post_comment.id %> %>').empty();
+                $('#standard_rate_<%= post_comment.id %> %>').raty({
+                  size: 20,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  score: <%= post_comment.standard_rate %>,
+                });
+              </script>
+            </td>
+            <td><%= post_comment.comment %></td>
+            <td><%= post_comment.confession_result_i18n %></td>
+            <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.post, post_comment), class: "btn btn-success" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

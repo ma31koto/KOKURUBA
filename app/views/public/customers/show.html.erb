@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto">
+    <div class="col-10 mx-auto">
 
     <% if @customers = current_customer %>
       <h1>My Page</h1>
@@ -27,7 +27,7 @@
       <% end %>
     </div>
     <div>
-      <h2>投稿一覧</h2>
+      <h2>スポット投稿一覧</h2>
       <table>
         <thead>
           <tr>
@@ -54,8 +54,23 @@
                 <%= tag.name %>
               <% end %>
             </td>
-            <td><%= post.post_comments.count %></td>
-            <td>★★★★★</td>
+            <td><%= post.post_comments.count %>件</td>
+            <td>
+              <%= post.all_rate.round(1).to_f %>
+              <div id="all_rate_<%= post.id %>" class="form-group"></div>
+              <script>
+                $('#all_rate_<%= post.id %>').empty();
+                $('#all_rate_<%= post.id %>').raty({
+                  size: 20,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  core: <%= post.all_rate %>,
+                });
+              </script>
+            </td>
             <td>90％</td>
           </tr>
           <% end %>

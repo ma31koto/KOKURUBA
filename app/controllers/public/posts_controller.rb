@@ -20,6 +20,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
+    # @post.confession_result = avg_confession_result
     tag_list = params[:post][:name].split(',')
     if @post.save
       @post.save_tag(tag_list)
@@ -63,4 +64,10 @@ class Public::PostsController < ApplicationController
       redirect_to map_search_posts_path
     end
   end
+
+  # def avg_confession_result
+  #     告白成功率＝(「postの告白結果が成功の数」＋「post_commentの告白結果が成功の数」)/(「postの告白結果が成功または失敗の数」＋「post_commentの告白結果が成功または失敗の数」）*100.round(1).to_f
+  #     self.where(confession_result: 0) + self.post_comments.where(confession_result: 0)/self.where(confession_result: 0).or(self.where(confession_result: 1)) + self.post_comments.where(confession_result: 0).or(self.post_comments.where(confession_result: 1))
+  # end
+
 end

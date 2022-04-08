@@ -1,2 +1,158 @@
-<h1>Admin::Posts#edit</h1>
-<p>Find me in app/views/admin/posts/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h1>スポット編集フォーム</h1>
+
+      <p>投稿者情報</p>
+      <%= image_tag @post.customer.get_profile_image, size: "50x50" %>
+      <%= @post.customer.name %>
+      <%= @post.customer.gender_i18n %>
+      <%= @post.customer.age %>
+
+      <%= form_with model:@post, url: admin_post_path(@post), method: :patch, local: true do |f| %>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= f.label :title, "タイトル" %></td>
+              <td><%= f.text_field :title %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :introduction, "説明文" %></td>
+              <td><%= f.text_area :introduction %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :postal_code, "郵便番号" %></td>
+              <td><%= f.text_field :postal_code %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :address, "住所" %></td>
+              <td><%= f.text_field :address %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :area_id, "エリア" %></td>
+              <td><%= f.collection_select :area_id, Area.all, :id, :name, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :spot_image, "スポット画像" %></td>
+              <td><%= f.file_field :spot_image, accept: "image/*" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></td>
+              <td><%= f.text_field :name, value: @tag_list, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :confession_result, "告白結果" %></td>
+              <td>
+                <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
+
+                <%= f.radio_button :confession_result, Post.confession_results.key(1) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:no] %>
+
+                <%= f.radio_button :confession_result, Post.confession_results.key(2) %>
+                <%= f.label :confession_result, Post.confession_results_i18n[:no_answer] %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                雰囲気</br>
+                人の少なさ</br>
+                定番度</br>
+              </td>
+              <td>
+                <div class="form-group" id="atmosphere_rate">
+                  <%= f.label :atmosphere_rate %>
+                  <%= f.hidden_field :atmosphere_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#atmosphere_rate').empty();
+                  $('#atmosphere_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[atmosphere_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+
+                <div class="form-group" id="few_people_rate">
+                  <%= f.label :few_people_rate %>
+                  <%= f.hidden_field :few_people_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#few_people_rate').empty();
+                  $('#few_people_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[few_people_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+
+                <div class="form-group" id="standard_rate">
+                  <%= f.label :standard_rate %>
+                  <%= f.hidden_field :standard_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#standard_rate').empty();
+                  $('#standard_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[standard_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+              </td>
+            </tr>
+            <tr>
+              <td>総合評価</td>
+              <td>
+                <div class="form-group" id="all_rate">
+                  <%= f.label :all_rate %>
+                  <%= f.hidden_field :all_rate, id: :review_star, class:'form-control' %>
+                </div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  $('#all_rate').empty();
+                  $('#all_rate').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[all_rate]',
+                    half: true,
+                  });
+                })
+                </script>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <%= f.submit "変更", class: "btn btn-success" %>
+                <%= link_to "削除",admin_post_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

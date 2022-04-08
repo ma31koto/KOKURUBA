@@ -7,8 +7,12 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update] do
       get 'list' => 'customers#list'
     end
-    resources :posts, only: [:index, :show, :edit, :update, :destroy]
-    resources :post_comments, only: [:index, :edit, :update, :destroy]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy] do
+      resources :post_comments, only: [:edit, :update, :destroy]
+      collection do
+        get 'post_comments_list',to: 'post_comments#index', as: 'post_comments_list'
+      end
+    end
     resources :areas, only: [:index, :create, :edit, :update, :destroy]
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
   end

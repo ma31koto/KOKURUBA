@@ -1,2 +1,60 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h2>会員詳細</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>プロフィール写真</td>
+            <td><%= image_tag @customer.get_profile_image, size: "100x100" %></td>
+          </tr>
+          <tr>
+            <td>名前</td>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td>性別</td>
+            <td><%= @customer.gender_i18n %></td>
+          </tr>
+          <tr>
+            <td>年齢</td>
+            <td><%= @customer.age %></td>
+          </tr>
+          <tr>
+            <td>自己紹介</td></td>
+            <td><%= @customer.biography %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <td>会員ステータス</td>
+            <td>
+              <% if @customer.is_deleted == false %>
+                <p class="text-success">有効</p>
+              <% else %>
+                <p class="text-danger">退会</p>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+              <%= link_to "スポット/コメント投稿一覧", admin_customer_list_path(@customer), class: "btn btn-primary" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

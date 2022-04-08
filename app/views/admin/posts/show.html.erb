@@ -1,2 +1,165 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h1>スポット投稿詳細</h1>
+
+
+      <h2><%= @post.title %></h2>
+      <% @post.tags.each do |tag| %>
+        <%=tag.name%>
+      <% end %>
+
+      <p>投稿者</p>
+      <%= link_to admin_customer_path(@post.customer) do %>
+        <%= @post.customer.name %>
+      <% end %>
+
+      <%= link_to "編集する", edit_admin_post_path(@post), class: "btn btn-success" %>
+
+      <%= image_tag @post.get_spot_image, size: "200x200" %>
+
+      <%= @post.introduction %>
+
+      <p>総合評価</p>
+      <%= @post.all_rate.round(1).to_f %>
+      <div id="all_rate_<%= @post.id %>" class="form-group"></div>
+      <p>雰囲気</p>
+      <%= @post.atmosphere_rate.round(1).to_f %>
+      <div id="atmosphere_rate_<%= @post.id %>" class="form-group"></div>
+      <p>人の少なさ</p>
+      <%= @post.few_people_rate.round(1).to_f %>
+      <div id="few_people_rate_<%= @post.id %>" class="form-group"></div>
+      <p>定番度</p>
+      <%= @post.standard_rate.round(1).to_f %>
+      <div id="standard_rate_<%= @post.id %>" class="form-group"></div>
+
+      <script>
+      $(document).on('turbolinks:load', function() {
+        $('#all_rate_<%= @post.id %>').empty();
+        $('#all_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.all_rate %>,
+        });
+
+        $('#atmosphere_rate_<%= @post.id %>').empty();
+        $('#atmosphere_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.atmosphere_rate %>,
+        });
+
+        $('#few_people_rate_<%= @post.id %>').empty();
+        $('#few_people_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.few_people_rate %>,
+        });
+
+        $('#standard_rate_<%= @post.id %>').empty();
+        $('#standard_rate_<%= @post.id %>').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score: <%= @post.standard_rate %>,
+        });
+      });
+      </script>
+
+      告白成功率90％
+
+      <h2>コメント一覧<%= @post.post_comments.count %>件</h2>
+      <% @post.post_comments.each do |post_comment| %>
+        <%= image_tag post_comment.get_comment_image, size: "50x50" %>
+        <p>投稿者</p>
+        <%= link_to customer_path(post_comment.customer) do %>
+          <%= post_comment.customer.name %>
+          <%= post_comment.customer.gender_i18n %>
+          <%= post_comment.customer.age %>歳
+        <% end %>
+
+        <p>総合評価</p>
+        <%= post_comment.all_rate.round(1).to_f %>
+        <div id="all_rate_<%= post_comment.id %>" class="form-group"></div>
+        <p>雰囲気</p>
+        <%= post_comment.atmosphere_rate.round(1).to_f %>
+        <div id="atmosphere_rate_<%= post_comment.id %>" class="form-group"></div>
+        <p>人の少なさ</p>
+        <%= post_comment.few_people_rate.round(1).to_f %>
+        <div id="few_people_rate_<%= post_comment.id %>" class="form-group"></div>
+        <p>定番度</p>
+        <%= post_comment.standard_rate.round(1).to_f %>
+        <div id="standard_rate_<%= post_comment.id %>" class="form-group"></div>
+
+        <script>
+        $(document).on('turbolinks:load', function() {
+          $('#all_rate_<%= post_comment.id %>').empty();
+          $('#all_rate_<%= post_comment.id %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= post_comment.all_rate %>,
+          });
+
+          $('#atmosphere_rate_<%= post_comment.id %>').empty();
+          $('#atmosphere_rate_<%= post_comment.id %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= post_comment.atmosphere_rate %>,
+          });
+
+          $('#few_people_rate_<%= post_comment.id %>').empty();
+          $('#few_people_rate_<%= post_comment.id %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= post_comment.few_people_rate %>,
+          });
+
+          $('#standard_rate_<%= post_comment.id %>').empty();
+          $('#standard_rate_<%= post_comment.id %>').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= post_comment.standard_rate %>,
+          });
+        });
+        </script>
+
+        <%= post_comment.title %>
+        <%= post_comment.comment %>
+        <%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
+      <% end %>
+
+
+    </div>
+  </div>
+</div>

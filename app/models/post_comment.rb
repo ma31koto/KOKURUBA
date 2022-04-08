@@ -11,6 +11,6 @@ class PostComment < ApplicationRecord
   has_one_attached :comment_image
 
   def get_comment_image
-    (comment_image.attached?) ? coment_image : 'no_image.jpg'
+    (comment_image.attached?) ? comment_image : 'no_image.jpg'
   end
 end

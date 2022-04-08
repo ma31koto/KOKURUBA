@@ -1,0 +1,30 @@
+<% if area.name == nil %>
+  <%= form_with model:@area, url: admin_areas_path, method: :post, local: true do |f|  %>
+  <div class="form-group row ml-3">
+    <div class="col-2 ml-5 font-weight-bold">
+     <%= f.label :name, "エリア名" %>
+    </div>
+    <div class="col-2 mr-3">
+     <%= f.text_field :name, placeholder: "エリア名" %>
+    </div>
+    <div class="col-2 ml-5">
+     <%= f.submit "新規登録", class: "btn btn-primary" %>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <%= form_with model:@area, url: admin_area_path(area), method: :patch, local: true do |f|  %>
+   <div class="form-group row font-weight-bold">
+     <%= f.label :name, "エリア名" %>
+     <div class="col-2 ml-5 mr-3">
+      <%= f.text_field :name %>
+     </div>
+     <div class="col-2 ml-5">
+      <%= f.submit "変更を保存", class: "btn btn-success" %>
+     </div>
+     <div class="col-2 ml-5">
+      <%= link_to "削除", admin_area_path(area), method: :delete, date: { confirm: '本当に消しますか？'}, class: "btn btn-danger" %>
+     </div>
+    </div>
+  <% end %>
+<% end %>

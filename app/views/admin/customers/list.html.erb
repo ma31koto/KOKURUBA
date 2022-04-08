@@ -1,2 +1,161 @@
-<h1>Admin::Customers#list</h1>
-<p>Find me in app/views/admin/customers/list.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h2>スポット/コメント投稿一覧</h2>
+
+      <%= image_tag @customer.get_profile_image, size: "100x100" %>
+      <%= @customer.name %>
+      <%= @customer.gender_i18n %>
+      <%= @customer.age %>
+
+
+      <html lang="ja">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+          <link rel="stylesheet" href="css/style.css" />
+        </head>
+        <body>
+          <div class="wrap">
+            <ul id="tab-menu">
+              <li><a href="#tab1" class="active">スポット一覧<%= @customer.posts.count %>件</a></li>
+              <li><a href="#tab2" class="">コメント一覧<%= @customer.post_comments.count %>件</a></li>
+            </ul>
+
+            <div id="tab-contents">
+              <div id="tab1" class="tab">
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>エリア</th>
+                      <th>関連タグ</th>
+                      <th>コメント数</th>
+                      <th>総合評価</th>
+                      <th>告白成功率</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @customer.posts.each do |post| %>
+                    <tr>
+                      <td>
+                        <%= link_to admin_post_path(post) do %>
+                          <%= image_tag post.get_spot_image, size: "50x50" %>
+                          <%= post.title %>
+                        <% end %>
+                      </td>
+                      <td><%= post.area.name %></td>
+                      <td>
+                        <% post.tags.each do |tag| %>
+                          <%= tag.name %>
+                        <% end %>
+                      </td>
+                      <td><%= post.post_comments.count %>件</td>
+                      <td>
+                        <%= post.all_rate.round(1).to_f %>
+                        <div id="all_rate_<%= post.id %>" class="form-group"></div>
+                        <script>
+                          $('#all_rate_<%= post.id %>').empty();
+                          $('#all_rate_<%= post.id %>').raty({
+                            size: 20,
+                            starOff:  '<%= asset_path('star-off.png') %>',
+                            starOn : '<%= asset_path('star-on.png') %>',
+                            starHalf: '<%= asset_path('star-half.png') %>',
+                            half: true,
+                            readOnly: true,
+                            core: <%= post.all_rate %>,
+                          });
+                        </script>
+                      </td>
+                      <td>90％</td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="tab2" class="tab">
+                <% @post_comments.each do |post_comment| %>
+                  <%= image_tag post_comment.get_comment_image, size: "50x50" %>
+                  エリア<%= post_comment.post.area.name %>
+
+
+                  <p>総合評価</p>
+                  <%= post_comment.all_rate.round(1).to_f %>
+                  <div id="all_rate_<%= post_comment.id %>" class="form-group"></div>
+                  <p>雰囲気</p>
+                  <%= post_comment.atmosphere_rate.round(1).to_f %>
+                  <div id="atmosphere_rate_<%= post_comment.id %>" class="form-group"></div>
+                  <p>人の少なさ</p>
+                  <%= post_comment.few_people_rate.round(1).to_f %>
+                  <div id="few_people_rate_<%= post_comment.id %>" class="form-group"></div>
+                  <p>定番度</p>
+                  <%= post_comment.standard_rate.round(1).to_f %>
+                  <div id="standard_rate_<%= post_comment.id %>" class="form-group"></div>
+
+                  <script>
+                    $(document).on('turbolinks:load', function() {
+                      $('#all_rate_<%= post_comment.id %>').empty();
+                      $('#all_rate_<%= post_comment.id %>').raty({
+                        size: 20,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        starHalf: '<%= asset_path('star-half.png') %>',
+                        half: true,
+                        readOnly: true,
+                        score: <%= post_comment.all_rate %>,
+                      });
+
+                      $('#atmosphere_rate_<%= post_comment.id %>').empty();
+                      $('#atmosphere_rate_<%= post_comment.id %>').raty({
+                        size: 20,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        starHalf: '<%= asset_path('star-half.png') %>',
+                        half: true,
+                        readOnly: true,
+                        score: <%= post_comment.atmosphere_rate %>,
+                      });
+
+                      $('#few_people_rate_<%= post_comment.id %>').empty();
+                      $('#few_people_rate_<%= post_comment.id %>').raty({
+                        size: 20,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        starHalf: '<%= asset_path('star-half.png') %>',
+                        half: true,
+                        readOnly: true,
+                        score: <%= post_comment.few_people_rate %>,
+                      });
+
+                      $('#standard_rate_<%= post_comment.id %>').empty();
+                      $('#standard_rate_<%= post_comment.id %>').raty({
+                        size: 20,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        starHalf: '<%= asset_path('star-half.png') %>',
+                        half: true,
+                        readOnly: true,
+                        score: <%= post_comment.standard_rate %>,
+                      });
+                    });
+                  </script>
+
+                  <p><%= post_comment.title %></p>
+                  <%= post_comment.comment %>
+                  <%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
+                <% end %>
+              </div>
+
+            </div>
+          <script src="js/jquery.min.js"></script>
+          <script src="js/script.js"></script>
+          </div>
+        </body>
+      </html>
+
+
+    </div>
+  </div>
+</div>

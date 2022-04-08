@@ -1,2 +1,27 @@
-<h1>Admin::Areas#index</h1>
-<p>Find me in app/views/admin/areas/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      
+    <h2>エリア一覧・追加</h2>
+    <%= render 'form', area: @area %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>エリア</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @areas.each do |area| %>
+        <tr>
+          <td><%= area.name %></td>
+          <td><%= link_to "編集する", edit_admin_area_path(area), class:"btn btn-success" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</div>
