@@ -14,7 +14,7 @@ class Post < ApplicationRecord
   validates :introduction, presence: true
   validates :confession_result, presence: true
 
-  enum confession_result: { yes: 0, no: 1, no_answer: 3 }
+  enum confession_result: { yes: 0, no: 1, no_answer: 2 }
 
   has_one_attached :spot_image
   has_many_attached :main_spot_image
@@ -44,6 +44,43 @@ class Post < ApplicationRecord
 
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?
+  end
+
+  def avg_confession_result
+    # 告白の成功率を定義
+    # 分子：numerator
+    # 分母：enominator
+    post_numerator = 0
+    post_denominator = 0
+
+    all_numerator = 0
+    all_denominator = 0
+
+
+    if self.confession_result == 0
+      post_numerator = 1
+    elsif self.confession_result == 1
+      post_numerator = 0
+    elsif self.confession_result == 2
+      post_numerator = 0
+    end
+
+    if self.confession_result == 0
+      post_denominator = 1
+    elsif self.confession_result == 1
+      post_denominator = 1
+    elsif self.confession_result == 2
+      post_denominator = 0
+    end
+
+    all_numerator = (post_numerator + self.post_comments.where(confession_result: 0).count)
+    all_denominator = (post_denominator + self.post_comments.where(confession_result: 0).or(self.post_comments.where(confession_result: 1)).count)
+
+    if all_denominator == 0
+      return false
+    elsif all_denominator > 0
+      return ((all_numerator.to_f/all_denominator)*100).round(1)
+    end
   end
 
 end

@@ -10,6 +10,13 @@
 }
 
 
+body {
+  min-height: 100vh;
+  color: white;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
+}
+
+
 .wrap {
   width: 90%;
   max-width: 800px;
