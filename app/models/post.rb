@@ -12,6 +12,10 @@ class Post < ApplicationRecord
   validates :latitude, presence: true
   validates :title, presence: true
   validates :introduction, presence: true
+  validates :atmosphere_rate, presence: true
+  validates :few_people_rate, presence: true
+  validates :standard_rate, presence: true
+  validates :all_rate, presence: true
   validates :confession_result, presence: true
 
   enum confession_result: { yes: 0, no: 1, no_answer: 2 }
@@ -82,5 +86,25 @@ class Post < ApplicationRecord
       return ((all_numerator.to_f/all_denominator)*100).round(1)
     end
   end
+
+  def avg_confession_result_num
+    if avg_confession_result == false
+      return -1
+    else
+      return avg_confession_result
+    end
+  end
+
+  def self.avg_confession_result_ranking(sort,posts)
+    if sort == 'asc'
+      posts.sort { |a, b| b.avg_confession_result_num <=> a.avg_confession_result_num }
+    else
+      posts.sort { |a, b| a.avg_confession_result_num <=> b.avg_confession_result_num }
+    end
+  end
+
+
+
+
 
 end

@@ -7,6 +7,9 @@ class Public::PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true)
+    if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
+      @posts = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
+    end
   end
 
   def show

@@ -7,6 +7,7 @@
 
   <%= f.label :tag, "タグ名" %>
   <%= f.search_field :post_tags_tag_name_cont %>
+  <%= hidden_field_tag(:confession_ranking) %>
 
   <%= f.submit "検索" %>
 <% end %>
@@ -17,10 +18,9 @@
 <%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc) %>
 <%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc) %>
 <%= sort_link(@q, :standard_rate, "定番度", default_order: :desc) %>
-
-<!--告白成功率順-->
-<%#= sort_link(@q, :, "告白成功率", default_order: :desc) %>
-<%#= link_to "告白成功率", posts_path(sort: 'created_at DESC') %>
+<% pp params %>
+<a href="javascript:onSortConfessionRranking()">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
+<%#= link_to "告白成功率", posts_path(confession_ranking: true) %>
 
 
 <table>
@@ -87,12 +87,38 @@
   $(document).on('turbolinks:load', function() {
     $('.star').empty();
     $('.star').raty({
-      size: 20,
+      size: 36,
       starOff:  '<%= asset_path('star-off.png') %>',
       starOn : '<%= asset_path('star-on.png') %>',
       starHalf: '<%= asset_path('star-half.png') %>',
       half: true,
       readOnly: true,
     });
+
+    $('#confession_desc').hide();
+    $('#confession_asc').hide();
+
+    <% if params[:confession_ranking] =='asc' %>
+      $('#confession_asc').show();
+    <% elsif params[:confession_ranking] == 'desc' %>
+      $('#confession_desc').show();
+    <% end %>
+    $('.sort_link').each( function(i,elem){
+      var str = $(elem).attr('href').replace('confession_ranking=','');
+      $(elem).attr('href',str);
+      console.log($(elem).attr('href'))
+    })
   });
+
+  function onSortConfessionRranking(){
+    var form = document.getElementById('post_search');
+  <% if params[:confession_ranking] == 'asc' %>
+    document.getElementById('confession_ranking').value='desc';
+  <% else %>
+    document.getElementById('confession_ranking').value='asc';
+  <% end %>
+    form.submit();
+  }
+
+
 </script>

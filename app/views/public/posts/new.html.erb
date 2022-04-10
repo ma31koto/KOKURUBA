@@ -59,81 +59,27 @@
                 定番度</br>
               </td>
               <td>
-                <div class="form-group" id="atmosphere_rate">
+                <div class="star_atmosphere_rate">
                   <%= f.label :atmosphere_rate %>
-                  <%= f.hidden_field :atmosphere_rate, id: :review_star, class:'form-control' %>
+                  <%= f.hidden_field :atmosphere_rate %>
                 </div>
-                <script>
-                $(document).on('turbolinks:load', function() {
-                  $('#atmosphere_rate').empty();
-                  $('#atmosphere_rate').raty({
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    scoreName: 'post[atmosphere_rate]',
-                    half: true,
-                  });
-                })
-                </script>
-
-                <div class="form-group" id="few_people_rate">
+                <div class="star_few_people_rate">
                   <%= f.label :few_people_rate %>
-                  <%= f.hidden_field :few_people_rate, id: :review_star, class:'form-control' %>
+                  <%= f.hidden_field :few_people_rate %>
                 </div>
-                <script>
-                $(document).on('turbolinks:load', function() {
-                  $('#few_people_rate').empty();
-                  $('#few_people_rate').raty({
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    scoreName: 'post[few_people_rate]',
-                    half: true,
-                  });
-                })
-                </script>
-
-                <div class="form-group" id="standard_rate">
+                <div class="star_standard_rate">
                   <%= f.label :standard_rate %>
-                  <%= f.hidden_field :standard_rate, id: :review_star, class:'form-control' %>
+                  <%= f.hidden_field :standard_rate %>
                 </div>
-                <script>
-                $(document).on('turbolinks:load', function() {
-                  $('#standard_rate').empty();
-                  $('#standard_rate').raty({
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    scoreName: 'post[standard_rate]',
-                    half: true,
-                  });
-                })
-                </script>
               </td>
             </tr>
             <tr>
               <td>総合評価</td>
               <td>
-                <div class="form-group" id="all_rate">
+                <div class="star_all_rate">
                   <%= f.label :all_rate %>
-                  <%= f.hidden_field :all_rate, id: :review_star, class:'form-control' %>
+                  <%= f.hidden_field :all_rate %>
                 </div>
-                <script>
-                $(document).on('turbolinks:load', function() {
-                  $('#all_rate').empty();
-                  $('#all_rate').raty({
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    scoreName: 'post[all_rate]',
-                    half: true,
-                  });
-                })
-                </script>
               </td>
             </tr>
             <tr>
@@ -142,6 +88,24 @@
             </tr>
           </tbody>
         </table>
+
+        <script>
+          $(document).on('turbolinks:load', function() {
+            <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
+              $('.star_<%= rate %>').empty();
+              $('.star_<%= rate %>').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'post[<%= rate %>]',
+                half: true,
+              })
+            <% end %>
+          })
+        </script>
+
+
         <!--後で消す-->
         <%= f.label :longitude, "緯度" %></td>
         <%= f.text_field :longitude %>

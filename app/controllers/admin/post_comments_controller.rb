@@ -2,7 +2,8 @@ class Admin::PostCommentsController < ApplicationController
   before_action :ensure_customer, only: [:edit, :update, :destroy]
 
   def index
-    @post_comments = PostComment.all
+    @q = PostComment.ransack(params[:q])
+    @post_comments = @q.result(distinct: true)
   end
 
   def edit

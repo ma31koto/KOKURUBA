@@ -2,7 +2,8 @@ class Admin::PostsController < ApplicationController
   before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true)
   end
 
   def show
