@@ -2,81 +2,89 @@
   <div class="row">
     <div class="col-10 mx-auto">
 
-    <% if @customers = current_customer %>
-      <h1>My Page</h1>
-    <% end %>
+      <% if @customers = current_customer %>
+        <h1>My Page</h1>
+      <% end %>
 
-    <div>
-      <%= image_tag @customer.get_profile_image, size: "200x200" %>
-      <%= @customer.name %>
-      <%= @customer.gender_i18n %>
-      <%= @customer.age %>
-      <%= @customer.biography %>
-      <%= link_to customer_followings_path(@customer) do %>
-        <%= @customer.followings.count %>フォロー
-      <% end %>
-      <%= link_to customer_followers_path(@customer) do %>
-        <%= @customer.followers.count %>フォロワー
-      <% end %>
-      <% if @customer == current_customer %>
-        <%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-success" %>
-      <% elsif current_customer.following?(@customer) %>
-        <%= link_to "フォロー外す", customer_relationship_path(@customer), method: :delete, class: "btn btn-danger" %>
-      <% elsif %>
-        <%= link_to 'フォローする', customer_relationships_path(@customer), method: :post, class: "btn btn-primary"  %>
-      <% end %>
-    </div>
-    <div>
-      <h2>スポット投稿一覧</h2>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>エリア</th>
-            <th>関連タグ</th>
-            <th>コメント数</th>
-            <th>総合評価</th>
-            <th>告白成功率</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @customer.posts.each do |post| %>
-          <tr>
-            <td>
-              <%= link_to post_path(post) do %>
-                <%= image_tag post.get_spot_image, size: "50x50" %>
-                <%= post.title %>
-              <% end %>
-            </td>
-            <td><%= post.area.name %></td>
-            <td>
-              <% post.tags.each do |tag| %>
-                <%= tag.name %>
-              <% end %>
-            </td>
-            <td><%= post.post_comments.count %>件</td>
-            <td>
-              <%= post.all_rate.round(1).to_f %>
-              <div id="all_rate_<%= post.id %>" class="form-group"></div>
-              <script>
-                $('#all_rate_<%= post.id %>').empty();
-                $('#all_rate_<%= post.id %>').raty({
-                  size: 20,
-                  starOff:  '<%= asset_path('star-off.png') %>',
-                  starOn : '<%= asset_path('star-on.png') %>',
-                  starHalf: '<%= asset_path('star-half.png') %>',
-                  half: true,
-                  readOnly: true,
-                  core: <%= post.all_rate %>,
-                });
-              </script>
-            </td>
-            <td>90％</td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+      <div>
+        <%= image_tag @customer.get_profile_image, size: "200x200" %>
+        <%= @customer.name %>
+        <%= @customer.gender_i18n %>
+        <%= @customer.age %>
+        <%= @customer.biography %>
+        <%= link_to customer_followings_path(@customer) do %>
+          <%= @customer.followings.count %>フォロー
+        <% end %>
+        <%= link_to customer_followers_path(@customer) do %>
+          <%= @customer.followers.count %>フォロワー
+        <% end %>
+        <% if @customer == current_customer %>
+          <%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-success" %>
+        <% elsif current_customer.following?(@customer) %>
+          <%= link_to "フォロー外す", customer_relationship_path(@customer), method: :delete, class: "btn btn-danger" %>
+        <% elsif %>
+          <%= link_to 'フォローする', customer_relationships_path(@customer), method: :post, class: "btn btn-primary"  %>
+        <% end %>
+      </div>
+      <div>
+        <h2>スポット投稿一覧</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>エリア</th>
+              <th>関連タグ</th>
+              <th>コメント数</th>
+              <th>総合評価</th>
+              <th>告白成功率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customer.posts.each do |post| %>
+            <tr>
+             <td>
+                <%= link_to post_path(post) do %>
+                  <%= image_tag post.get_spot_image, size: "50x50" %>
+                  <%= post.title %>
+                <% end %>
+              </td>
+              <td><%= post.area.name %></td>
+              <td>
+                <% post.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              </td>
+              <td><%= post.post_comments.count %>件</td>
+              <td>
+                <%= post.all_rate.round(1).to_f %>
+                <div class="star" data-score="<%= post.all_rate %>"></div>
+              </td>
+              <td>
+                <% unless post.avg_confession_result %>
+                  未回答
+                <% else %>
+                  <%= post.avg_confession_result %>％
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <script>
+        $(document).on('turbolinks:load', function() {
+          $('.star').empty();
+          $('.star').raty({
+            size: 20,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+          });
+        });
+      </script>
 
     </div>
   </div>

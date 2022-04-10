@@ -11,6 +11,17 @@
   <%= f.submit "検索" %>
 <% end %>
 
+ランキング検索
+<%= sort_link(@q, :created_at, "新着", default_order: :desc)%>
+<%= sort_link(@q, :all_rate, "総合評価", default_order: :desc) %>
+<%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc) %>
+<%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc) %>
+<%= sort_link(@q, :standard_rate, "定番度", default_order: :desc) %>
+
+<!--告白成功率順-->
+<%#= sort_link(@q, :, "告白成功率", default_order: :desc) %>
+<%#= link_to "告白成功率", posts_path(sort: 'created_at DESC') %>
+
 
 <table>
   <thead>

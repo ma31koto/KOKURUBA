@@ -7,7 +7,6 @@ class Public::PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true)
-    #binding.pry
   end
 
   def show

@@ -1,7 +1,13 @@
 class Public::FavoritesController < ApplicationController
   def index
+    # favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
+    # @posts = Post.find(favorites)
+
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
-    @posts = Post.find(favorites)
+    # p '==================='
+    # PP favorites
+    @q = Post.find(favorites).ransack(params[:q])
+    @posts = @q.result(distinct: true)
   end
 
   def create
