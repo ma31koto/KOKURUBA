@@ -8,111 +8,107 @@
       <%= @customer.gender_i18n %>
       <%= @customer.age %>
 
+      <div class="customer-list">
+        <ul class="tab-list">
+          <li class="tab box-active">スポット一覧<%= @customer.posts.count %>件</li>
+          <li class="tab">コメント一覧<%= @customer.post_comments.count %>件</li>
+        </ul>
 
-      <html lang="ja">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width,initial-scale=1.0">
-          <link rel="stylesheet" href="css/style.css" />
-        </head>
-        <body class="admin_customer_list">
-          <div class="wrap">
-            <ul id="tab-menu">
-              <li><a href="#tab1" class="active">スポット一覧<%= @customer.posts.count %>件</a></li>
-              <li><a href="#tab2" class="">コメント一覧<%= @customer.post_comments.count %>件</a></li>
-            </ul>
-
-            <div id="tab-contents">
-              <div id="tab1" class="tab">
-
-                <table>
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th>エリア</th>
-                      <th>関連タグ</th>
-                      <th>コメント数</th>
-                      <th>総合評価</th>
-                      <th>告白成功率</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @customer.posts.each do |post| %>
-                    <tr>
-                      <td>
-                        <%= link_to admin_post_path(post) do %>
-                          <%= image_tag post.get_spot_image, size: "50x50" %>
-                          <%= post.title %>
-                        <% end %>
-                      </td>
-                      <td><%= post.area.name %></td>
-                      <td>
-                        <% post.tags.each do |tag| %>
-                          <%= tag.name %>
-                        <% end %>
-                      </td>
-                      <td><%= post.post_comments.count %>件</td>
-                      <td>
-                        <%= post.all_rate.round(1).to_f %>
-                        <div class="star" data-score="<%= post.all_rate %>"></div>
-                      </td>
-                      <td>
-                        <% unless post.avg_confession_result %>
-                          未回答
-                        <% else %>
-                          <%= post.avg_confession_result %>％
-                        <% end %>
-                      </td>
-                    </tr>
+        <div class="tabbox-contents">
+          <div class="tabbox box-show">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>エリア</th>
+                  <th>関連タグ</th>
+                  <th>コメント数</th>
+                  <th>総合評価</th>
+                  <th>告白成功率</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @customer.posts.each do |post| %>
+                <tr>
+                  <td>
+                    <%= link_to admin_post_path(post) do %>
+                    <%= image_tag post.get_spot_image, size: "50x50" %>
+                      <%= post.title %>
                     <% end %>
-                  </tbody>
-                </table>
-              </div>
-
-              <div id="tab2" class="tab">
-                <% @post_comments.each do |post_comment| %>
-                  <%= image_tag post_comment.get_comment_image, size: "50x50" %>
-                  エリア<%= post_comment.post.area.name %>
-
-                  <p>総合評価</p>
-                  <%= post_comment.all_rate.round(1).to_f %>
-                  <div class="star" data-score="<%= post_comment.all_rate %>"></div>
-                  <p>雰囲気</p>
-                  <%= post_comment.atmosphere_rate.round(1).to_f %>
-                  <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
-                  <p>人の少なさ</p>
-                  <%= post_comment.few_people_rate.round(1).to_f %>
-                  <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
-                  <p>定番度</p>
-                  <%= post_comment.standard_rate.round(1).to_f %>
-                  <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
-
-                  <p><%= post_comment.title %></p>
-                  <%= post_comment.comment %>
-                  <%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
+                  </td>
+                  <td><%= post.area.name %></td>
+                  <td>
+                    <% post.tags.each do |tag| %>
+              　       <%= tag.name %>
+                    <% end %>
+                  </td>
+                  <td><%= post.post_comments.count %>件</td>
+                  <td>
+                    <%= post.all_rate.round(1).to_f %>
+                    <div class="star" data-score="<%= post.all_rate %>"></div>
+                  </td>
+                  <td>
+                    <% unless post.avg_confession_result %>
+                      未回答
+                    <% else %>
+                      <%= post.avg_confession_result %>％
+                    <% end %>
+                  </td>
+                </tr>
                 <% end %>
-              </div>
-
-              <script>
-                $(document).on('turbolinks:load', function() {
-                  $('.star').empty();
-                  $('.star').raty({
-                    size: 20,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    half: true,
-                    readOnly: true,
-                  });
-                });
-              </script>
-
-            </div>
-          <script src="js/jquery.min.js"></script>
-          <script src="js/script.js"></script>
+              </tbody>
+            </table>
           </div>
-        </body>
-      </html>
+
+          <div class="tabbox">
+            <% @post_comments.each do |post_comment| %>
+              <%= image_tag post_comment.get_comment_image, size: "50x50" %>
+              エリア<%= post_comment.post.area.name %>
+
+              <p>総合評価</p>
+              <%= post_comment.all_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post_comment.all_rate %>"></div>
+              <p>雰囲気</p>
+              <%= post_comment.atmosphere_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
+              <p>人の少なさ</p>
+              <%= post_comment.few_people_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
+              <p>定番度</p>
+              <%= post_comment.standard_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+
+              <p><%= post_comment.title %></p>
+              <%= post_comment.comment %>
+              <%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(function() {
+          $('.tab').click(function(){
+            $('.tab-active').removeClass('tab-active');
+            $(this).addClass('tab-active');
+            $('.box-show').removeClass('box-show');
+            const index = $(this).index();
+            $('.tabbox').eq(index).addClass('box-show');
+          });
+        });
+
+        $(document).on('turbolinks:load', function() {
+          $('.star').empty();
+          $('.star').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+          });
+        });
+      </script>
 
 
     </div>

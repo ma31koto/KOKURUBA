@@ -23,6 +23,12 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
+    # @post.few_people_rate = 投稿者の星＋コメントの星/（コメントの数＋１）
+    # @post.standard_rate =
+    # @post.all_rate =
+
+
+
     tag_list = params[:post][:name].split(',')
     if @post.save
       @post.save_tag(tag_list)

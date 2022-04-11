@@ -1,0 +1,33 @@
+
+[1mFrom:[0m /home/ec2-user/environment/kokuruba/app/controllers/public/posts_controller.rb:35 Public::PostsController#create:
+
+    [1;34m23[0m: [32mdef[0m [1;34mcreate[0m
+    [1;34m24[0m:   @post = [1;34;4mPost[0m.new(post_params)
+    [1;34m25[0m:   @post.customer_id = current_customer.id
+    [1;34m26[0m:   p [31m[1;31m"[0m[31m======================[1;31m"[0m[31m[0m
+    [1;34m27[0m:   params[[33m:post[0m][[33m:atmosphere_rate[0m].to_f
+    [1;34m28[0m:   [1;34m# @post.post_commets.sum(:atmosphere_rate).to_f[0m
+    [1;34m29[0m:   @post.post_comments.count
+    [1;34m30[0m: 
+    [1;34m31[0m:   binding.pry
+    [1;34m32[0m: 
+    [1;34m33[0m: 
+    [1;34m34[0m: 
+ => [1;34m35[0m:   @post.atmosphere_rate = (params[[33m:post[0m][[33m:atmosphere_rate[0m].to_f + @post.post_commets.sum([33m:atmosphere_rate[0m).to_f )/([1;34m1[0m + @post.post_comments.count).to_f
+    [1;34m36[0m: 
+    [1;34m37[0m: 
+    [1;34m38[0m:   [1;34m# @post.few_people_rate = 投稿者の星＋コメントの星/（コメントの数＋１）[0m
+    [1;34m39[0m:   [1;34m# @post.standard_rate =[0m
+    [1;34m40[0m:   [1;34m# @post.all_rate =[0m
+    [1;34m41[0m: 
+    [1;34m42[0m: 
+    [1;34m43[0m: 
+    [1;34m44[0m:   tag_list = params[[33m:post[0m][[33m:name[0m].split([31m[1;31m'[0m[31m,[1;31m'[0m[31m[0m)
+    [1;34m45[0m:   [32mif[0m @post.save
+    [1;34m46[0m:     @post.save_tag(tag_list)
+    [1;34m47[0m:     redirect_to post_path(@post), [35mnotice[0m:[31m[1;31m'[0m[31m投稿完了しました[1;31m'[0m[31m[0m
+    [1;34m48[0m:   [32melse[0m
+    [1;34m49[0m:     render [33m:new[0m
+    [1;34m50[0m:   [32mend[0m
+    [1;34m51[0m: [32mend[0m
+
