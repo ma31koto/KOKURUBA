@@ -9,6 +9,14 @@ class Public::PostsController < ApplicationController
     @posts = @q.result(distinct: true)
     if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
       @posts = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
+    elsif params[:all_rate_ranking] == 'asc' || params[:all_rate_ranking] == 'desc'
+      @posts = Post.avg_all_rate_ranking(params[:all_rate_ranking],@posts)
+    elsif params[:atmosphere_rate_ranking] == 'asc' || params[:atmosphere_rate_ranking] == 'desc'
+      @posts = Post.avg_atmosphere_rate_ranking(params[:atmosphere_rate_ranking],@posts)
+    elsif params[:few_people_rate_ranking] == 'asc' || params[:few_people_rate_ranking] == 'desc'
+      @posts = Post.avg_few_people_rate_ranking(params[:few_people_rate_ranking],@posts)
+    elsif params[:standard_rate_ranking] == 'asc' || params[:standard_rate_ranking] == 'desc'
+      @posts = Post.avg_standard_rate_ranking(params[:standard_rate_ranking],@posts)
     end
   end
 
@@ -23,12 +31,6 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    # @post.few_people_rate = 投稿者の星＋コメントの星/（コメントの数＋１）
-    # @post.standard_rate =
-    # @post.all_rate =
-
-
-
     tag_list = params[:post][:name].split(',')
     if @post.save
       @post.save_tag(tag_list)

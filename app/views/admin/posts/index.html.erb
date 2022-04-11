@@ -13,15 +13,22 @@
         <%= f.label :tag, "タグ名" %>
         <%= f.search_field :post_tags_tag_name_cont %>
 
+        <%= hidden_field_tag(:confession_ranking) %>
+        <%= hidden_field_tag(:all_rate_ranking) %>
+        <%= hidden_field_tag(:atmosphere_rate_ranking) %>
+        <%= hidden_field_tag(:few_people_rate_ranking) %>
+        <%= hidden_field_tag(:standard_rate_ranking) %>
+
         <%= f.submit "検索" %>
       <% end %>
 
       ランキング検索
       <%= sort_link(@q, :created_at, "新着", default_order: :desc)%>
-      <%= sort_link(@q, :all_rate, "総合評価", default_order: :desc) %>
-      <%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc) %>
-      <%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc) %>
-      <%= sort_link(@q, :standard_rate, "定番度", default_order: :desc) %>
+      <a href="javascript:onSortAllRateRanking()">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
+      <a href="javascript:onSortAtmosphereRateRanking()">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
+      <a href="javascript:onSortFewPeopleRateRanking()">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
+      <a href="javascript:onSortStandardRateRanking()">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a>
+      <a href="javascript:onSortConfessionRranking()">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
 
       <table>
         <thead>
@@ -54,20 +61,20 @@
               <% end %>
             </td>
             <td>
-              <%= post.all_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.all_rate %>"></div>
+              <%= post.avg_all_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post.avg_all_rate %>"></div>
             </td>
             <td>
-              <%= post.atmosphere_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.atmosphere_rate %>"></div>
+              <%= post.avg_atmosphere_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
             </td>
             <td>
-              <%= post.few_people_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.few_people_rate %>"></div>
+              <%= post.avg_few_people_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
             </td>
             <td>
-              <%= post.standard_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.standard_rate %>"></div>
+              <%= post.avg_standard_rate.round(1).to_f %>
+              <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
             </td>
             <td>
               <% unless post.avg_confession_result %>
@@ -94,7 +101,122 @@
             half: true,
             readOnly: true,
           });
+
+          $('#confession_desc').hide();
+          $('#confession_asc').hide();
+          <% if params[:confession_ranking] =='asc' %>
+            $('#confession_asc').show();
+          <% elsif params[:confession_ranking] == 'desc' %>
+            $('#confession_desc').show();
+          <% end %>
+          $('.sort_link').each( function(i,elem){
+            var str = $(elem).attr('href').replace('confession_ranking=','');
+            $(elem).attr('href',str);
+            console.log($(elem).attr('href'))
+          })
+
+          $('#all_rate_desc').hide();
+          $('#all_rate_asc').hide();
+          <% if params[:all_rate_ranking] =='asc' %>
+            $('#all_rate_asc').show();
+          <% elsif params[:all_rate_ranking] == 'desc' %>
+            $('#all_rate_desc').show();
+          <% end %>
+          $('.sort_link').each( function(i,elem){
+            var str = $(elem).attr('href').replace('all_rate_ranking=','');
+            $(elem).attr('href',str);
+            console.log($(elem).attr('href'))
+          })
+
+          $('#atmosphere_rate_desc').hide();
+          $('#atmosphere_rate_asc').hide();
+          <% if params[:atmosphere_rate_ranking] =='asc' %>
+            $('#atmosphere_rate_asc').show();
+          <% elsif params[:atmosphere_rate_ranking] == 'desc' %>
+            $('#atmosphere_rate_desc').show();
+          <% end %>
+          $('.sort_link').each( function(i,elem){
+            var str = $(elem).attr('href').replace('atmosphere_rate_ranking=','');
+            $(elem).attr('href',str);
+            console.log($(elem).attr('href'))
+          })
+
+          $('#few_people_rate_desc').hide();
+          $('#few_people_rate_asc').hide();
+          <% if params[:few_people_rate_ranking] =='asc' %>
+            $('#few_people_rate_asc').show();
+          <% elsif params[:few_people_rate_ranking] == 'desc' %>
+            $('#few_people_rate_desc').show();
+          <% end %>
+          $('.sort_link').each( function(i,elem){
+            var str = $(elem).attr('href').replace('few_people_rate_ranking=','');
+            $(elem).attr('href',str);
+            console.log($(elem).attr('href'))
+          })
+
+          $('#standard_rate_desc').hide();
+          $('#standard_rate_asc').hide();
+          <% if params[:standard_rate_ranking] =='asc' %>
+            $('#standard_rate_asc').show();
+          <% elsif params[:standard_rate_ranking] == 'desc' %>
+            $('#standard_rate_desc').show();
+          <% end %>
+          $('.sort_link').each( function(i,elem){
+            var str = $(elem).attr('href').replace('standard_rate_ranking=','');
+            $(elem).attr('href',str);
+            console.log($(elem).attr('href'))
+          })
         });
+
+        function onSortConfessionRranking(){
+          var form = document.getElementById('post_search');
+          <% if params[:confession_ranking] == 'asc' %>
+            document.getElementById('confession_ranking').value='desc';
+          <% else %>
+            document.getElementById('confession_ranking').value='asc';
+          <% end %>
+          form.submit();
+        }
+
+        function onSortAllRateRanking(){
+          var form = document.getElementById('post_search');
+          <% if params[:all_rate_ranking] == 'asc' %>
+            document.getElementById('all_rate_ranking').value='desc';
+          <% else %>
+            document.getElementById('all_rate_ranking').value='asc';
+          <% end %>
+          form.submit();
+        }
+
+        function onSortAtmosphereRateRanking(){
+          var form = document.getElementById('post_search');
+          <% if params[:atmosphere_rate_ranking] == 'asc' %>
+            document.getElementById('atmosphere_rate_ranking').value='desc';
+          <% else %>
+            document.getElementById('atmosphere_rate_ranking').value='asc';
+          <% end %>
+          form.submit();
+        }
+
+        function onSortFewPeopleRateRanking(){
+          var form = document.getElementById('post_search');
+          <% if params[:few_people_rate_ranking] == 'asc' %>
+            document.getElementById('few_people_rate_ranking').value='desc';
+          <% else %>
+            document.getElementById('few_people_rate_ranking').value='asc';
+          <% end %>
+          form.submit();
+        }
+
+        function onSortStandardRateRanking(){
+          var form = document.getElementById('post_search');
+          <% if params[:standard_rate_ranking] == 'asc' %>
+            document.getElementById('standard_rate_ranking').value='desc';
+          <% else %>
+            document.getElementById('standard_rate_ranking').value='asc';
+          <% end %>
+          form.submit();
+        }
       </script>
 
     </div>

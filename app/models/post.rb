@@ -95,6 +95,22 @@ class Post < ApplicationRecord
     end
   end
 
+  def avg_atmosphere_rate
+    (self.atmosphere_rate + self.post_comments.sum(:atmosphere_rate)).to_f/(1 + self.post_comments.count).to_f
+  end
+
+  def avg_few_people_rate
+    (self.few_people_rate + self.post_comments.sum(:few_people_rate)).to_f/(1 + self.post_comments.count).to_f
+  end
+
+  def avg_standard_rate
+    (self.standard_rate + self.post_comments.sum(:standard_rate)).to_f/(1 + self.post_comments.count).to_f
+  end
+
+  def avg_all_rate
+    (self.all_rate + self.post_comments.sum(:all_rate)).to_f/(1 + self.post_comments.count).to_f
+  end
+
   def self.avg_confession_result_ranking(sort,posts)
     if sort == 'asc'
       posts.sort { |a, b| b.avg_confession_result_num <=> a.avg_confession_result_num }
@@ -103,8 +119,36 @@ class Post < ApplicationRecord
     end
   end
 
+  def self.avg_atmosphere_rate_ranking(sort,posts)
+    if sort == 'asc'
+      posts.sort { |a, b| b.avg_atmosphere_rate <=> a.avg_atmosphere_rate }
+    else
+      posts.sort { |a, b| a.avg_atmosphere_rate <=> b.avg_atmosphere_rate }
+    end
+  end
 
+  def self.avg_few_people_rate_ranking(sort,posts)
+    if sort == 'asc'
+      posts.sort { |a, b| b.avg_few_people_rate <=> a.avg_few_people_rate }
+    else
+      posts.sort { |a, b| a.avg_few_people_rate <=> b.avg_few_people_rate }
+    end
+  end
 
+  def self.avg_standard_rate_ranking(sort,posts)
+    if sort == 'asc'
+      posts.sort { |a, b| b.avg_standard_rate <=> a.avg_standard_rate }
+    else
+      posts.sort { |a, b| a.avg_standard_rate <=> b.avg_standard_rate }
+    end
+  end
 
+  def self.avg_all_rate_ranking(sort,posts)
+    if sort == 'asc'
+      posts.sort { |a, b| b.avg_all_rate <=> a.avg_all_rate }
+    else
+      posts.sort { |a, b| a.avg_all_rate <=> b.avg_all_rate }
+    end
+  end
 
 end

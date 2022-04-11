@@ -61,6 +61,7 @@
             </tr>
             <tr>
               <td>
+                ※平均値ではなく<%= @post.customer.name %>さんの評価になります。</br>
                 雰囲気</br>
                 人の少なさ</br>
                 定番度</br>
@@ -98,7 +99,7 @@
             </tr>
           </tbody>
         </table>
-        
+
         <script>
           $(document).on('turbolinks:load', function() {
             <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
@@ -114,8 +115,8 @@
             <% end %>
           })
         </script>
-        
-        
+
+
       <% end %>
     </div>
   </div>

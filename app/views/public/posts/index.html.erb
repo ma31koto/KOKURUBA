@@ -2,6 +2,25 @@
   <div class="row">
     <div class="col-12 mx-auto">
       <h1>スポット一覧</h1>
+      <%= search_form_for @q do |f| %>
+        <%= f.label :title, "タイトル" %>
+        <%= f.search_field :title_cont %>
+
+        <%= f.label :area_id, "エリア" %>
+        <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
+
+        <%= f.label :tag, "タグ名" %>
+        <%= f.search_field :post_tags_tag_name_cont %>
+
+        <%= hidden_field_tag(:confession_ranking) %>
+        <%= hidden_field_tag(:all_rate_ranking) %>
+        <%= hidden_field_tag(:atmosphere_rate_ranking) %>
+        <%= hidden_field_tag(:few_people_rate_ranking) %>
+        <%= hidden_field_tag(:standard_rate_ranking) %>
+
+        <%= f.submit "検索" %>
+      <% end %>
+
       <%= render "index", posts: @posts %>
     </div>
   </div>

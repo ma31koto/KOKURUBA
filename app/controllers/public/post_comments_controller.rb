@@ -10,11 +10,7 @@ class Public::PostCommentsController < ApplicationController
     post = Post.find(params[:post_id])
     post_comment = current_customer.post_comments.new(post_comment_params)
     post_comment.post_id = post.id
-    sum_atmosphere_rate = post.atmosphere_rate*(1 + post.post_comments.count)
-    if post_comment.save
-      update_atmosphere_rate = (sum_atmosphere_rate + post_comment.atmosphere_rate).to_f/(1 + post.post_comments.count).to_f
-      post.update_attribute(:atmosphere_rate, update_atmosphere_rate)
-    end
+    post_comment.save
     redirect_to post_path(post)
   end
 
@@ -23,10 +19,7 @@ class Public::PostCommentsController < ApplicationController
 
   def update
     post = Post.find(params[:post_id])
-    set_sum_atmosphere_rate = post.atmosphere_rate*(1 + post.post_comments.count) - @post_comment.atmosphere_rate
     if @post_comment.update(post_comment_params)
-      update_atmosphere_rate = (set_sum_atmosphere_rate + @post_comment.atmosphere_rate).to_f/(1 + post.post_comments.count).to_f
-      post.update_attribute(:atmosphere_rate, update_atmosphere_rate)
       redirect_to post_path(post),notice:'投稿を変更しました'
     else
       render :edit
@@ -35,12 +28,7 @@ class Public::PostCommentsController < ApplicationController
 
   def destroy
     post = Post.find(params[:post_id])
-    sum_atmosphere_rate = post.atmosphere_rate*(1 + post.post_comments.count)
-    if PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-      update_atmosphere_rate = (sum_atmosphere_rate - @post_comment.atmosphere_rate).to_f/(1 + post.post_comments.count).to_f
-      post.update_attribute(:atmosphere_rate, update_atmosphere_rate)
-    end
-
+    PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
     redirect_to post_path(post)
   end
 

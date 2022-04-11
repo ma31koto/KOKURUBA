@@ -21,17 +21,17 @@
       <%= @post.introduction %>
 
       <p>総合評価</p>
-      <%= @post.all_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.all_rate %>"></div>
+      <%= @post.avg_all_rate.round(1).to_f %>
+      <div class="star" data-score="<%= @post.avg_all_rate %>"></div>
       <p>雰囲気</p>
-      <%= @post.atmosphere_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.atmosphere_rate %>"></div>
+      <%= @post.avg_atmosphere_rate.round(1).to_f %>
+      <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
       <p>人の少なさ</p>
-      <%= @post.few_people_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.few_people_rate %>"></div>
+      <%= @post.avg_few_people_rate.round(1).to_f %>
+      <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
       <p>定番度</p>
-      <%= @post.standard_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.standard_rate %>"></div>
+      <%= @post.avg_standard_rate.round(1).to_f %>
+      <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
 
       <td>
         <% unless @post.avg_confession_result %>

@@ -44,8 +44,8 @@
                   </td>
                   <td><%= post.post_comments.count %>件</td>
                   <td>
-                    <%= post.all_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post.all_rate %>"></div>
+                    <%= post.avg_all_rate.round(1).to_f %>
+                    <div class="star" data-score="<%= post.avg_all_rate %>"></div>
                   </td>
                   <td>
                     <% unless post.avg_confession_result %>
