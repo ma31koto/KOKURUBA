@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
 
   def map_search
+    @posts = Post.all
   end
 
   def index
@@ -26,6 +27,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @posts = Post.all
   end
 
   def create

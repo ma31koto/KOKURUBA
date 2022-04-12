@@ -12,7 +12,19 @@
 body {
   min-height: 100vh;
   color: white;
-  background-image: linear-gradient(to right, #434343 0%, black 100%);
+  background-color: black;
+}
+
+.nav-link {
+  background-color: #BDB76B;
+  width: 110px;
+  font-size: 13px
+}
+
+.home-top {
+  background-image: url("../images/home_top.png");
+  width: 500px;
+  height: 500px;
 }
 
 .admin_customer_list {
@@ -59,4 +71,13 @@ body {
 
 .box-show {
   display: block;
+}
+
+#map {
+  width: 800px;
+  height: 400px;
+}
+
+.navbar-toggler {
+  background-color: white;
 }

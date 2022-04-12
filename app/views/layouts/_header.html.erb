@@ -1,71 +1,76 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href=""><span>KOKURUBA</span></a>
+
+      <%= link_to root_path do%>
+        <%= image_tag 'KOKURUBA_logo', size: "100x100" %>
+      <% end %>
+      <% if customer_signed_in? %>
+        <span class="ml-3 text-left">ようこそ、<%= current_customer.name %>さん！</span>
+      <% end %>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto av-link text-light btn">
         <% if customer_signed_in? %>
-          <div style="font-size: 20px; margin-top: 5px; text-align: center;">
-            ようこそ、<%= current_customer.name %>さん！
-          </div>
           <li>
-            <%= link_to "マイページ", customer_path(current_customer), class: "nav-link text-light" %>
+            <%= link_to "マイページ", customer_path(current_customer), class: "nav-link text-light btn" %>
           </li>
           <li>
-            <%= link_to "投稿", new_post_path, class: "nav-link text-light" %>
+            <%= link_to "投稿", new_post_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "スポット検索", map_search_posts_path, class: "nav-link text-light" %>
+            <%= link_to "スポット検索", map_search_posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "スポット一覧", posts_path, class: "nav-link text-light" %>
+            <%= link_to "スポット一覧", posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "お気に入り一覧", favorites_list_posts_path, class: "nav-link text-light" %>
+            <%= link_to "お気に入り一覧", favorites_list_posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link text-light" %>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link text-light btn ml-2" %>
           </li>
         <% elsif admin_signed_in? %>
           <li>
-            <%= link_to "会員一覧", admin_customers_path, class: "nav-link text-light" %>
+            <%= link_to "会員一覧", admin_customers_path, class: "nav-link text-light btn" %>
           </li>
           <li>
-            <%= link_to "スポット一覧", admin_posts_path, class: "nav-link text-light" %>
+            <%= link_to "スポット一覧", admin_posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "コメント一覧", post_comments_list_admin_posts_path, class: "nav-link text-light" %>
+            <%= link_to "コメント一覧", post_comments_list_admin_posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "エリア一覧", admin_areas_path, class: "nav-link text-light" %>
+            <%= link_to "エリア一覧", admin_areas_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "タグ一覧", admin_tags_path, class: "nav-link text-light" %>
+            <%= link_to "タグ一覧", admin_tags_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light btn ml-2" %>
           </li>
         <% else %>
           <li>
-            <%= link_to "Home", root_path, class: "nav-link text-light" %>
+            <%= link_to "Home", root_path, class: "nav-link text-light btn" %>
           </li>
           <li>
-            <%= link_to "About", homes_about_path, class: "nav-link text-light" %>
+            <%= link_to "About", homes_about_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%=  link_to "スポット検索", map_search_posts_path, class: "nav-link text-light" %>
+            <%=  link_to "スポット検索", map_search_posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%=  link_to "スポット一覧", posts_path, class: "nav-link text-light" %>
+            <%=  link_to "スポット一覧", posts_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "新規登録", new_customer_registration_path, class: "nav-link text-light" %>
+            <%= link_to "新規登録", new_customer_registration_path, class: "nav-link text-light btn ml-2" %>
           </li>
           <li>
-            <%= link_to "ログイン", new_customer_session_path, class: "nav-link text-light" %>
+            <%= link_to "ログイン", new_customer_session_path, class: "nav-link text-light btn ml-2" %>
           </li>
         <% end %>
         </ul>
