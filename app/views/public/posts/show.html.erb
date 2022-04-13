@@ -1,90 +1,135 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
-      <h1>スポット投稿詳細</h1>
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">スポット詳細</mark></h2>
 
+      <div class="mt-5">
+        <div class="d-flex flex-wrap">
+          <div><h1>【<%= @post.title %>】</h1></div>
+          <div id="favorite_buttons" class="ml-5 d-flex align-items-center">
+           <%= render "public/favorites/btn", post: @post %>
+          </div>
+          <div class="ml-3 d-flex align-items-center">
+            ●関連タグ:
+            <% @post.tags.each do |tag| %>
+              <%=tag.name%>
+            <% end %>
+          </div>
+          <div class="ml-3 d-flex align-items-center">
+            <span>●投稿者:</span>
+            <%= link_to customer_path(@post.customer.id) do %>
+              <%= @post.customer.name %>
+            <% end %>
+          </div>
+          <div>
+            <% if @post.customer == current_customer %>
+              <%= link_to "編集する", edit_post_path(@post), class: "btn btn-success" %>
+            <% end %>
+          </div>
+        </div>
 
-      <h2><%= @post.title %></h2>
+        <div class="mt-4 ml-5 d-flex flex-wrap">
+          <div><%= image_tag @post.get_spot_image, size: "400x300" %></div>
+          <div class="mt-4 ml-5">
+            <div>
+              <div class="d-flex flex-wrap" style="height: 30px;">
+                <div style="width: 150px;"><h3>総合評価</h3></div>
+                <div class="mr-3"><h3><%= @post.avg_all_rate.round(1).to_f %></h3></div>
+                <div class="star show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
+              </div>
+              <div class="d-flex flex-wrap mt-3 ml-4" style="height: 30px;">
+                <div style="width: 150px;"><p>雰囲気</p></div>
+                <div class="mr-3"><%= @post.avg_atmosphere_rate.round(1).to_f %></div>
+                <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
+              </div>
+              <div class="d-flex flex-wrap ml-4" style="height: 30px;">
+                <div style="width: 150px;"><p>人の少なさ</p></div>
+                <div class="mr-3"><%= @post.avg_few_people_rate.round(1).to_f %></div>
+                <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
+              </div>
+              <div class="d-flex flex-wrap ml-4" style="height: 30px;">
+                <div style="width: 150px;"><p>定番度</p></div>
+                <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
+                <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <p>＜内容＞<br/><%= @post.introduction %></p>
+            </div>
+          </div>
+          <div class="avg_confession_result ml-5">
+            <div class="mt-5" style="text-align: center;">
+              <% unless @post.avg_confession_result %>
+                <h3>未回答</h3>
+              <% else %>
+                <h3><%= @post.avg_confession_result %>％</h3>
+              <% end %>
+            </div>
+          </div>
+        </div>
 
-      <div id="favorite_buttons">
-        <%= render "public/favorites/btn", post: @post %>
+        <div class="ml-5" style="margin-top: 100px;">
+          <div class="d-flex flex-wrap">
+            <div><h2>コメント一覧  <%= @post.post_comments.count %>件</h2></div>
+            <div class="ml-3">
+              <i class="fa-solid fa-comment-pen"></i>
+              <% if @post.customer != current_customer %>
+                <%= link_to "コメントする", new_post_post_comment_path(@post) %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="ml-5">
+            <% @post.post_comments.each do |post_comment| %>
+              <div class="d-flex flex-wrap mt-4">
+                <div><%= image_tag post_comment.get_comment_image, size: "150x150" %></div>
+                <div>
+                  <a>投稿者</a>
+                  <%= link_to customer_path(post_comment.customer) do %><br/>
+                    名前:<%= post_comment.customer.name %><br/>
+                    性別:<%= post_comment.customer.gender_i18n %><br/>
+                    年齢:<%= post_comment.customer.age %>歳
+                  <% end %>
+                </div>
+
+                <div class="ml-5">
+                  <div class="d-flex flex-wrap" style="height: 30px;">
+                    <div style="width: 100px;"><h5>総合評価</h5></div>
+                    <div><h5><%= post_comment.all_rate.round(1).to_f %><h5></div>
+                    <div class="star" data-score="<%= post_comment.all_rate %>"></div>
+                  </div>
+                  <div class="d-flex flex-wrap" style="height: 30px;">
+                    <div style="width: 100px;"><p>雰囲気</p></div>
+                    <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
+                    <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
+                  </div>
+                  <div class="d-flex flex-wrap" style="height: 30px;">
+                    <div style="width: 100px;"><p>人の少なさ</p></div>
+                    <div><%= post_comment.few_people_rate.round(1).to_f %></div>
+                    <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
+                  </div>
+                  <div class="d-flex flex-wrap" style="height: 30px;">
+                    <div style="width: 100px;"><p>定番度</p></div>
+                    <div><%= post_comment.standard_rate.round(1).to_f %></div>
+                    <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+                  </div>
+                </div>
+
+                <div class="ml-5">
+                  <h5><strong><%= post_comment.title %></strong></h5>
+                  <%= post_comment.comment %>
+                </div>
+                <div class="float-right">
+                  <% if post_comment.customer == current_customer %>
+                    <%= link_to "編集する", edit_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
+                  <% end %>
+                </div>
+
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
-
-      <% @post.tags.each do |tag| %>
-        <%=tag.name%>
-      <% end %>
-
-      <p>投稿者</p>
-      <%= link_to customer_path(@post.customer) do %>
-        <%= @post.customer.name %>
-      <% end %>
-
-      <% if @post.customer == current_customer %>
-        <%= link_to "編集する", edit_post_path(@post), class: "btn btn-success" %>
-      <% end %>
-
-      <%= image_tag @post.get_spot_image, size: "200x200" %>
-
-      <%= @post.introduction %>
-
-      <p>総合評価</p>
-      <%= @post.avg_all_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.avg_all_rate %>"></div>
-      <p>雰囲気</p>
-      <%= @post.avg_atmosphere_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
-      <p>人の少なさ</p>
-      <%= @post.avg_few_people_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
-      <p>定番度</p>
-      <%= @post.avg_standard_rate.round(1).to_f %>
-      <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
-
-      <td>
-        <% unless @post.avg_confession_result %>
-          未回答
-        <% else %>
-          <%= @post.avg_confession_result %>％
-        <% end %>
-      </td>
-
-      <% if @post.customer != current_customer %>
-        <%= link_to "コメントする", new_post_post_comment_path(@post) %>
-      <% end %>
-
-
-
-
-      <h2>コメント一覧<%= @post.post_comments.count %>件</h2>
-      <% @post.post_comments.each do |post_comment| %>
-        <%= image_tag post_comment.get_comment_image, size: "50x50" %>
-        <p>投稿者</p>
-        <%= link_to customer_path(post_comment.customer) do %>
-          <%= post_comment.customer.name %>
-          <%= post_comment.customer.gender_i18n %>
-          <%= post_comment.customer.age %>歳
-        <% end %>
-
-        <p>総合評価</p>
-        <%= post_comment.all_rate.round(1).to_f %>
-        <div class="star" data-score="<%= post_comment.all_rate %>"></div>
-        <p>雰囲気</p>
-        <%= post_comment.atmosphere_rate.round(1).to_f %>
-        <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
-        <p>人の少なさ</p>
-        <%= post_comment.few_people_rate.round(1).to_f %>
-        <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
-        <p>定番度</p>
-        <%= post_comment.standard_rate.round(1).to_f %>
-        <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
-
-        <p><%= post_comment.title %></p>
-        <%= post_comment.comment %>
-        <% if post_comment.customer == current_customer %>
-          <%= link_to "編集する", edit_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
-        <% end %>
-
-      <% end %>
 
 
       <script>

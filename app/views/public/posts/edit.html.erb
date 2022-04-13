@@ -1,115 +1,137 @@
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto">
-      <h1>スポット投稿編集フォーム</h1>
-      <%= form_with model:@post, url: post_path(@post), method: :patch, local: true do |f| %>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= f.label :title, "タイトル" %></td>
-              <td><%= f.text_field :title %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :introduction, "説明文" %></td>
-              <td><%= f.text_area :introduction %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :postal_code, "郵便番号" %></td>
-              <td><%= f.text_field :postal_code %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :address, "住所" %></td>
-              <td><%= f.text_field :address %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :area_id, "エリア" %></td>
-              <td><%= f.collection_select :area_id, Area.all, :id, :name, class: "form-control" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :spot_image, "スポット画像" %></td>
-              <td><%= f.file_field :spot_image, accept: "image/*" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></td>
-              <td><%= f.text_field :name, value: @tag_list, class: "form-control" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :confession_result, "告白結果" %></td>
-              <td>
-                <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
-                <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">スポット編集</mark></h2>
 
-                <%= f.radio_button :confession_result, Post.confession_results.key(1) %>
-                <%= f.label :confession_result, Post.confession_results_i18n[:no] %>
+      <div class="mt-5 offset-1">
+        <input id="address" type="textbox" value="" size="50">
+        <input type="button" value="地図を検索" onclick="codeAddress()">
+        <div id='map' class="mt-3"></div>
 
-                <%= f.radio_button :confession_result, Post.confession_results.key(2) %>
-                <%= f.label :confession_result, Post.confession_results_i18n[:no_answer] %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                ※平均値ではなくご自身の評価になります。</br>
-                雰囲気</br>
-                人の少なさ</br>
-                定番度</br>
-              </td>
-              <td>
-                <div class="star_atmosphere_rate" data-score="<%= @post.atmosphere_rate %>">
-                  <%= f.label :atmosphere_rate %>
-                  <%= f.hidden_field :atmosphere_rate %>
-                </div>
-                <div class="star_few_people_rate" data-score="<%= @post.few_people_rate %>">
-                  <%= f.label :few_people_rate %>
-                  <%= f.hidden_field :few_people_rate %>
-                </div>
-                <div class="star_standard_rate" data-score="<%= @post.standard_rate %>">
-                  <%= f.label :standard_rate %>
-                  <%= f.hidden_field :standard_rate %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>総合評価</td>
-              <td>
-                <div class="star_all_rate" data-score="<%= @post.all_rate %>">
-                  <%= f.label :all_rate %>
-                  <%= f.hidden_field :all_rate %>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <%= f.submit "変更", class: "btn btn-success" %>
-                <%= link_to "削除", post_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger" %>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="mt-5 offset-1">
+          <%= form_with model:@post, url: post_path(@post), method: :patch, local: true do |f| %>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%"></th>
+                  <th style="width: 50%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= f.label :title, "タイトル" %></td>
+                  <td><%= f.text_field :title, :placeholder =>"例)東京タワー", size: 50 %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :introduction, "説明文" %></td>
+                  <td><%= f.text_area :introduction, :placeholder =>"例)夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x4" %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :postal_code, "郵便番号" %></td>
+                  <td><%= f.text_field :postal_code, :placeholder =>"自動入力", :value => "", id: "postal_code", size: 50 %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :address, "住所" %></td>
+                  <td><%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "address", size: 50 %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :area_id, "エリア" %></td>
+                  <td><%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :spot_image, "スポット画像" %></td>
+                  <td><%= f.file_field :spot_image, accept: "image/*" %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :name,"タグ (,で区切ると複数タグ登録可能)" %></td>
+                  <td><%= f.text_field :name, :placeholder =>"例)夜景,海,イルミネーション", size: 50 %></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="mt-4">
+                      <%= f.label :confession_result, "告白結果" %>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="mt-4">
+                      <div class="d-flex flex-wrap">
+                        <div class="mr-4">
+                          <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
+                          <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
+                        </div>
+                        <div class="mr-4">
+                          <%= f.radio_button :confession_result, Post.confession_results.key(1) %>
+                          <%= f.label :confession_result, Post.confession_results_i18n[:no] %>
+                        </div>
+                        <div>
+                          <%= f.radio_button :confession_result, Post.confession_results.key(2) %>
+                          <%= f.label :confession_result, Post.confession_results_i18n[:no_answer] %>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="mt-4">
+                      <div>　</div>
+                      <div class="mb-2">雰囲気</div>
+                      <div class="mb-2">人の少なさ</div>
+                      <div class="mb-2">定番度</div>
+                      <div class="mb-4">総合評価</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="mt-4">
+                      <div>※平均値ではなくご自身の評価になります。</div>
+                      <div class="star_atmosphere_rate mb-2" data-score="<%= @post.atmosphere_rate %>">
+                        <%= f.label :atmosphere_rate %>
+                        <%= f.hidden_field :atmosphere_rate %>
+                      </div>
+                      <div class="star_few_people_rate mb-2" data-score="<%= @post.few_people_rate %>">
+                        <%= f.label :few_people_rate %>
+                        <%= f.hidden_field :few_people_rate %>
+                      </div>
+                      <div class="star_standard_rate mb-2" data-score="<%= @post.standard_rate %>">
+                        <%= f.label :standard_rate %>
+                        <%= f.hidden_field :standard_rate %>
+                      </div>
+                      <div class="star_all_rate mb-4" data-score="<%= @post.all_rate %>">
+                        <%= f.label :all_rate %>
+                        <%= f.hidden_field :all_rate %>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <%= f.submit "変更", class: "btn btn-success mr-3", style: "width: 150px;" %>
+                    <%= link_to "削除", post_path(@post),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger", style: "width: 150px;" %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-        <script>
-          $(document).on('turbolinks:load', function() {
-            <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
-              $('.star_<%= rate %>').empty();
-              $('.star_<%= rate %>').raty({
-                size     : 36,
-                starOff:  '<%= asset_path('star-off.png') %>',
-                starOn : '<%= asset_path('star-on.png') %>',
-                starHalf: '<%= asset_path('star-half.png') %>',
-                scoreName: 'post[<%= rate %>]',
-                half: true,
+            <script>
+              $(document).on('turbolinks:load', function() {
+                <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
+                  $('.star_<%= rate %>').empty();
+                  $('.star_<%= rate %>').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[<%= rate %>]',
+                    half: true,
+                  })
+                <% end %>
               })
-            <% end %>
-          })
-        </script>
+            </script>
+          <% end %>
+        </div>
 
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
