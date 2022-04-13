@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   belongs_to :area
 
-  validates :postal_code, presence: true, format: { with: /\A\d{7}\z/ }
+  validates :postal_code, presence: true, format: { with: /\A\d{3}[-]\d{4}\z/ }
   validates :address, presence: true
   validates :longitude, presence: true
   validates :latitude, presence: true

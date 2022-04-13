@@ -23,6 +23,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @posts = Post.all
   end
 
   def new
@@ -31,6 +32,7 @@ class Public::PostsController < ApplicationController
   end
 
   def create
+    @posts = Post.all
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
     tag_list = params[:post][:name].split(',')

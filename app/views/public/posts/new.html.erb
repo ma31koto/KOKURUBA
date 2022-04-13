@@ -10,10 +10,6 @@
 
         <div class="mt-5 offset-1">
           <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
-
-          <%= f.text_field :longitude, :value => "緯度", id: "longitude" %>
-          <%= f.text_field :latitude, :value => "経度", id: "latitude" %>
-
             <table>
               <thead>
                 <tr>
@@ -36,7 +32,7 @@
                 </tr>
                 <tr>
                   <td><%= f.label :address, "住所" %></td>
-                  <td><%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "address", size: 50 %></td>
+                  <td><%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "input_address", size: 50 %></td>
                 </tr>
                 <tr>
                   <td><%= f.label :area_id, "エリア" %></td>
@@ -111,8 +107,8 @@
                 </tr>
               </tbody>
             </table>
-            <%#= f.hidden_field :longitude, :value => "", id: "longitude" %>
-            <%#= f.hidden_field :latitude, :value => "", id: "latitude" %>
+            <%= f.hidden_field :longitude, :value => "", id: "longitude" %>
+            <%= f.hidden_field :latitude, :value => "", id: "latitude" %>
           <% end %>
         </div>
 
@@ -189,8 +185,6 @@
                 //     map_lat.value = "";
                 //     map_lng.value = "";
                 // }
-
-
             }
 
 
@@ -205,7 +199,6 @@
                   if (status == 'OK') {
                     map.setCenter(results[0].geometry.location);
 
-
                     // 再検索でピンを消す
                     function setMapOnAll() {
                       for (let i = 0; i < markers.length; i++) {
@@ -218,21 +211,18 @@
                       position: results[0].geometry.location
                     });
                     markers.push(marker)
-                    // 再検索でピンを消す
 
                     var lat = marker.getPosition().lat();
                     var lng = marker.getPosition().lng();
                     $("#longitude").val(lat);
                     $("#latitude").val(lng);
 
-                    // 郵便番号、住所自動入力
-                    // results[0].address_components.reverse().forEach(function(address) {
-                    //   if ( value == 1 )
-                    //     $("#postal_code").val(value == 1);
-                    //   else ( value > 1 )
-                    //     var address += value
-                    //     $("#address").val(address);
-                    // });
+
+                    var postalCode = results[0].formatted_address.match(/〒[0-9]{3}-[0-9]{4}/)[0].slice(1)
+                    $("#postal_code").val(postalCode);
+
+                    var address = results[0].formatted_address.split('、')[1].split(' ')[1]
+                    $("#input_address").val(address);
 
                   } else {
                     alert('該当する結果がありませんでした：' + status);
