@@ -91,7 +91,7 @@
                         <div>(<%= post.post_comments.count + 1 %>件)</div>
                       </div>
                     </td>
-                    <td>
+                    <td class="text-center align-middle">
                       <% unless post.avg_confession_result %>
                         未回答
                       <% else %>
@@ -174,7 +174,7 @@
 
         $(function(){
           $('.tab').mouseover(function(){
-            $('.tab').css({'background-color': '#0000FF'});
+            $('.tab').css({'background-color': '#666633'});
           });
           $('.tab').mouseout(function(){
             $('.tab').css({'background-color': 'white'});

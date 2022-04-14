@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                   <td><%= f.label :address, "住所" %></td>
-                  <td><%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "address", size: 50 %></td>
+                  <td><%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "input_address", size: 50 %></td>
                 </tr>
                 <tr>
                   <td><%= f.label :area_id, "エリア" %></td>
@@ -112,24 +112,112 @@
                 </tr>
               </tbody>
             </table>
-
-            <script>
-              $(document).on('turbolinks:load', function() {
-                <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
-                  $('.star_<%= rate %>').empty();
-                  $('.star_<%= rate %>').raty({
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    scoreName: 'post[<%= rate %>]',
-                    half: true,
-                  })
-                <% end %>
-              })
-            </script>
+            <%= f.hidden_field :longitude, :value => "", id: "longitude" %>
+            <%= f.hidden_field :latitude, :value => "", id: "latitude" %>
           <% end %>
         </div>
+
+        <script>
+          $(document).on('turbolinks:load', function() {
+            <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
+              $('.star_<%= rate %>').empty();
+              $('.star_<%= rate %>').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'post[<%= rate %>]',
+                half: true,
+              })
+            <% end %>
+          })
+        </script>
+
+        <script>
+            let map
+            const longitude = document.getElementById('longitude')
+            let markers = []
+
+            // mapの表示関数
+            function initMap() {
+              geocoder = new google.maps.Geocoder()
+             // mapの初期位置, 縮尺を定義
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
+                zoom: 12,
+              });
+
+              // mapsテーブルにあるそれぞれのレコードをmap上に表示
+              (function(){
+                // マーカーを立てる
+                var marker = new google.maps.Marker({
+                  position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+                  map: map,
+                  title: contentString
+                });
+                markers.push(marker)
+              })();
+
+                //クリックしたときの処理
+                // function mylistener(event){
+                //     marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
+                //     marker.setMap(map);
+                //     console.log(event.latLng.lat(), event.latLng.lng());
+                //     map_lat.value = event.latLng.lat();
+                //     map_lng.value = event.latLng.lng();
+                //   }
+                // }
+
+                //   function deleteMarker(){
+                //     marker.setMap(null);
+                //     map_lat.value = "";
+                //     map_lng.value = "";
+                // }
+            }
+
+
+            let geocoder
+             // 地図検索関数
+            function codeAddress() {
+              let inputAddress = document.getElementById('address').value;
+
+              geocoder.geocode({
+                'address': inputAddress},
+                function (results, status) {
+                  if (status == 'OK') {
+                    map.setCenter(results[0].geometry.location);
+
+                    // 再検索でピンを消す
+                      for (let i = 0; i < markers.length; i++) {
+                        markers[i].setMap(null);
+                      }
+
+                    var marker = new google.maps.Marker({
+                      map: map,
+                      position: results[0].geometry.location
+                    });
+                    markers.push(marker)
+
+                    var lat = marker.getPosition().lat();
+                    var lng = marker.getPosition().lng();
+                    $("#latitude").val(lat);
+                    $("#longitude").val(lng);
+
+
+                    var postalCode = results[0].formatted_address.match(/〒[0-9]{3}-[0-9]{4}/)[0].slice(1)
+                    $("#postal_code").val(postalCode);
+
+                    var address = results[0].formatted_address.split('、')[1].split(' ')[1]
+                    $("#input_address").val(address);
+
+                  } else {
+                    alert('該当する結果がありませんでした：' + status);
+                  }
+                });
+              }
+          </script>
+
+          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 
       </div>
     </div>

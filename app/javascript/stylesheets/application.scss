@@ -1,5 +1,4 @@
 @import '~bootstrap/scss/bootstrap';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 @charset "UTF-8";
 
@@ -48,6 +47,8 @@ body {
   display: flex;
   justify-content: space-around;
   text-align: center;
+  list-style-type: none;
+  color: black;
 }
 
 .tab {
@@ -62,9 +63,9 @@ body {
 }
 
 .tab-active {
-  color: #FFF;
-  background: #19b5d1;
-  transition: all 0.2s ease-in-out;
+  color: black;
+  background: #999900;
+  // transition: all 0.2s ease-in-out;
 }
 
 .tabbox {
@@ -76,21 +77,21 @@ body {
   display: block;
 }
 
-// .table-bordered thead th {
-//   border: 1.5px solid black;
-// }
+.table-bordered thead th {
+  border: 1.5px solid #808000;
+}
 
-// .table-bordered tbody td {
-//   border: 1.5px solid black;
-// }
+.table-bordered tbody td {
+  border: 1.5px solid #808000;
+}
 
-// .table-bordered th {
-//   border: 1.5px solid black;
-// }
+.table-bordered th {
+  border: 1.5px solid #808000;
+}
 
-// .table-bordered td {
-//   border: 1.5px solid black;
-// }
+.table-bordered td {
+  border: 1.5px solid #808000;
+}
 
 #map {
   width: 900px;
@@ -116,4 +117,11 @@ body {
   background-size: cover;
   width: 150px;
   height: 150px;
+}
+
+.ranking-tab {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  background-color: #9933FF	;
 }

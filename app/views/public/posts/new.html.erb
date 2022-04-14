@@ -20,11 +20,11 @@
               <tbody>
                 <tr>
                   <td><%= f.label :title, "タイトル" %></td>
-                  <td><%= f.text_field :title, :placeholder =>"例)東京タワー", size: 50 %></td>
+                  <td><%= f.text_field :title, :placeholder =>"例：東京タワー", size: 50 %></td>
                 </tr>
                 <tr>
                   <td><%= f.label :introduction, "説明文" %></td>
-                  <td><%= f.text_area :introduction, :placeholder =>"例)夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x4" %></td>
+                  <td><%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x4" %></td>
                 </tr>
                 <tr>
                   <td><%= f.label :postal_code, "郵便番号" %></td>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                   <td><%= f.label :name,"タグ (,で区切ると複数タグ登録可能)" %></td>
-                  <td><%= f.text_field :name, :placeholder =>"例)夜景,海,イルミネーション", size: 50 %></td>
+                  <td><%= f.text_field :name, :placeholder =>"例：夜景,イルミネーション", size: 50 %></td>
                 </tr>
                 <tr>
                   <td>
@@ -141,35 +141,6 @@
                 zoom: 12,
               });
 
-              // mapsテーブルにあるそれぞれのレコードをmap上に表示
-              <% @posts.each do |post| %>
-                (function(){
-                  var contentString = "住所：<%= post.address %>";
-                  // マーカーを立てる
-                  var marker = new google.maps.Marker({
-                    position:{lat: <%= post.latitude %>, lng: <%= post.longitude %>},
-                    map: map,
-                    title: contentString
-                  });
-                  markers.push(marker)
-
-                  // 情報ウィンドウ(吹き出し)の定義
-                  // 投稿の詳細ページへのリンクも
-                  var infowindow = new google.maps.InfoWindow({
-                    position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>},
-                    content: "<a href='<%=  %>' target='_blank'><%= post.address %></a>"
-                  });
-
-                  // クリックしたときに情報ウィンドウを表示
-                  // ※(map, marker)の引数なに？marker.なに？
-                  marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                  });
-
-                })();
-              <% end %>
-
-
                 //クリックしたときの処理
                 // function mylistener(event){
                 //     marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
@@ -187,7 +158,6 @@
                 // }
             }
 
-
             let geocoder
              // 地図検索関数
             function codeAddress() {
@@ -200,11 +170,9 @@
                     map.setCenter(results[0].geometry.location);
 
                     // 再検索でピンを消す
-                    function setMapOnAll() {
                       for (let i = 0; i < markers.length; i++) {
                         markers[i].setMap(null);
                       }
-                    }
 
                     var marker = new google.maps.Marker({
                       map: map,
@@ -214,8 +182,8 @@
 
                     var lat = marker.getPosition().lat();
                     var lng = marker.getPosition().lng();
-                    $("#longitude").val(lat);
-                    $("#latitude").val(lng);
+                    $("#latitude").val(lat);
+                    $("#longitude").val(lng);
 
 
                     var postalCode = results[0].formatted_address.match(/〒[0-9]{3}-[0-9]{4}/)[0].slice(1)

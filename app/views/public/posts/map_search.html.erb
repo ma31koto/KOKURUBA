@@ -1,13 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
-    <h1>地図検索</h1>
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">マップ検索</mark></h2>
 
-    <input id="address" type="textbox" value="">
-    <input type="button" value="地図を検索" onclick="codeAddress()">
-    <div id="display">緯度経度が表示されるよ！</div>
+  　　<div class="mt-2 offset-1">
+        <input id="address" type="textbox" value="" size="50">
+        <input type="button" value="地図を検索" onclick="codeAddress()">
 
-    <div id='map'></div>
+        <div id='map' class="mt-3"></div>
+      </div>
+
     <script>
       let map
       const display = document.getElementById('display')
@@ -21,21 +23,26 @@
         });
 
         // mapsテーブルにあるそれぞれのレコードをmap上に表示
-        <% @maps.each do |m| %>
+        <% @posts.each do |post| %>
           (function(){
-            var contentString = "住所：<%= m.address %>";
+            var contentString = "住所：<%= post.address %>";
             // マーカーを立てる
             var marker = new google.maps.Marker({
-              position:{lat: <%= m.latitude %>, lng: <%= m.longitude %>},
+              position:{lat: <%= post.latitude %>, lng: <%= post.longitude %>},
               map: map,
               title: contentString
             });
 
             // 情報ウィンドウ(吹き出し)の定義
             // 投稿の詳細ページへのリンクも
+            // var infowindow = new google.maps.InfoWindow({
+            //   position: {lat: <%#= post.latitude %>, lng: <%#= post.longitude %>},
+            //   contet: "<a window.location.href = <%#= post_url(post.id) %>'target='_blank'><%#= post.title %></a>"
+            // });
+
             var infowindow = new google.maps.InfoWindow({
-              position: {lat: <%= m.latitude %>, lng: <%= m.longitude %>},
-              content: "<a href='<%=  %>' target='_blank'><%= m.address %></a>"
+              position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>},
+              content: '<a href="<%= post_url(post.id) %>"> <%= image_tag post.get_spot_image, size: "100x100"%><br/><%= post.title %></a>'
             });
 
             // クリックしたときに情報ウィンドウを表示
@@ -62,7 +69,6 @@
                 map: map,
                 position: results[0].geometry.location
               });
-              display.textContent = "検索結果：" + results[ 0 ].geometry.location
             } else {
               alert('該当する結果がありませんでした：' + status);
             }
