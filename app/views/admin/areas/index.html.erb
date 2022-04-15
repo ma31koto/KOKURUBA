@@ -1,26 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
-      
-    <h2>エリア一覧・追加</h2>
-    <%= render 'form', area: @area %>
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">エリア一覧・追加</mark></h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>エリア</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @areas.each do |area| %>
-        <tr>
-          <td><%= area.name %></td>
-          <td><%= link_to "編集する", edit_admin_area_path(area), class:"btn btn-success" %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <div class="mt-5 ml-5">
+        <%= render 'form', area: @area %>
+
+        <table class="table text-light col-8">
+          <thead style="background-color: #666633;">
+            <tr>
+              <th width="10%"></th>
+              <th width="60%">エリア名</th>
+              <th width="30%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @areas.each do |area| %>
+            <tr>
+              <td></td>
+              <td><%= area.name %></td>
+              <td><%= link_to "編集する", edit_admin_area_path(area), class:"btn btn-success" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </div>

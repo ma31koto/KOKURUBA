@@ -1,15 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">エリア名編集</mark></h2>
 
-    <div class="container-fluid">
-      <div class="row offset-1 mt-3 mb-5">
-        <h2>エリア編集フォーム</h2>
+      <div class="mt-5 ml-5">
+        <div class="offset-1">
+          <%= render 'form', area: @area %>
+        </div>
       </div>
-      <div class="offset-1">
-        <%= render 'form', area: @area %>
-      </div>
-    </div>
 
     </div>
   </div>

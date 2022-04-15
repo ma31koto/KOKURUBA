@@ -1,36 +1,39 @@
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto">
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">フォロー 一覧</mark></mark></h2>
 
-      <div class="customer-info">
-        <%= image_tag @customer.get_profile_image, size: "100x100" %>
-        <%= @customer.name %>
-        <%= @customer.gender_i18n %>
-        <%= @customer.age %>
+　　　<div class="ml-5">
+        <div class="d-flex flex-wrap">
+          <div>
+            <%= image_tag @customer.get_profile_image, size: "100x100" %>
+          </div>
+          <div class="d-flex align-items-end ml-3">
+            名前：<%= @customer.name %><br/>
+            性別：<%= @customer.gender_i18n %><br/>
+            年齢：<%= @customer.age %>
+            </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="followings-list">
-        <h2>フォロー一覧</h2>
+  <div class="row">
+    <div class="col-12 mx-auto mt-5">
+      <div class="offset-1">
         <% if @customers.exists? %>
-          <table>
-            <thead>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </thead>
+          <table class="table text-light ">
             <tbody>
               <% @customers.each do |customer| %>
               <tr>
                 <th>
                   <%= link_to customer_path(customer) do %>
-                    <%= image_tag customer.get_profile_image, size: "50x50" %>
+                    <%= image_tag customer.get_profile_image, size: "80x80" %>
                     <%= customer.name %>
                   <% end %>
                 </th>
-                <th><%= customer.followings.count %>フォロー</th>
-                <th><%= customer.followers.count %>フォロワー</th>
+                <th><div class="mt-4"><%= customer.followings.count %> フォロー</div></th>
+                <th><div class="mt-4"><%= customer.followers.count %> フォロワー</div></th>
               </tr>
               <% end %>
             </tbody>
@@ -41,5 +44,6 @@
       </div>
     </div>
   </div>
+
 </div>
 

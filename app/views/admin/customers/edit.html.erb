@@ -11,15 +11,21 @@
             </thead>
             <tbody>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :profile_image, "プロフィール写真" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :profile_image, "プロフィール写真" %>
+                </td>
                 <td><%= f.file_field :profile_image, accept: "image/*" %></td>
               </tr>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :name, "名前" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :name, "名前" %>
+                </td>
                 <td><%= f.text_field :name, size: 30 %></td>
               </tr>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :gender, "性別" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :gender, "性別" %>
+                </td>
                 <td>
                   <%= f.radio_button :gender, Customer.genders.key(0) %>
                   <%= f.label :gender, Customer.genders_i18n[:man] %>
@@ -35,19 +41,27 @@
                 </td>
               </tr>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :age, "年齢" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :age, "年齢" %>
+                </td>
                 <td><%= f.text_field :age, size: 5 %>歳</td>
               </tr>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :biography, "自己紹介" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :biography, "自己紹介" %>
+                </td>
                 <td><%= f.text_area :biography, size: "60x4" %></td>
               </tr>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :email, "メールアドレス" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :email, "メールアドレス" %>
+                </td>
                 <td><%= f.text_field :email, size: 30 %></td>
               </tr>
               <tr>
-                <td class="font-weight-bolder"><%= f.label :is_deleted, "会員ステータス" %></td>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :is_deleted, "会員ステータス" %>
+                </td>
                 <td>
                   <%= f.radio_button :is_deleted, 'false' %>
                   <%= f.label :is_deleted, '有効', value: false %>

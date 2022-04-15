@@ -78,9 +78,9 @@
   <div class="row">
     <div class="col-12">
       <h2 class="mt-5 ml-3">コメント一覧　<%= @post.post_comments.count %>件</h2>
-      <div class="mt-1 ml-5">
 
-        <div class="bg-white text-dark" style="padding:20px; border: inset 10px #999966;">
+      <div class="mt-1 ml-5">
+        <div class="bg-white text-dark" style="padding:20px; border: inset 10px #999966; width: 1000px;">
           <% if @post.post_comments.count == 0 %>
             <a>コメントなし</a>
           <% else %>
@@ -100,7 +100,7 @@
                   性別:<%= post_comment.customer.gender_i18n %><br/>
                   年齢:<%= post_comment.customer.age %>歳
                 </div>
-                <div class="ml-5">
+                <div class="ml-4">
                   <div class="d-flex flex-wrap" style="height: 30px;">
                     <div style="width: 100px;"><h5>総合評価</h5></div>
                     <div><h5><%= post_comment.all_rate.round(1).to_f %><h5></div>
@@ -121,11 +121,11 @@
                     <div><%= post_comment.standard_rate.round(1).to_f %></div>
                     <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
                   </div>
-              </div>
-
-              <div class="ml-5">
-                <h5><strong><%= post_comment.title %></strong></h5>
-                <%= post_comment.comment %>
+                </div>
+                <div class="ml-4">
+                  <h5><strong><%= post_comment.title %></strong></h5>
+                  <%= post_comment.comment %>
+                </div>
               </div>
             <% end %>
           <% end %>

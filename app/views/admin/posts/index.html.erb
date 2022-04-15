@@ -1,94 +1,117 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 mx-auto">
-      <h1>スポット一覧</h1>
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">スポット一覧</mark></h2>
 
-      <%= search_form_for @q do |f| %>
-        <%= f.label :title, "タイトル" %>
-        <%= f.search_field :title_cont %>
+      <div class="mt-5">
+        <%= search_form_for @q do |f| %>
+          <%= f.label :title, "タイトル" %>
+          <%= f.search_field :title_cont, :placeholder =>"例：東京タワー" %>
+          <%= f.label :area_id, "× エリア" %>
+          <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
+          <%= f.label :tag, "× タグ名" %>
+          <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"夜景" %>
+          <%= hidden_field_tag(:confession_ranking) %>
+          <%= hidden_field_tag(:all_rate_ranking) %>
+          <%= hidden_field_tag(:atmosphere_rate_ranking) %>
+          <%= hidden_field_tag(:few_people_rate_ranking) %>
+          <%= hidden_field_tag(:standard_rate_ranking) %>
+          <%= f.submit "検索" %>
+        <% end %>
 
-        <%= f.label :area_id, "エリア" %>
-        <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
+        <div class="d-flex flex-wrap">
+          並び替え
+          <div class"ranking-tab"><%= sort_link(@q, :created_at, "新着", default_order: :desc)%></div>
+          <div class"ranking-tab"><a href="javascript:onSortAllRateRanking()">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a></div>
+          <div class"ranking-tab"><a href="javascript:onSortAtmosphereRateRanking()">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a></div>
+          <div class"ranking-tab"><a href="javascript:onSortFewPeopleRateRanking()">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a></div>
+          <div class"ranking-tab"><a href="javascript:onSortStandardRateRanking()">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a></div>
+          <div class"ranking-tab"><a href="javascript:onSortConfessionRranking()">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a></div>
+        </div>
 
-        <%= f.label :tag, "タグ名" %>
-        <%= f.search_field :post_tags_tag_name_cont %>
-
-        <%= hidden_field_tag(:confession_ranking) %>
-        <%= hidden_field_tag(:all_rate_ranking) %>
-        <%= hidden_field_tag(:atmosphere_rate_ranking) %>
-        <%= hidden_field_tag(:few_people_rate_ranking) %>
-        <%= hidden_field_tag(:standard_rate_ranking) %>
-
-        <%= f.submit "検索" %>
-      <% end %>
-
-      ランキング検索
-      <%= sort_link(@q, :created_at, "新着", default_order: :desc)%>
-      <a href="javascript:onSortAllRateRanking()">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
-      <a href="javascript:onSortAtmosphereRateRanking()">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
-      <a href="javascript:onSortFewPeopleRateRanking()">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
-      <a href="javascript:onSortStandardRateRanking()">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a>
-      <a href="javascript:onSortConfessionRranking()">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
-
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>エリア</th>
-            <th>関連タグ</th>
-            <th>総合評価</th>
-            <th>雰囲気</th>
-            <th>人の少なさ</th>
-            <th>定番度</th>
-            <th>告白成功率</th>
-            <th>コメント数</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @posts.each do |post| %>
-          <tr>
-            <td>
-              <%= link_to admin_post_path(post) do %>
-                <%= image_tag post.get_spot_image, size: "50x50" %></br>
-                <%= post.title %>
+        <div class="mx-auto mt-5">
+          <table class="table-bordered">
+             <thead>
+              <tr style="height: 50px; background-color: #666633;" class="text-center align-middle">
+                <th width="10%"></th>
+                <th width="10%">エリア</th>
+                <th width="10%">関連タグ</th>
+                <th width="10%">総合評価</th>
+                <th width="10%">雰囲気</th>
+                <th width="10%">人の少なさ</th>
+                <th width="10%">定番度</th>
+                <th width="8%">告白<br/>成功率</th>
+                <th width="8%">コメント数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @posts.each do |post| %>
+              <tr>
+                <td>
+                  <div class="ml-3 align-middle">
+                    <%= link_to admin_post_path(post) do %>
+                      <%= image_tag post.get_spot_image, size: "150x100" %></br>
+                      <%= post.title %>
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3 h6">
+                    <%= post.area.name %>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3 h6">
+                    <% post.tags.each do |tag| %>
+                      <%= tag.name %></br>
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3">
+                    <%= post.avg_all_rate.round(1).to_f %>
+                    <div class="star" data-score="<%= post.avg_all_rate %>"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3">
+                    <%= post.avg_atmosphere_rate.round(1).to_f %>
+                    <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3">
+                    <%= post.avg_few_people_rate.round(1).to_f %>
+                    <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3">
+                    <%= post.avg_standard_rate.round(1).to_f %>
+                    <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3">
+                    <% unless post.avg_confession_result %>
+                      未回答
+                    <% else %>
+                      <%= post.avg_confession_result %>％
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <div class="ml-3">
+                    <%= post.post_comments.count %>件
+                  </div>
+                </td>
+              </tr>
               <% end %>
-            </td>
-            <td><%= post.area.name %></td>
-            <td>
-              <% post.tags.each do |tag| %>
-                <%= tag.name %></br>
-              <% end %>
-            </td>
-            <td>
-              <%= post.avg_all_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.avg_all_rate %>"></div>
-            </td>
-            <td>
-              <%= post.avg_atmosphere_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
-            </td>
-            <td>
-              <%= post.avg_few_people_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
-            </td>
-            <td>
-              <%= post.avg_standard_rate.round(1).to_f %>
-              <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
-            </td>
-            <td>
-              <% unless post.avg_confession_result %>
-                未回答
-              <% else %>
-                <%= post.avg_confession_result %>％
-              <% end %>
-            </td>
-            <td><%= post.post_comments.count %>件</td>
-            <td><%= link_to "表示する", admin_post_path(post), class: "btn btn-success" %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
 
       <script>
         $(document).on('turbolinks:load', function() {

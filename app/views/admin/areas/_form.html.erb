@@ -16,14 +16,14 @@
   <%= form_with model:@area, url: admin_area_path(area), method: :patch, local: true do |f|  %>
    <div class="form-group row font-weight-bold">
      <%= f.label :name, "エリア名" %>
-     <div class="col-2 ml-5 mr-3">
-      <%= f.text_field :name %>
+     <div class="ml-3">
+      <%= f.text_field :name, size: 30 %>
      </div>
-     <div class="col-2 ml-5">
-      <%= f.submit "変更を保存", class: "btn btn-success" %>
+     <div class="ml-5">
+      <%= f.submit "変更", class: "btn btn-success", style: "width: 100px;" %>
      </div>
-     <div class="col-2 ml-5">
-      <%= link_to "削除", admin_area_path(area), method: :delete, date: { confirm: '本当に消しますか？'}, class: "btn btn-danger" %>
+     <div class="ml-3">
+      <%= link_to "削除", admin_area_path(area), method: :delete, date: { confirm: '本当に消しますか？'}, class: "btn btn-danger", style: "width: 100px;" %>
      </div>
     </div>
   <% end %>

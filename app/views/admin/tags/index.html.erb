@@ -1,26 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">タグ一覧・追加</mark></h2>
 
-    <h2>タグ一覧・追加</h2>
-    <%= render 'form', tag: @tag %>
+      <div class="mt-5 ml-5">
+        <%= render 'form', tag: @tag %>
 
-    <table>
-      <thead>
-        <tr>
-          <th>タグ</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @tags.each do |tag| %>
-        <tr>
-          <td><%= tag.name %></td>
-          <td><%= link_to "編集する", edit_admin_tag_path(tag), class:"btn btn-success" %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+        <table class="table text-light col-8">
+          <thead style="background-color: #666633;">
+            <tr>
+              <th width="10%"></th>
+              <th width="60%">タグ名</th>
+              <th width="30%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tags.each do |tag| %>
+            <tr>
+              <td></td>
+              <td><%= tag.name %></td>
+              <td><%= link_to "編集する", edit_admin_tag_path(tag), class:"btn btn-success" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
     </div>
   </div>

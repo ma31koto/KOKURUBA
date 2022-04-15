@@ -15,7 +15,7 @@
             <tbody>
               <tr>
                 <td><%= f.label :title, "タイトル" %></td>
-                <td><%= f.text_field :title, size: 50%></td>
+                <td><%= f.text_field :title, size: 50 %></td>
               </tr>
               <tr>
                 <td><%= f.label :comment, "コメント" %></td>
@@ -52,7 +52,7 @@
               </tr>
               <tr>
                 <td>
-                    <div class="mt-4">
+                    <div class="mt-2">
                   　<div class="mb-2">雰囲気</div>
                     <div class="mb-2">人の少なさ</div>
                     <div class="mb-2">定番度</div>
@@ -60,7 +60,7 @@
                   </div>
                 </td>
                 <td>
-                  <div class="mt-4">
+                  <div class="mt-2">
                     <div class="star_atmosphere_rate" data-score="<%= @post_comment.atmosphere_rate %>">
                       <%= f.label :atmosphere_rate %>
                       <%= f.hidden_field :atmosphere_rate %>
@@ -83,8 +83,8 @@
               <tr>
                 <td></td>
                 <td>
-                  <%= f.submit "変更", class: "btn btn-success" %>
-                  <%= link_to "削除", post_post_comment_path(@post_comment.post, @post_comment),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger", style: "width: 150px;"  %>
+                  <%= f.submit "変更", class: "btn btn-success", style: "width: 150px;" %>
+                  <%= link_to "削除", post_post_comment_path(@post_comment.post, @post_comment),  method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger ml-3", style: "width: 150px;"  %>
                 </td>
               </tr>
             </tbody>

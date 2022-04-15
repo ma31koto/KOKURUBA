@@ -1,61 +1,77 @@
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto">
-      <h1>My Page 編集</h1>
-      <div class="text-danger">
-        <%= render 'layouts/error_messages', resource: @customer %>
-      </div>
-      <%= form_with model:@customer, url: customer_path(@customer), method: :patch, local: true do |f| %>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= f.label :profile_image, "写真" %></td>
-              <td><%= f.file_field :profile_image, accept: "image/*" %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :name, "名前" %></td>
-              <td><%= f.text_field :name %></td>
-            </tr>
-            <tr>
-              <td><%= f.label :gender, "性別" %></td>
-              <td>
-                <%= f.radio_button :gender, Customer.genders.key(0) %>
-                <%= f.label :gender, Customer.genders_i18n[:man] %>
+    <div class="col-12 mx-auto mt-5">
+      <h2><mark class="bg-secondary text-light">My Page編集</mark></mark></h2>
 
-                <%= f.radio_button :gender, Customer.genders.key(1) %>
-                <%= f.label :gender, Customer.genders_i18n[:woman] %>
+　　　<div class="mt-1 ml-5">
+        <div class="text-danger">
+          <%= render 'layouts/error_messages', resource: @customer %>
+        </div>
 
-                <%= f.radio_button :gender, Customer.genders.key(2) %>
-                <%= f.label :gender, Customer.genders_i18n[:another] %>
+        <%= form_with model:@customer, url: customer_path(@customer), method: :patch, local: true do |f| %>
+          <table class="table table-light text-body align-middle table-bordered">
+            <thead>
+              <tr></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td  class="font-weight-bolder table-bg-color">
+                  <%= f.label :profile_image, "写真", class: "ml-3" %>
+                </td>
+                <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+              </tr>
+              <tr>
+                <td  class="font-weight-bolder table-bg-color">
+                  <%= f.label :name, "名前", class: "ml-3" %>
+                </td>
+                <td><%= f.text_field :name, size: 30 %></td>
+              </tr>
+              <tr>
+                <td  class="font-weight-bolder table-bg-color">
+                  <%= f.label :gender, "性別", class: "ml-3" %>
+                </td>
+                <td>
+                  <%= f.radio_button :gender, Customer.genders.key(0) %>
+                  <%= f.label :gender, Customer.genders_i18n[:man], class: "mr-3" %>
 
-                <%= f.radio_button :gender, Customer.genders.key(3) %>
-                <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
-              </td>
-            </tr>
-            <tr>
-              <td><%= f.label :age, "年齢" %></td>
-              <td><%= f.text_field :age %>歳</td>
-            </tr>
-            <tr>
-              <td><%= f.label :biography, "自己紹介" %></td>
-              <td><%= f.text_area :biography %></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <%= f.submit "変更", class: "btn btn-sm btn-success" %>
-              　<%= link_to "退会", unsubscribe_customers_path, class: "btn btn-danger"%>
-              </td>
-            </tr>
-          </tbody>
+                  <%= f.radio_button :gender, Customer.genders.key(1) %>
+                  <%= f.label :gender, Customer.genders_i18n[:woman], class: "mr-3" %>
+
+                  <%= f.radio_button :gender, Customer.genders.key(2) %>
+                  <%= f.label :gender, Customer.genders_i18n[:another], class: "mr-3" %>
+
+                  <%= f.radio_button :gender, Customer.genders.key(3) %>
+                  <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
+                </td>
+              </tr>
+              <tr>
+                <td  class="font-weight-bolder table-bg-color">
+                  <%= f.label :age, "年齢", class: "ml-3" %>
+                </td>
+                <td><%= f.text_field :age, size: 5  %>歳</td>
+              </tr>
+              <tr>
+                <td  class="font-weight-bolder table-bg-color">
+                  <%= f.label :biography, "自己紹介", class: "ml-3" %>
+                </td>
+                <td><%= f.text_area :biography, size: "60x4"  %></td>
+              </tr>
+              <tr>
+                <td class="font-weight-bolder table-bg-color">
+                  <%= f.label :email, "メールアドレス", class: "ml-3" %>
+                </td>
+                <td><%= f.text_field :email, size: 30 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-center">
+            <%= f.submit "変更", class: "btn btn-success mr-3", style: "width: 150px;" %>
+            <%= link_to "退会", unsubscribe_customers_path, class: "btn btn-danger", style: "width: 150px;" %>
+          </div>
         <% end %>
-      </table>
+      </div>
+
     </div>
   </div>
 </div>
