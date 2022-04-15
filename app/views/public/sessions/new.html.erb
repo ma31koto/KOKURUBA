@@ -1,18 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto mt-5">
+    <div class="col-12 mx-auto mt-5">
       <h2><mark class="bg-secondary text-light">ログイン</mark></h2>
+      <%= render 'layouts/error_messages', resource: @customer %>
+    </div>
+  </div>
 
-　　　<div class="ml-5">
-　　　  <p><mark class="bg-secondary text-light">・会員の方はこちらからログイン</mark></p>
+  <div class="row">
+    <div class="col-12 mx-auto mt-5">
+      <div class="ml-5">
+        <p><mark class="bg-secondary text-light">・会員の方はこちらからログイン</mark></p>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="mb-2">
             <%= f.label :email, "メールアドレス", class: "col-2" %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"sample@example.com", class: "col-5"%>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"例：sample@example.com", size: 30%>
           </div>
           <div class="mb-2">
             <%= f.label :password, "パスワード", class: "col-2"%>
-            <%= f.password_field :password, autocomplete: "current-password", class: "col-5"%>
+            <%= f.password_field :password, autocomplete: "current-password", size: 30%>
           </div>
 
           <%= f.submit "ログイン", class: "btn btn-primary offset-2"%>

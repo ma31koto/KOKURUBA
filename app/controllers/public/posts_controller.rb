@@ -38,7 +38,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.save
       @post.save_tag(tag_list)
-      redirect_to post_path(@post), notice:'投稿完了しました'
+      redirect_to post_path(@post), notice:'スポットを投稿完了しました!'
     else
       render :new
     end
@@ -54,7 +54,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
        @post.save_tag(tag_list)
-       redirect_to post_path(@post),notice:'投稿を変更しました'
+       redirect_to post_path(@post), notice:'スポット投稿を変更しました!'
     else
       render :edit
     end
@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to map_search_posts_path
+    redirect_to map_search_posts_path, notice:'スポット投稿を削除しました!'
   end
 
   private

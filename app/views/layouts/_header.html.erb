@@ -1,9 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-
       <%= link_to root_path do%>
-        <%= image_tag 'KOKURUBA_logo', size: "100x100" %>
+        <%= image_tag 'KOKURUBA_logo', size: "70x70" %>
       <% end %>
       <% if customer_signed_in? %>
         <span class="ml-3 text-left">ようこそ、<%= current_customer.name %>さん！</span>

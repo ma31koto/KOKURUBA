@@ -16,7 +16,7 @@ class Admin::PostsController < ApplicationController
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
        @post.save_tag(tag_list)
-       redirect_to admin_post_path(@post), notice:'投稿を変更しました'
+       redirect_to admin_post_path(@post), notice:'スポット投稿を変更しました!'
     else
       render :edit
     end
@@ -24,7 +24,7 @@ class Admin::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to admin_customers_path, notice:'投稿を削除しました'
+    redirect_to admin_customers_path, notice:'スポット投稿を削除しました!'
   end
 
   private

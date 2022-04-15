@@ -13,7 +13,7 @@ class Admin::CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to admin_customer_path(@customer), notice: "会員の情報が更新されました"
+      redirect_to admin_customer_path(@customer), notice: "会員の情報が更新されました!"
     else
       render :edit
     end

@@ -10,9 +10,9 @@ class Admin::PostCommentsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     if @post_comment.update(post_comment_params)
-       redirect_to admin_post_path(post), notice:'投稿を変更しました'
+       redirect_to admin_post_path(@post), notice:'コメント投稿を変更しました!'
     else
       render :edit
     end
@@ -21,7 +21,7 @@ class Admin::PostCommentsController < ApplicationController
   def destroy
     post = Post.find(params[:post_id])
     PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-    redirect_to admin_post_path(post)
+    redirect_to admin_post_path(post), notice:'コメント投稿を削除しました!'
   end
 
   private

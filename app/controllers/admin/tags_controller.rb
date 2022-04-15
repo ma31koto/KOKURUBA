@@ -7,7 +7,7 @@ class Admin::TagsController < ApplicationController
   def create
     tag = Tag.new(tag_params)
     if tag.save
-      redirect_to admin_tags_path
+      redirect_to admin_tags_path, notice:'タグ名を作成しました!'
     else
       redirect_to admin_tags_path
     end
@@ -18,15 +18,18 @@ class Admin::TagsController < ApplicationController
   end
 
   def update
-    tag = Tag.find(params[:id])
-    tag.update(tag_params)
-    redirect_to admin_tags_path
+    @tag = Tag.find(params[:id])
+    if @tag.update(tag_params)
+      redirect_to admin_tags_path, notice:'タグ名を変更しました!'
+    else
+     render :edit
+    end
   end
 
   def destroy
       tag = Tag.find(params[:id])
       tag.destroy
-      redirect_to admin_tags_path
+      redirect_to admin_tags_path, notice:'タグ名を削除しました!'
   end
 
   private
