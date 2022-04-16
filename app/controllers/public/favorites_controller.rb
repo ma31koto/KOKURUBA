@@ -2,7 +2,7 @@ class Public::FavoritesController < ApplicationController
   def index
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
     @q = Post.where(id: favorites).ransack(params[:q])
-    @posts = @q.result(distinct: true)
+    @posts = @q.result(distinct: true).page(params[:page]).per(8)
     if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
       @posts = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
     elsif params[:all_rate_ranking] == 'asc' || params[:all_rate_ranking] == 'desc'

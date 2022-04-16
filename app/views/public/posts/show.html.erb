@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 mx-auto mt-5">
       <h2><mark class="bg-secondary text-light">スポット詳細</mark></h2><i class="fa-solid fa-comment-pen"></i>
-      <div class="mt-5 d-flex align-items-center">
+      <div class="mt-3 d-flex align-items-center">
         <div><h1>【<%= @post.title %>】</h1></div>
         <div id="favorite_buttons" class="ml-5 d-flex align-items-center">
           <%= render "public/favorites/btn", post: @post %>
@@ -57,29 +57,32 @@
         <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
         <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
       </div>
-
-      <div class="mt-4">
-        <p>＜内容＞<br/><%= @post.introduction %></p>
-      </div>
     </div>
 
     <div class="col-2">
       <div class="avg_confession_result">
-        <div class="mt-3">
-          <% unless @post.avg_confession_result %>
-            <h3 class="d-flex align-items-center">未回答</h3>
-          <% else %>
-            <h3  class="d-flex align-items-center">
-              <%= @post.avg_confession_result %>％
-            </h3>
-          <% end %>
-        </div>
+        <% unless @post.avg_confession_result %>
+          <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">未回答</h3>
+        <% else %>
+          <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">
+            <%= @post.avg_confession_result %>％
+          </h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="mt-3 ml-5">
+        <span class="mr-5">＜住所＞</span><span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
+        <span class="mr-5">＜内容＞</span><%= @post.introduction %>
       </div>
     </div>
   </div>
 
 
-    <div class="row">
+  <div class="row">
     <div class="col-12">
       <div class="d-flex flex-wrap">
         <div class="mt-5 ml-3"><h2>コメント一覧　<%= @post.post_comments.count %>件</h2></div>
@@ -146,16 +149,14 @@
   </div>
 
   <script>
-    $(document).on('turbolinks:load', function() {
-      $('.star').empty();
-      $('.star').raty({
-        size: 36,
-        starOff:  '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf: '<%= asset_path('star-half.png') %>',
-        half: true,
-        readOnly: true,
-      });
+    $('.star').empty();
+    $('.star').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
     });
   </script>
 

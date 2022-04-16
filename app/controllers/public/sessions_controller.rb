@@ -27,10 +27,6 @@ class Public::SessionsController < Devise::SessionsController
 
   protected
 
-  def after_sign_out_path_for(resource)
-    root_path
-  end
-
   def reject_inactive_customer
     @customer = Customer.find_by(email: params[:customer][:email])
     if @customer
@@ -38,6 +34,8 @@ class Public::SessionsController < Devise::SessionsController
       if @customer.valid_password?(params[:customer][:password]) && @customer.is_deleted
         flash[:danger] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
         redirect_to new_customer_session_path
+      else
+        flash[:notice] = "項目を入力してください"
       end
     end
   end

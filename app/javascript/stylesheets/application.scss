@@ -66,6 +66,7 @@ body {
   cursor: pointer;
   border-left: solid 1px #CCC;
   border-bottom: solid 1px #CCC;
+  background-color: white;
 }
 .tab:first-child {
   border-left: none;
@@ -73,9 +74,14 @@ body {
 
 .tab-active {
   color: black;
-  background: #999900;
+  background-color: #999900;
   // transition: all 0.2s ease-in-out;
 }
+
+.tab-mouseover {
+  background-color: #666633;
+}
+
 
 .tabbox {
   display: none;
@@ -107,6 +113,16 @@ body {
 }
 
 #map {
+  width: 900px;
+  height: 400px;
+}
+
+#map_new {
+  width: 900px;
+  height: 400px;
+}
+
+#map_edit {
   width: 900px;
   height: 400px;
 }

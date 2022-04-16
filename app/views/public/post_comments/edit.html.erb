@@ -91,19 +91,17 @@
           </table>
 
           <script>
-            $(document).on('turbolinks:load', function() {
-              <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
-                $('.star_<%= rate %>').empty();
-                $('.star_<%= rate %>').raty({
-                  size     : 36,
-                  starOff:  '<%= asset_path('star-off.png') %>',
-                  starOn : '<%= asset_path('star-on.png') %>',
-                  starHalf: '<%= asset_path('star-half.png') %>',
-                  scoreName: 'post_comment[<%= rate %>]',
-                  half: true,
-                })
-              <% end %>
-            })
+            <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
+              $('.star_<%= rate %>').empty();
+              $('.star_<%= rate %>').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'post_comment[<%= rate %>]',
+                half: true,
+              })
+            <% end %>
           </script>
 
         <% end %>

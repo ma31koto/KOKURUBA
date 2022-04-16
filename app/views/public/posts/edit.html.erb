@@ -6,7 +6,7 @@
       <div class="mt-5 offset-1">
         <input id="address" type="textbox" value="" size="50">
         <input type="button" value="地図を検索" onclick="codeAddress()">
-        <div id='map' class="mt-3"></div>
+        <div id='map_edit' class="mt-3"></div>
 
         <div class="mt-5 offset-1">
           <%= form_with model:@post, url: post_path(@post), method: :patch, local: true do |f| %>
@@ -28,11 +28,11 @@
                 </tr>
                 <tr>
                   <td><%= f.label :postal_code, "郵便番号" %></td>
-                  <td><%= f.text_field :postal_code, :placeholder =>"自動入力", :value => "", id: "postal_code", size: 50 %></td>
+                  <td><%= f.text_field :postal_code, :placeholder =>"自動入力", id: "postal_code", size: 50 %></td>
                 </tr>
                 <tr>
                   <td><%= f.label :address, "住所" %></td>
-                  <td><%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "input_address", size: 50 %></td>
+                  <td><%= f.text_field :address, :placeholder =>"自動入力", id: "input_address", size: 50 %></td>
                 </tr>
                 <tr>
                   <td><%= f.label :area_id, "エリア" %></td>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                   <td><%= f.label :name,"タグ (,で区切ると複数タグ登録可能)" %></td>
-                  <td><%= f.text_field :name, :placeholder =>"例)夜景,海,イルミネーション", size: 50 %></td>
+                  <td><%= f.text_field :name, :placeholder =>"例)夜景,海,イルミネーション", :value => @tag_list, size: 50 %></td>
                 </tr>
                 <tr>
                   <td>
@@ -112,51 +112,50 @@
                 </tr>
               </tbody>
             </table>
-            <%= f.hidden_field :longitude, :value => "", id: "longitude" %>
-            <%= f.hidden_field :latitude, :value => "", id: "latitude" %>
+            <%= f.hidden_field :longitude, id: "longitude" %>
+            <%= f.hidden_field :latitude, id: "latitude" %>
           <% end %>
         </div>
 
         <script>
-          $(document).on('turbolinks:load', function() {
-            <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
-              $('.star_<%= rate %>').empty();
-              $('.star_<%= rate %>').raty({
-                size     : 36,
-                starOff:  '<%= asset_path('star-off.png') %>',
-                starOn : '<%= asset_path('star-on.png') %>',
-                starHalf: '<%= asset_path('star-half.png') %>',
-                scoreName: 'post[<%= rate %>]',
-                half: true,
-              })
-            <% end %>
-          })
-        </script>
+        　//評価機能
+          <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
+            $('.star_<%= rate %>').empty();
+            $('.star_<%= rate %>').raty({
+              size     : 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              scoreName: 'post[<%= rate %>]',
+              half: true,
+            })
+          <% end %>
 
-        <script>
-            let map
-            const longitude = document.getElementById('longitude')
-            let markers = []
+          //地図機能
+          let map_edit
+          const longitude = document.getElementById('longitude')
+          let markers = []
 
-            // mapの表示関数
-            function initMap() {
-              geocoder = new google.maps.Geocoder()
-             // mapの初期位置, 縮尺を定義
-              map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
-                zoom: 12,
+          // mapの表示関数
+          function initMap() {
+            geocoder = new google.maps.Geocoder()
+           // mapの初期位置, 縮尺を定義
+            map_edit = new google.maps.Map(document.getElementById('map_edit'), {
+              center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
+              zoom: 12,
+            });
+
+             // mapsテーブルにあるそれぞれのレコードをmap上に表示
+            (function(){
+              var contentString = "住所：<%= @post.address %>";
+              // マーカーを立てる
+              var marker = new google.maps.Marker({
+                position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+                map: map_edit,
+                title: contentString
               });
-
-              // mapsテーブルにあるそれぞれのレコードをmap上に表示
-              (function(){
-                // マーカーを立てる
-                var marker = new google.maps.Marker({
-                  position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
-                  map: map,
-                  title: contentString
-                });
-                markers.push(marker)
-              })();
+              markers.push(marker)
+            })();
 
                 //クリックしたときの処理
                 // function mylistener(event){
@@ -173,51 +172,51 @@
                 //     map_lat.value = "";
                 //     map_lng.value = "";
                 // }
+          }
+
+
+          let geocoder
+           // 地図検索関数
+          function codeAddress() {
+            let inputAddress = document.getElementById('address').value;
+
+            geocoder.geocode({
+              'address': inputAddress},
+              function (results, status) {
+                if (status == 'OK') {
+                  map.setCenter(results[0].geometry.location);
+
+                  // 再検索でピンを消す
+                    for (let i = 0; i < markers.length; i++) {
+                      markers[i].setMap(null);
+                    }
+
+                  var marker = new google.maps.Marker({
+                    map: map_edit,
+                    position: results[0].geometry.location
+                  });
+                  markers.push(marker)
+
+                  var lat = marker.getPosition().lat();
+                  var lng = marker.getPosition().lng();
+                  $("#latitude").val(lat);
+                  $("#longitude").val(lng);
+
+
+                  var postalCode = results[0].formatted_address.match(/〒[0-9]{3}-[0-9]{4}/)[0].slice(1)
+                  $("#postal_code").val(postalCode);
+
+                  var address = results[0].formatted_address.split('、')[1].split(' ')[1]
+                  $("#input_address").val(address);
+
+                } else {
+                  alert('該当する結果がありませんでした：' + status);
+                }
+              });
             }
+        </script>
 
-
-            let geocoder
-             // 地図検索関数
-            function codeAddress() {
-              let inputAddress = document.getElementById('address').value;
-
-              geocoder.geocode({
-                'address': inputAddress},
-                function (results, status) {
-                  if (status == 'OK') {
-                    map.setCenter(results[0].geometry.location);
-
-                    // 再検索でピンを消す
-                      for (let i = 0; i < markers.length; i++) {
-                        markers[i].setMap(null);
-                      }
-
-                    var marker = new google.maps.Marker({
-                      map: map,
-                      position: results[0].geometry.location
-                    });
-                    markers.push(marker)
-
-                    var lat = marker.getPosition().lat();
-                    var lng = marker.getPosition().lng();
-                    $("#latitude").val(lat);
-                    $("#longitude").val(lng);
-
-
-                    var postalCode = results[0].formatted_address.match(/〒[0-9]{3}-[0-9]{4}/)[0].slice(1)
-                    $("#postal_code").val(postalCode);
-
-                    var address = results[0].formatted_address.split('、')[1].split(' ')[1]
-                    $("#input_address").val(address);
-
-                  } else {
-                    alert('該当する結果がありませんでした：' + status);
-                  }
-                });
-              }
-          </script>
-
-          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
 
       </div>
     </div>

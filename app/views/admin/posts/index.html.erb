@@ -109,21 +109,21 @@
               <% end %>
             </tbody>
           </table>
+          <%= paginate @posts %>
         </div>
 
       </div>
 
       <script>
-        $(document).on('turbolinks:load', function() {
-          $('.star').empty();
-          $('.star').raty({
-            size: 20,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            half: true,
-            readOnly: true,
-          });
+        $('.star').empty();
+        $('.star').raty({
+          size: 20,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+        });
 
           $('#confession_desc').hide();
           $('#confession_asc').hide();
@@ -189,7 +189,6 @@
             $(elem).attr('href',str);
             console.log($(elem).attr('href'))
           })
-        });
 
         function onSortConfessionRranking(){
           var form = document.getElementById('post_search');

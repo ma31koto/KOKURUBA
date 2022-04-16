@@ -7,7 +7,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true)
+    @posts = @q.result(distinct: true).page(params[:page]).per(8)
     if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
       @posts = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
     elsif params[:all_rate_ranking] == 'asc' || params[:all_rate_ranking] == 'desc'
@@ -47,6 +47,7 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
+      # session[:previous_url] = request.referer
   end
 
   def update
@@ -63,7 +64,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to map_search_posts_path, notice:'スポット投稿を削除しました!'
+    redirect_to session[:previous_url][session[:previous_url].size-3], notice:'スポット投稿を削除しました!'
   end
 
   private

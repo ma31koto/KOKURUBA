@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   belongs_to :area
 
   validates :postal_code, presence: true, format: { with: /\A\d{3}[-]\d{4}\z/ }
-  validates :address, presence: true
+  validates :address, presence: true, uniqueness: true
   validates :longitude, presence: true
   validates :latitude, presence: true
   validates :title, presence: true
@@ -21,14 +21,9 @@ class Post < ApplicationRecord
   enum confession_result: { yes: 0, no: 1, no_answer: 2 }
 
   has_one_attached :spot_image
-  has_many_attached :main_spot_image
 
   def get_spot_image
     (spot_image.attached?) ? spot_image : 'no_image.jpg'
-  end
-
-  def get_main_spot_image
-    (main_spot_image.attached?) ? main_spot_image : 'no_image.jpg'
   end
 
   def save_tag(sent_tags)
@@ -61,24 +56,26 @@ class Post < ApplicationRecord
     all_denominator = 0
 
 
-    if self.confession_result == 0
+    if self.confession_result == "yes"
       post_numerator = 1
-    elsif self.confession_result == 1
+    elsif self.confession_result == "no"
       post_numerator = 0
-    elsif self.confession_result == 2
+    elsif self.confession_result == "no_answer"
       post_numerator = 0
     end
 
-    if self.confession_result == 0
+    if self.confession_result == "yes"
       post_denominator = 1
-    elsif self.confession_result == 1
+    elsif self.confession_result == "no"
       post_denominator = 1
-    elsif self.confession_result == 2
+    elsif self.confession_result == "no_answer"
       post_denominator = 0
     end
 
-    all_numerator = (post_numerator + self.post_comments.where(confession_result: 0).count)
-    all_denominator = (post_denominator + self.post_comments.where(confession_result: 0).or(self.post_comments.where(confession_result: 1)).count)
+
+    all_numerator = post_numerator +  post_comments.where(confession_result: 0).count
+    all_denominator = post_denominator +  post_comments.where(confession_result: 0).or(post_comments.where(confession_result: 1)).count
+
 
     if all_denominator == 0
       return false

@@ -30,7 +30,7 @@ ja:
         no_answer: "告白していない"
 
 
-ja:
+
   activerecord:
     errors:
       messages:

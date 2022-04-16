@@ -3,13 +3,15 @@ class Admin::PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true)
+    @posts = @q.result(distinct: true).page(params[:page]).per(8)
   end
 
   def show
   end
 
   def edit
+    @post = Post.find(params[:id])
+    @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
@@ -24,7 +26,7 @@ class Admin::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to admin_customers_path, notice:'スポット投稿を削除しました!'
+    redirect_to session[:previous_url][session[:previous_url].size-3], notice:'スポット投稿を削除しました!'
   end
 
   private

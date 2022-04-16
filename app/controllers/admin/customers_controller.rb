@@ -2,7 +2,7 @@ class Admin::CustomersController < ApplicationController
   before_action :ensure_customer, only: [:show, :edit, :update]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.all.page(params[:page]).per(10)
   end
 
   def show

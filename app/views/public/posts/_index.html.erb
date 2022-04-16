@@ -93,83 +93,81 @@
 
 
 <script>
-  $(document).on('turbolinks:load', function() {
-    $('.star').empty();
-    $('.star').raty({
-      size: 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      half: true,
-      readOnly: true,
-    });
-
-    $('#confession_desc').hide();
-    $('#confession_asc').hide();
-    <% if params[:confession_ranking] =='asc' %>
-      $('#confession_asc').show();
-    <% elsif params[:confession_ranking] == 'desc' %>
-      $('#confession_desc').show();
-    <% end %>
-    $('.sort_link').each( function(i,elem){
-      var str = $(elem).attr('href').replace('confession_ranking=','');
-      $(elem).attr('href',str);
-      console.log($(elem).attr('href'))
-    })
-
-    $('#all_rate_desc').hide();
-    $('#all_rate_asc').hide();
-    <% if params[:all_rate_ranking] =='asc' %>
-      $('#all_rate_asc').show();
-    <% elsif params[:all_rate_ranking] == 'desc' %>
-      $('#all_rate_desc').show();
-    <% end %>
-    $('.sort_link').each( function(i,elem){
-      var str = $(elem).attr('href').replace('all_rate_ranking=','');
-      $(elem).attr('href',str);
-      console.log($(elem).attr('href'))
-    })
-
-    $('#atmosphere_rate_desc').hide();
-    $('#atmosphere_rate_asc').hide();
-    <% if params[:atmosphere_rate_ranking] =='asc' %>
-      $('#atmosphere_rate_asc').show();
-    <% elsif params[:atmosphere_rate_ranking] == 'desc' %>
-      $('#atmosphere_rate_desc').show();
-    <% end %>
-    $('.sort_link').each( function(i,elem){
-      var str = $(elem).attr('href').replace('atmosphere_rate_ranking=','');
-      $(elem).attr('href',str);
-      console.log($(elem).attr('href'))
-    })
-
-    $('#few_people_rate_desc').hide();
-    $('#few_people_rate_asc').hide();
-    <% if params[:few_people_rate_ranking] =='asc' %>
-      $('#few_people_rate_asc').show();
-    <% elsif params[:few_people_rate_ranking] == 'desc' %>
-      $('#few_people_rate_desc').show();
-    <% end %>
-    $('.sort_link').each( function(i,elem){
-      var str = $(elem).attr('href').replace('few_people_rate_ranking=','');
-      $(elem).attr('href',str);
-      console.log($(elem).attr('href'))
-    })
-
-    $('#standard_rate_desc').hide();
-    $('#standard_rate_asc').hide();
-    <% if params[:standard_rate_ranking] =='asc' %>
-      $('#standard_rate_asc').show();
-    <% elsif params[:standard_rate_ranking] == 'desc' %>
-      $('#standard_rate_desc').show();
-    <% end %>
-    $('.sort_link').each( function(i,elem){
-      var str = $(elem).attr('href').replace('standard_rate_ranking=','');
-      $(elem).attr('href',str);
-      console.log($(elem).attr('href'))
-    })
-
+  $('.star').empty();
+  $('.star').raty({
+    size: 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    readOnly: true,
   });
+
+  $('#confession_desc').hide();
+  $('#confession_asc').hide();
+  <% if params[:confession_ranking] =='asc' %>
+    $('#confession_asc').show();
+  <% elsif params[:confession_ranking] == 'desc' %>
+    $('#confession_desc').show();
+  <% end %>
+  $('.sort_link').each( function(i,elem){
+    var str = $(elem).attr('href').replace('confession_ranking=','');
+    $(elem).attr('href',str);
+    console.log($(elem).attr('href'))
+  })
+
+  $('#all_rate_desc').hide();
+  $('#all_rate_asc').hide();
+  <% if params[:all_rate_ranking] =='asc' %>
+    $('#all_rate_asc').show();
+  <% elsif params[:all_rate_ranking] == 'desc' %>
+    $('#all_rate_desc').show();
+  <% end %>
+  $('.sort_link').each( function(i,elem){
+    var str = $(elem).attr('href').replace('all_rate_ranking=','');
+    $(elem).attr('href',str);
+    console.log($(elem).attr('href'))
+  })
+
+  $('#atmosphere_rate_desc').hide();
+  $('#atmosphere_rate_asc').hide();
+  <% if params[:atmosphere_rate_ranking] =='asc' %>
+    $('#atmosphere_rate_asc').show();
+  <% elsif params[:atmosphere_rate_ranking] == 'desc' %>
+    $('#atmosphere_rate_desc').show();
+  <% end %>
+  $('.sort_link').each( function(i,elem){
+    var str = $(elem).attr('href').replace('atmosphere_rate_ranking=','');
+    $(elem).attr('href',str);
+    console.log($(elem).attr('href'))
+  })
+
+  $('#few_people_rate_desc').hide();
+  $('#few_people_rate_asc').hide();
+  <% if params[:few_people_rate_ranking] =='asc' %>
+    $('#few_people_rate_asc').show();
+  <% elsif params[:few_people_rate_ranking] == 'desc' %>
+    $('#few_people_rate_desc').show();
+  <% end %>
+  $('.sort_link').each( function(i,elem){
+    var str = $(elem).attr('href').replace('few_people_rate_ranking=','');
+    $(elem).attr('href',str);
+    console.log($(elem).attr('href'))
+  })
+
+  $('#standard_rate_desc').hide();
+  $('#standard_rate_asc').hide();
+  <% if params[:standard_rate_ranking] =='asc' %>
+    $('#standard_rate_asc').show();
+  <% elsif params[:standard_rate_ranking] == 'desc' %>
+    $('#standard_rate_desc').show();
+  <% end %>
+  $('.sort_link').each( function(i,elem){
+    var str = $(elem).attr('href').replace('standard_rate_ranking=','');
+    $(elem).attr('href',str);
+    console.log($(elem).attr('href'))
+  })
+
 
 
   function onSortConfessionRranking(){
