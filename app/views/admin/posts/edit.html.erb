@@ -147,87 +147,92 @@
           })
         <% end %>
 
-        //地図機能
-        let map_edit
-        const longitude = document.getElementById('longitude')
-        let markers = []
+                 //地図機能
+          let map_edit
+          const longitude = document.getElementById('longitude')
+          const latitude = document.getElementById('latitude');
+          let marker;
+          function formatAddress(results) {
+             const formattedAddress = results[0].formatted_address;
+            const postalCode = formattedAddress.match(/〒[0-9]{3}-[0-9]{4}/);
+            if(!!postalCode) {
+              $("#postal_code").val(postalCode[0].slice(1));
+            }
+            const address = formattedAddress.split('、')[1].split(' ')[1];
+            $("#input_address").val(address);
+          }
 
-        // mapの表示関数
-        function initMap() {
-          geocoder = new google.maps.Geocoder()
-          // mapの初期位置, 縮尺を定義
-          map_edit = new google.maps.Map(document.getElementById('map_edit'), {
-            center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
-            zoom: 12,
-          });
-
-          // mapsテーブルにあるそれぞれのレコードをmap上に表示
-          (function(){
-            var contentString = "住所：<%= @post.address %>";
-           // マーカーを立てる
-            var marker = new google.maps.Marker({
-              position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
-              map: map_edit,
-              title: contentString
+          // mapの表示関数
+          function initMap() {
+            geocoder = new google.maps.Geocoder()
+            marker = new google.maps.Marker();
+           // mapの初期位置, 縮尺を定義
+            map_edit = new google.maps.Map(document.getElementById('map_edit'), {
+              center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
+              zoom: 12,
             });
-            markers.push(marker)
-          })();
 
+             // mapsテーブルにあるそれぞれのレコードをmap上に表示
+            function showPins(setNull = false){
+              var contentString = "住所：<%= @post.address %>";
+              // マーカーを立てる
+              marker = new google.maps.Marker({
+                position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+                map: map_edit,
+                title: contentString
+              });
+            };
+            showPins();
 
-              //クリックしたときの処理
-              // function mylistener(event){
-              //     marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
-              //     marker.setMap(map);
-              //     console.log(event.latLng.lat(), event.latLng.lng());
-              //     map_lat.value = event.latLng.lat();
-              //     map_lng.value = event.latLng.lng();
-              //   }
-              // }
+            // クリックしたときの処理
+            google.maps.event.addListener(map_edit, 'click', mylistener);
+            function mylistener(event){
+              const currentLocation = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+              marker.setPosition(currentLocation);
+              marker.setMap(null);
+              marker.setMap(map_edit);
+              geocoder.geocode({
+                'latLng': currentLocation,
+              }, (results, status) => {
+                if(status === google.maps.GeocoderStatus.OK) {
+                  formatAddress(results);
+                } else {
+                  alert('何かしらの障害です。')
+                }
+              });
 
-              //   function deleteMarker(){
-              //     marker.setMap(null);
-              //     map_lat.value = "";
-              //     map_lng.value = "";
-              // }
-        }
+              latitude.value = event.latLng.lat();
+              longitude.value = event.latLng.lng();
+            }
+          }
 
+           // 地図検索関数
+          function codeAddress() {
+            let inputAddress = document.getElementById('address').value;
 
-        let geocoder
-         // 地図検索関数
-        function codeAddress() {
-          let inputAddress = document.getElementById('address').value;
+            geocoder.geocode({
+              'address': inputAddress},
+              function (results, status) {
+                if (status == 'OK') {
+                  map_edit.setCenter(results[0].geometry.location);
 
-          geocoder.geocode({
-            'address': inputAddress},
-            function (results, status) {
-              if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
+                  // 再検索でピンを消す
+                  marker.setMap(null);
+                  marker = new google.maps.Marker({
+                    map: map_edit,
+                    position: results[0].geometry.location
+                  });
 
-                // 再検索でピンを消す
-                  for (let i = 0; i < markers.length; i++) {
-                    markers[i].setMap(null);
-                  }
+                  const lat = marker.getPosition().lat();
+                  const lng = marker.getPosition().lng();
+                  $("#latitude").val(lat);
+                  $("#longitude").val(lng);
 
-                var marker = new google.maps.Marker({
-                  map: map_edit,
-                  position: results[0].geometry.location
-                });
-                markers.push(marker)
+                  formatAddress(results);
 
-                var lat = marker.getPosition().lat();
-                var lng = marker.getPosition().lng();
-                $("#latitude").val(lat);
-                $("#longitude").val(lng);
-
-                var postalCode = results[0].formatted_address.match(/〒[0-9]{3}-[0-9]{4}/)[0].slice(1)
-                $("#postal_code").val(postalCode);
-
-                var address = results[0].formatted_address.split('、')[1].split(' ')[1]
-                $("#input_address").val(address);
-
-              } else {
-                alert('該当する結果がありませんでした：' + status);
-              }
+                } else {
+                  alert('該当する結果がありませんでした：' + status);
+                }
             });
           }
       </script>

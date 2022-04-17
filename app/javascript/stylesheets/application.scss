@@ -75,11 +75,12 @@ body {
 .tab-active {
   color: black;
   background-color: #999900;
-  // transition: all 0.2s ease-in-out;
 }
 
 .tab-mouseover {
   background-color: #666633;
+  // transition: all 0.2s ease-in-out;
+  transition: background-color 1s;
 }
 
 
@@ -139,6 +140,11 @@ body {
 .show-all-star img {
   width: 35px;
   height: 35px;
+}
+
+.show-star img {
+  width: 25px;
+  height: 25px;
 }
 
 .avg_confession_result {
