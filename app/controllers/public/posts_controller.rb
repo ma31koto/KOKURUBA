@@ -47,7 +47,6 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
-      # session[:previous_url] = request.referer
   end
 
   def update
@@ -64,7 +63,11 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to session[:previous_url][session[:previous_url].size-3], notice:'スポット投稿を削除しました!'
+    if session[:previous_url].count < 4
+      redirect_to homes_about_path
+    else
+      redirect_to session[:previous_url][session[:previous_url].size-3], notice:'スポット投稿を削除しました!'
+    end
   end
 
   private

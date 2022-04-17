@@ -26,7 +26,11 @@ class Admin::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to session[:previous_url][session[:previous_url].size-3], notice:'スポット投稿を削除しました!'
+    if session[:previous_url].count < 4
+      redirect_to admin_customers_path
+    else
+      redirect_to session[:previous_url][session[:previous_url].size-3], notice:'スポット投稿を削除しました!'
+    end
   end
 
   private

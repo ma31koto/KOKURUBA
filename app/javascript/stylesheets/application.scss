@@ -79,8 +79,7 @@ body {
 
 .tab-mouseover {
   background-color: #666633;
-  // transition: all 0.2s ease-in-out;
-  transition: background-color 1s;
+  transition: background-color 0.5s;
 }
 
 
@@ -159,4 +158,44 @@ body {
   height: 50px;
   margin-left: 10px;
   background-color: #9933FF	;
+}
+
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: white;
+  background-color: #BDB76B;
+  border: 1px solid #666600;
+}
+
+// .page-item.disabled .page-link {
+
+//   color: #868e96;
+
+//   pointer-events: none;
+
+//   cursor: auto;
+
+//   background-color: #CEFFCE;
+
+//   border-color: #718393;
+
+// }
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #808000;
+  border-color: #666600;
+}
+
+.page-link:focus, .page-link:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #808000;
+  border-color: #666600;
 }

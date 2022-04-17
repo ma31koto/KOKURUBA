@@ -44,11 +44,16 @@
                   <div class="ml-2 align-middle">
                     <%= image_tag post_comment.get_comment_image, size: "120x70" %></br>
                     <%= post_comment.title %>
+                    <%= link_to admin_post_path(post_comment.post) do %>
+                      投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
+                    <% end %>
                   </div>
                 </td>
                 <td>
                   <div class="ml-2">
-                    <%= post_comment.customer.name %>
+                    <%= link_to admin_customer_path(post_comment.customer) do %>
+                      <%= post_comment.customer.name %>
+                    <% end %>
                   </div>
                 </td>
                 <td>
