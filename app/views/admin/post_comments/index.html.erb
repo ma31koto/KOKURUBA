@@ -12,14 +12,13 @@
           <%= f.submit "検索" %>
         <% end %>
 
-        <div class="d-flex flex-wrap">
-          並び替え
-          <div class"ranking-tab"><%= sort_link(@q, :created_at, "新着", default_order: :desc)%></div>
-          <div class"ranking-tab"><%= sort_link(@q, :all_rate, "総合評価", default_order: :desc) %></div>
-          <div class"ranking-tab"><%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc) %></div>
-          <div class"ranking-tab"><%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc) %></div>
-          <div class"ranking-tab"><%= sort_link(@q, :standard_rate, "定番度", default_order: :desc) %></div>
-        </div>
+        並び替え
+        <%= sort_link(@q, :created_at, "新着", default_order: :desc)%>
+        <%= sort_link(@q, :all_rate, "総合評価", default_order: :desc) %>
+        <%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc) %>
+        <%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc) %>
+        <%= sort_link(@q, :standard_rate, "定番度", default_order: :desc) %>
+
 
         <div class="mx-auto mt-5">
           <table class="table-bordered">

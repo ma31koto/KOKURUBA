@@ -8,6 +8,7 @@ class Public::PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true)
+
     if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
       @posts_pre = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
       @posts = Kaminari.paginate_array(@posts_pre).page(params[:page]).per(8)
@@ -27,8 +28,6 @@ class Public::PostsController < ApplicationController
       @q = Post.ransack(params[:q])
       @posts = @q.result(distinct: true).page(params[:page]).per(8)
     end
-
-
   end
 
   def show
