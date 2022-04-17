@@ -1,11 +1,11 @@
 <div class="d-flex flex-wrap">
   並び替え
-  <div class"ranking-tab"><%= sort_link(@q, :created_at, "新着", default_order: :desc)%></div>
-  <div class"ranking-tab"><a href="javascript:onSortAllRateRanking()">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a></div>
-  <div class"ranking-tab"><a href="javascript:onSortAtmosphereRateRanking()">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a></div>
-  <div class"ranking-tab"><a href="javascript:onSortFewPeopleRateRanking()">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a></div>
-  <div class"ranking-tab"><a href="javascript:onSortStandardRateRanking()">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a></div>
-  <div class"ranking-tab"><a href="javascript:onSortConfessionRranking()">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a></div>
+  <%= sort_link(@q, :created_at, "新着", default_order: :desc) %>
+  <a href="javascript:onSortAllRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
+  <a href="javascript:onSortAtmosphereRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
+  <a href="javascript:onSortFewPeopleRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1"  style="width:100px;">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
+  <a href="javascript:onSortStandardRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1"  style="width:100px;">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a>
+  <a href="javascript:onSortConfessionRranking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
 </div>
 
 <div class="mx-auto mt-5">

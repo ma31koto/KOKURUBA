@@ -123,7 +123,7 @@
                 <div style="width: 200px;, height: 200px;">
                   <%= image_tag post_comment.get_comment_image, size: "100x100" %><br/>
                   <%= post_comment.post.area.name %><br/>
-                  <%= link_to admin_post_path(post_comment.post) do %>
+                  <%= link_to post_path(post_comment.post) do %>
                     投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
                   <% end %>
                 </div>

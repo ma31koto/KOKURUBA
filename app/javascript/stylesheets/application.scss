@@ -74,7 +74,7 @@ body {
 
 .tab-active {
   color: black;
-  background-color: #999900;
+  background-color: #BDB76B;
 }
 
 .tab-mouseover {
@@ -153,12 +153,12 @@ body {
   height: 150px;
 }
 
-.ranking-tab {
-  width: 50px;
-  height: 50px;
-  margin-left: 10px;
-  background-color: #9933FF	;
-}
+// .ranking-tab {
+//   width: 50px;
+//   height: 50px;
+//   margin-left: 10px;
+//   background-color: #9933FF	;
+// }
 
 
 .page-link {
@@ -172,20 +172,6 @@ body {
   border: 1px solid #666600;
 }
 
-// .page-item.disabled .page-link {
-
-//   color: #868e96;
-
-//   pointer-events: none;
-
-//   cursor: auto;
-
-//   background-color: #CEFFCE;
-
-//   border-color: #718393;
-
-// }
-
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
@@ -198,4 +184,8 @@ body {
   text-decoration: none;
   background-color: #808000;
   border-color: #666600;
+}
+
+.field_with_errors{
+  display: contents;
 }
