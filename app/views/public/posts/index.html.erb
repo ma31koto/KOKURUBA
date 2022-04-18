@@ -11,6 +11,7 @@
           <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
           <%= f.label :tag, "× タグ名" %>
           <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"例：夜景" %>
+          <%#= f.collection_select :customer_gender_eq, Customer.all, :id, :gender, include_blank: "----", class: "form-control" %>
           <%= hidden_field_tag(:confession_ranking) %>
           <%= hidden_field_tag(:all_rate_ranking) %>
           <%= hidden_field_tag(:atmosphere_rate_ranking) %>

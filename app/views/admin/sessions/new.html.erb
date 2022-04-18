@@ -8,10 +8,16 @@
           <div class="mb-2 mt-5">
             <%= f.label :email, "メールアドレス", class: "col-2" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"sample@example.com", class: "col-5"%>
+            <% if @admin.errors.include?(:email) %>
+              <p style="color: red;" class="offset-3"><%= @admin.errors.full_messages_for(:email).first %>
+            <% end %>
           </div>
           <div class="mb-2">
             <%= f.label :password, "パスワード", class: "col-2"%>
             <%= f.password_field :password, autocomplete: "current-password", class: "col-5"%>
+            <% if @admin.errors.include?(:password) %>
+              <p style="color: red;" class="offset-3"><%= @admin.errors.full_messages_for(:password).first %>
+            <% end %>
           </div>
 
           <%= f.submit "ログイン", class: "btn btn-primary offset-2"%>

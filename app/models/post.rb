@@ -17,6 +17,7 @@ class Post < ApplicationRecord
   validates :standard_rate, presence: true
   validates :all_rate, presence: true
   validates :confession_result, presence: true
+  validates :area_id, presence: true
 
   enum confession_result: { yes: 0, no: 1, no_answer: 2 }
 

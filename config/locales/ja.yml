@@ -29,8 +29,6 @@ ja:
         'no': "失敗"
         no_answer: "告白していない"
 
-
-
   activerecord:
     errors:
       messages:
@@ -38,6 +36,25 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+          
+    models:
+    　post: 投稿
+    attributes:
+      post:
+        title: タイトル
+        mailaddress: メールアドレス
+        password: パスワード
+      main_category:
+        category_name: メインカテゴリー名
+      sub_category:
+        category_name: サブカテゴリー名
+        study_time: 勉強時間
+
+
+
+
+
+
   date:
     abbr_day_names:
     - 日

@@ -127,6 +127,11 @@ body {
   height: 400px;
 }
 
+#map_edit_admin {
+  width: 900px;
+  height: 400px;
+}
+
 .navbar-toggler {
   background-color: white;
 }
@@ -189,3 +194,17 @@ body {
 .field_with_errors{
   display: contents;
 }
+
+.post-item {
+  background-color: #262626;
+  padding: 10px;
+  margin-bottom: 3px;
+}
+
+.post-form {
+  background-color: #404040;
+  padding: 10px;
+  margin-bottom: 3px;
+}
+
+
