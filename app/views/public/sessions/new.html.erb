@@ -14,9 +14,14 @@
           <div class="mb-2">
             <%= f.label :email, "メールアドレス", class: "col-2" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"例：sample@example.com", size: 30%>
-            <% if @customer.errors.include?(:email) %>
-              <p style="color: red;" class="offset-3"><%= @customer.errors.full_messages_for(:email).first %>
+            <%# binding.pry %>
+            <% flash.each do |message_type, message| %>
+              <%= content_tag :div, message, class: message_type %>
             <% end %>
+            
+            <% if @customer.email == "" %>
+              <p style="color: red;" class="offset-3"><%= @customer.errors.full_messages_for(:email).first %></p>
+            <%end %>
           </div>
           <div class="mb-2">
             <%= f.label :password, "パスワード", class: "col-2"%>

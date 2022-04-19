@@ -18,9 +18,11 @@
             <% end %>
           </div>
           <div class="mb-2">
+            <%# binding.pry %>
             <%= f.label :email, "メールアドレス", class: "col-3" %>
             <%= f.email_field :email, :placeholder =>"例：sample@example.com", size: 30 %>
             <% if @customer.errors.include?(:email) %>
+            <%# binding.pry%>
               <p style="color: red;" class="offset-3"><%= @customer.errors.full_messages_for(:email).first %>
             <% end %>
           </div>
@@ -58,8 +60,9 @@
           <div class="mb-2">
             <%= f.label :password_confirmation, "パスワード(確認用)", class: "col-3" %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", size: 30 %>
-            <% if @customer.errors.include?(:password_confirmation) %>
-              <p style="color: red;" class="offset-3"><%= @customer.errors.full_messages_for(:password_confirmation).first %>
+            <%# binding.pry %>
+            <% if @customer.errors.include?(:password) %>
+              <p style="color: red;" class="offset-3"><%= @customer.errors.full_messages_for(:password).first %>
             <% end %>
           </div>
           <div class="mb-2">

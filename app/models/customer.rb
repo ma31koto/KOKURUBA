@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  # validates :email, presence: true, uniqueness: true
   validates :gender, presence: true
   validates :age, presence: true
 

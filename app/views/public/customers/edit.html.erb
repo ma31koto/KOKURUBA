@@ -76,7 +76,8 @@
                 </td>
                 <td>
                   <%= f.text_field :email, size: 30 %>
-                  <% if @customer.errors.include?(:email) %>
+                  <% if params[:email].nil?%>
+                  <%# binding.pry %>
                     <p style="color: red;"><%= @customer.errors.full_messages_for(:email).first %>
                   <% end %>
                 </td>

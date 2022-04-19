@@ -37,45 +37,45 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
 
-    # models:
-    #   customer: 会員
-    #   admin: 管理者
-    #   post: スポット投稿
-    #   post_comment: コメント投稿
-    #   area: エリア
-    #   tag: タグ
-    # attributes:
-    #   customer: 会員
-    #     name: 名前
-    #     gender: 性別
-    #     age: 年齢
-    #     email: メールアドレス
-    #     password: パスワード
-    #   admin: 管理者
-    #     email: メールアドレス
-    #     password: パスワード
-    #   post: スポット投稿
-    #     postal_code: 郵便番号
-    #     address: 住所
-    #     title: タイトル
-    #     atmosphere_rate: 雰囲気
-    #     few_people_rate: 人の少なさ
-    #     standard_rate: 定番度
-    #     all_rate: 総合評価
-    #     confession_result: 告白結果
-    #     area_id: エリア名
-    #   post_comment: コメント投稿
-    #     title: タイトル
-    #     comment: コメント
-    #     atmosphere_rate: 雰囲気
-    #     few_people_rate: 人の少なさ
-    #     standard_rate: 定番度
-    #     all_rate: 総合評価
-    #     confession_result: 告白結果
-    #   area: エリア
-    #     name: 名前
-    #   tag: タグ
-    #     name: 名前
+    models:
+      customer: 会員
+      admin: 管理者
+      post: スポット投稿
+      post_comment: コメント投稿
+      area: エリア
+      tag: タグ
+    attributes:
+      customer:
+        name: 名前
+        gender: 性別
+        age: 年齢
+        email: メールアドレス
+        password: パスワード
+      admin:
+        email: メールアドレス
+        password: パスワード
+      post:
+        postal_code: 郵便番号
+        address: 住所
+        title: タイトル
+        atmosphere_rate: 雰囲気
+        few_people_rate: 人の少なさ
+        standard_rate: 定番度
+        all_rate: 総合評価
+        confession_result: 告白結果
+        area_id: エリア名
+      post_comment:
+        title: タイトル
+        comment: コメント
+        atmosphere_rate: 雰囲気
+        few_people_rate: 人の少なさ
+        standard_rate: 定番度
+        all_rate: 総合評価
+        confession_result: 告白結果
+      area:
+        name: 名前
+      tag:
+        name: 名前
 
 
 

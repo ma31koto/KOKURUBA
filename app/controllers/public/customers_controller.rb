@@ -9,9 +9,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
+    # binding.pry
     if @customer.update(customer_params)
       redirect_to customer_path(@customer), notice: "会員の情報が更新されました!"
     else
+      # binding.pry
       render :edit
     end
   end
@@ -30,7 +32,7 @@ class Public::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:profile_image, :name, :gender, :age, :biography)
+    params.require(:customer).permit(:profile_image, :name, :gender, :age, :biography, :email)
   end
 
   def ensure_correct_customer

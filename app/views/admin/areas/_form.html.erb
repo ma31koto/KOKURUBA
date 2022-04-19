@@ -1,13 +1,15 @@
-<% if area.name == nil %>
-  <%= form_with model:@area, url: admin_areas_path, method: :post, local: true do |f|  %>
+<% if area.name.nil? %>
+  <%= form_with model:area, url: admin_areas_path, method: :post, local: true do |f|  %>
     <div class="form-group row ml-3">
       <div class="col-2 ml-5 font-weight-bold">
         <%= f.label :name, "エリア名" %>
       </div>
       <div class="col-2 mr-3">
         <%= f.text_field :name, placeholder: "エリア名" %>
-        <% if @area.errors.include?(:name) %>
-          <p style="color: red;"><%= @area.errors.full_messages_for(:name).first %>
+          <%# binding.pry %>
+        <% if flash[:danger].present?  %>
+          <p style="color: red;">名前を入力してください</p><%#= area.errors.full_messages_for(:name).first %>
+
         <% end %>
       </div>
       <div class="col-2 ml-5">
@@ -16,7 +18,7 @@
     </div>
   <% end %>
 <% else %>
-  <%= form_with model:@area, url: admin_area_path(area), method: :patch, local: true do |f|  %>
+  <%= form_with model:area, url: admin_area_path(area), method: :patch, local: true do |f|  %>
     <div class="form-group row font-weight-bold">
       <%= f.label :name, "エリア名" %>
       <div class="ml-3">

@@ -68,3 +68,4 @@ gem "enum_help"
 gem 'ransack'
 gem 'geocoder'
 gem 'dotenv-rails'
+gem 'rails-i18n'
