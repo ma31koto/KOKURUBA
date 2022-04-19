@@ -3,7 +3,7 @@
     <div class="col-12 mx-auto mt-5">
       <h2><mark class="bg-secondary text-light">マップ検索</mark></h2>
 
-  　　<div class="mt-2 offset-1">
+    <div class="mt-5 offset-1">
         <input id="address" type="textbox" value="" size="50">
         <input type="button" value="地図を検索" onclick="codeAddress()">
 
@@ -34,12 +34,6 @@
             });
 
             // 情報ウィンドウ(吹き出し)の定義
-            // 投稿の詳細ページへのリンクも
-            // var infowindow = new google.maps.InfoWindow({
-            //   position: {lat: <%#= post.latitude %>, lng: <%#= post.longitude %>},
-            //   contet: "<a window.location.href = <%#= post_url(post.id) %>'target='_blank'><%#= post.title %></a>"
-            // });
-
             var infowindow = new google.maps.InfoWindow({
               position: {lat: <%= post.latitude %>, lng: <%= post.longitude %>},
               content: '<a href="<%= post_url(post.id) %>"> <%= image_tag post.get_spot_image, size: "100x100"%><br/><%= post.title %></a>'
@@ -65,10 +59,6 @@
           function (results, status) {
             if (status == 'OK') {
               map.setCenter(results[0].geometry.location);
-              var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-              });
             } else {
               alert('該当する結果がありませんでした：' + status);
             }

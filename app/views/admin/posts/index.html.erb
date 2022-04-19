@@ -7,10 +7,12 @@
         <%= search_form_for(@q, url: admin_posts_path) do |f| %>
           <%= f.label :title, "タイトル" %>
           <%= f.search_field :title_cont, :placeholder =>"例：東京タワー" %>
-          <%= f.label :area_id, "× エリア" %>
+          <i class="fa-solid fa-x ml-1 mr-1"></i>
+          <%= f.label :area_id, "エリア" %>
           <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
-          <%= f.label :tag, "× タグ名" %>
-          <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"夜景" %>
+          <i class="fa-solid fa-x ml-1 mr-1"></i>
+          <%= f.label :tag, "タグ名" %>
+          <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"例：夜景" %>
           <%= hidden_field_tag(:confession_ranking) %>
           <%= hidden_field_tag(:all_rate_ranking) %>
           <%= hidden_field_tag(:atmosphere_rate_ranking) %>
@@ -20,7 +22,7 @@
         <% end %>
 
         並び替え
-        <%= sort_link(@q, :created_at, "新着", default_order: :desc) %>
+        <%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
         <a href="javascript:onSortAllRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
         <a href="javascript:onSortAtmosphereRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
         <a href="javascript:onSortFewPeopleRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1"  style="width:100px;">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
@@ -42,66 +44,48 @@
                 <th width="8%">コメント数</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody style="background-color: #262626;">
               <% @posts.each do |post| %>
               <tr>
                 <td>
-                  <div class="ml-3 align-middle">
-                    <%= link_to admin_post_path(post) do %>
-                      <%= image_tag post.get_spot_image, size: "150x100" %></br>
-                      <%= post.title %>
-                    <% end %>
-                  </div>
+                  <%= link_to admin_post_path(post) do %>
+                    <%= image_tag post.get_spot_image, size: "150x100" %></br>
+                    <%= post.title %>
+                  <% end %>
                 </td>
                 <td>
-                  <div class="ml-3 h6">
-                    <%= post.area.name %>
-                  </div>
+                  <%= post.area.name %>
                 </td>
                 <td>
-                  <div class="ml-3 h6">
-                    <% post.tags.each do |tag| %>
-                      <%= tag.name %></br>
-                    <% end %>
-                  </div>
+                  <% post.tags.each do |tag| %>
+                    <%= tag.name %></br>
+                  <% end %>
                 </td>
                 <td>
-                  <div class="ml-3">
-                    <%= post.avg_all_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post.avg_all_rate %>"></div>
-                  </div>
+                  <h5><%= post.avg_all_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post.avg_all_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-3">
-                    <%= post.avg_atmosphere_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
-                  </div>
+                  <h5><%= post.avg_atmosphere_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-3">
-                    <%= post.avg_few_people_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
-                  </div>
+                  <h5><%= post.avg_few_people_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-3">
-                    <%= post.avg_standard_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
-                  </div>
+                  <h5><%= post.avg_standard_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-3">
-                    <% unless post.avg_confession_result %>
-                      未回答
-                    <% else %>
-                      <%= post.avg_confession_result %>％
-                    <% end %>
-                  </div>
+                  <% unless post.avg_confession_result %>
+                    <h5>未回答</h5>
+                  <% else %>
+                    <h5><%= post.avg_confession_result %>％</h5>
+                  <% end %>
                 </td>
                 <td>
-                  <div class="ml-3">
-                    <%= post.post_comments.count %>件
-                  </div>
+                  <h5><%= post.post_comments.count %>件</h5>
                 </td>
               </tr>
               <% end %>

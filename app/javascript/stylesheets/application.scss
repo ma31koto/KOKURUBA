@@ -106,6 +106,7 @@ body {
 
 .table-bordered td {
   border: 1.5px solid #808000;
+  padding: 10px;
 }
 
 .table-bg-color {
@@ -113,22 +114,22 @@ body {
 }
 
 #map {
-  width: 900px;
-  height: 400px;
+  width: 950px;
+  height: 500px;
 }
 
 #map_new {
-  width: 900px;
+  width: 950px;
   height: 400px;
 }
 
 #map_edit {
-  width: 900px;
+  width: 950px;
   height: 400px;
 }
 
 #map_edit_admin {
-  width: 900px;
+  width: 950px;
   height: 400px;
 }
 
@@ -137,7 +138,7 @@ body {
 }
 
 .star img {
-  width: 15px;
+  width: 16px;
   height: 20px;
 }
 
@@ -207,4 +208,37 @@ body {
   margin-bottom: 3px;
 }
 
+.biography{
+    margin: 0;
+    position: relative;
+    padding: 0.5em 1.5em;
+    border-top: solid 1px white;
+    border-bottom: solid 1px white;
+    height: 150px;
+    width: 500px;
+}
+.biography:before, .biography:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 1px;
+    height: -webkit-calc(100% + 20px);
+    height: calc(100% + 20px);
+    background-color: white;
+}
+.biography:before {left: 10px;}
+.biography:after {right: 10px;}
+.biography p {
+    margin: 0;
+    padding: 0;
+}
+
+.follow-count {
+    padding: 0 1em;
+    margin: 2em 0;
+    color: white;
+    background: #404040;
+    border-left: solid 10px white;
+    width: 150px;
+}
 

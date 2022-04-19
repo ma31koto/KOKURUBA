@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 mx-auto mt-5">
+    <div class="col-12 mt-5">
       <h2><mark class="bg-secondary text-light">スポット詳細</mark></h2>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-10 d-flex align-items-center">
       <div><h1>【<%= @post.title %>】</h1></div>
     </div>
@@ -36,59 +36,73 @@
     </div>
   </div>
 
-  <div class="row mt-3 ml-3">
+  <div class="row mt-5 ml-3">
     <div class="col-5">
       <%= image_tag @post.get_spot_image, size: "400x300" %>
     </div>
 
-    <div class="col-5">
-      <div class="d-flex flex-wrap mt-4" style="height: 30px;">
-        <div style="width: 150px;"><h3>総合評価</h3></div>
-        <div class="mr-3"><h3><%= @post.avg_all_rate.round(1).to_f %></h3></div>
-        <div class="star  show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
-      </div>
+    <div class="col-7 mt-3">
 
-      <div class="d-flex flex-wrap mt-3 ml-4" style="height: 30px;">
-        <div style="width: 150px;"><p>雰囲気</p></div>
-        <div class="mr-3"><%= @post.avg_atmosphere_rate.round(1).to_f %></div>
-        <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
-      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="d-flex mt-4" style="height: 30px;">
+            <div style="width: 150px;"><h3>総合評価</h3></div>
+            <div class="mr-3"><h3><%= @post.avg_all_rate.round(1).to_f %></h3></div>
+            <div class="star  show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
+          </div>
 
-      <div class="d-flex flex-wrap ml-4" style="height: 30px;">
-        <div style="width: 150px;"><p>人の少なさ</p></div>
-        <div class="mr-3"><%= @post.avg_few_people_rate.round(1).to_f %></div>
-        <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
-      </div>
+          <div class="d-flex mt-3 ml-4" style="height: 30px;">
+            <div style="width: 150px;"><p>雰囲気</p></div>
+            <div class="mr-3"><%= @post.avg_atmosphere_rate.round(1).to_f %></div>
+            <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
+          </div>
 
-      <div class="d-flex flex-wrap ml-4" style="height: 30px;">
-        <div style="width: 150px;"><p>定番度</p></div>
-        <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
-        <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
-      </div>
+          <div class="d-flex ml-4" style="height: 30px;">
+            <div style="width: 150px;"><p>人の少なさ</p></div>
+            <div class="mr-3"><%= @post.avg_few_people_rate.round(1).to_f %></div>
+            <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
+          </div>
+
+          <div class="d-flex ml-4" style="height: 30px;">
+            <div style="width: 150px;"><p>定番度</p></div>
+            <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
+            <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="avg_confession_result">
+            <div class="mt-3">
+              <% unless @post.avg_confession_result %>
+                <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">未回答</h3>
+              <% else %>
+                <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">
+                  <%= @post.avg_confession_result %>％
+                </h3>
+              <% end %>
+            </div>
+          </div>
+        </div>
 
     </div>
 
-    <div class="col-2">
-      <div class="avg_confession_result">
-        <div class="mt-3">
-          <% unless @post.avg_confession_result %>
-            <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">未回答</h3>
-          <% else %>
-            <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">
-              <%= @post.avg_confession_result %>％
-            </h3>
-          <% end %>
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="mt-3 border border-white p-2"<>
+            <div class="row">
+              <div class="col-2">
+                <div class="mr-2">＜住所＞</div>
+                <div class="mr-2">＜内容＞</div>
+              </div>
+              <div class="col-10">
+                <span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
+                <%= @post.introduction %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-12">
-      <div class="mt-3 ml-5">
-        <span class="mr-5">＜住所＞</span><span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
-        <span class="mr-5">＜内容＞</span><%= @post.introduction %>
-      </div>
     </div>
   </div>
 
@@ -107,7 +121,7 @@
       <% else %>
         <% @post.post_comments.each do |post_comment| %>
           <div class="row ml-3">
-            <div class="ol-4 d-flex flex-wrap">
+            <div class="col-4 d-flex flex-wrap">
               <div>
                 <%= image_tag post_comment.get_comment_image, size: "200x150" %>
                 <div class="ml-5 mt-1">

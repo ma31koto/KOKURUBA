@@ -7,18 +7,19 @@
         <%= search_form_for(@q, url: post_comments_list_admin_posts_path) do |f| %>
           <%= f.label :title, "タイトル" %>
           <%= f.search_field :title_cont, :placeholder =>"例：東京タワー"%>
-          <%= f.label :comment, "x コメント", :placeholder =>"例：夜景" %>
+          <i class="fa-solid fa-x ml-1 mr-1"></i>
+          <%= f.label :comment, "コメント", :placeholder =>"例：夜景" %>
           <%= f.search_field :comment_cont %>
           <%= f.submit "検索" %>
         <% end %>
 
         並び替え
-        <%= sort_link(@q, :created_at, "新着", default_order: :desc)%>
-        <%= sort_link(@q, :all_rate, "総合評価", default_order: :desc) %>
-        <%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc) %>
-        <%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc) %>
-        <%= sort_link(@q, :standard_rate, "定番度", default_order: :desc) %>
-
+        <%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
+        <%= sort_link(@q, :all_rate, "総合評価", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
+        <%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
+        <%= sort_link(@q, :few_people_rate, "人の少なさ", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
+        <%= sort_link(@q, :standard_rate, "定番度", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
+        <%= sort_link(@q, :confession_result, "告白結果", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
 
         <div class="mx-auto mt-5">
           <table class="table-bordered">
@@ -30,74 +31,54 @@
                 <th width="10%">雰囲気</th>
                 <th width="10%">人の少なさ</th>
                 <th width="10%">定番度</th>
-                <th width="10%">コメント</th>
-                <th width="10%">告白結果</th>
-                <th width="10%">投稿日</th>
-                <th width="10%"></th>
+                <th width="14%">コメント</th>
+                <th width="7%">告白結果</th>
+                <th width="7%">投稿日</th>
+                <th width="7%"></th>
               </tr>
             </thead>
             <tbody>
               <% @post_comments.each do |post_comment| %>
               <tr>
                 <td>
-                  <div class="ml-2 align-middle">
-                    <%= image_tag post_comment.get_comment_image, size: "120x70" %></br>
-                    <%= post_comment.title %>
-                    <%= link_to admin_post_path(post_comment.post) do %>
-                      投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
-                    <% end %>
-                  </div>
+                  <%= image_tag post_comment.get_comment_image, size: "120x70" %></br>
+                  <%= post_comment.title %>
+                  <%= link_to admin_post_path(post_comment.post) do %>
+                    スポット元へ<i class="fa-solid fa-right-to-bracket"></i>
+                  <% end %>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= link_to admin_customer_path(post_comment.customer) do %>
-                      <%= post_comment.customer.name %>
-                    <% end %>
-                  </div>
+                  <%= link_to admin_customer_path(post_comment.customer) do %>
+                    <%= post_comment.customer.name %>
+                  <% end %>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= post_comment.all_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post_comment.all_rate %>"></div>
-                  </div>
+                  <h5><%= post_comment.all_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post_comment.all_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= post_comment.atmosphere_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
-                  </dvi>
+                  <h5><%= post_comment.atmosphere_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= post_comment.few_people_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
-                  </div>
+                  <h5><%= post_comment.few_people_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= post_comment.standard_rate.round(1).to_f %>
-                    <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
-                  </div>
+                  <h5><%= post_comment.standard_rate.round(1).to_f %></h5>
+                  <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= post_comment.comment %>
-                  </div>
+                  <%= post_comment.comment %>
                 </td>
                 <td>
-                  <div class="ml-4">
-                    <%= post_comment.confession_result_i18n %>
-                  </div>
+                  <%= post_comment.confession_result_i18n %>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-                  </div>
+                  <%= post_comment.created_at.strftime('%Y/%m/%d') %>
                 </td>
                 <td>
-                  <div class="ml-2">
-                    <%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.post, post_comment), class: "btn btn-success" %>
-                  </div>
+                  <%= link_to "編集", edit_admin_post_post_comment_path(post_comment.post, post_comment), class: "btn btn-success" %>
                 </td>
               </tr>
               <% end %>

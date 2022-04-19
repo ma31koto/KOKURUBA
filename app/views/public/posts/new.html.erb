@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-12 mx-auto mt-5">
+    <div class="col-12 mt-5">
       <h2><mark class="bg-secondary text-light">スポット投稿</mark></h2>
     </div>
   </div>
 
   <div class="row mt-5">
     <div class="col-12">
-      <div class="mx-auto">
+      <div class="offset-1">
         <input id="address" type="textbox" value="" size="50">
         <input type="button" value="地図を検索" onclick="codeAddress()">
         <div id='map_new' class="mt-3"></div>
@@ -17,55 +17,69 @@
   </div>
 
  <div class="row  mt-5">
-    <div class="col-12 mx-auto">
+    <div class="col-12 text-center">
       <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
+        <div class="row text-left offset-2">
+          <div class="col-md-4 post-item"><%= f.label :title, "タイトル" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.text_field :title, :placeholder =>"例：東京タワー", size:50 %>
+            <% if @post.errors.include?(:title) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:title).first %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="row text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :introduction, "説明文" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x5" %>
+            <% if @post.errors.include?(:introduction) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:introduction).first %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="row text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :postal_code, "郵便番号" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.text_field :postal_code, :placeholder =>"自動入力",id: "postal_code", size: 50 %>
+            <% if @post.errors.include?(:postal_code) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:postal_code).first %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="row text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :address, "住所" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.text_field :address, :placeholder =>"自動入力", id: "input_address", size: 50 %>
+            <% if @post.errors.include?(:address) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:address).first %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="row text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :area_id, "エリア" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %>
+            <% if @post.errors.include?(:area_id) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="row text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :spot_image, "スポット画像" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.file_field :spot_image, accept: "image/*" %>
+          </div>
+        </div>
+        <div class="row text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :name,"タグ (,区切りで複数タグ登録可能)" %></div>
+          <div class="col-md-6 post-form">
+            <%= f.text_field :name, :placeholder =>"例：夜景,イルミネーション", size: 50 %>
+          </div>
+        </div>
 
-        <div>
-          <%= f.label :title, "タイトル", class: "col-4"%>
-          <%= f.text_field :title, :placeholder =>"例：東京タワー", size: 50 %>
-          <% if @post.errors.include?(:title) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:tilte).first %>
-          <% end %>
-        </div>
-        <div>
-          <%= f.label :introduction, "説明文", class: "col-4"%>
-          <%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x4" %>
-          <% if @post.errors.include?(:introduction) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:introduction).first %>
-          <% end %>
-        </div>
-        <div>
-          <%= f.label :postal_code, "郵便番号", class: "col-4"%>
-          <%= f.text_field :postal_code, :placeholder =>"自動入力", :value => "", id: "postal_code", size: 50 %>
-          <% if @post.errors.include?(:postal_code) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:postal_code).first %>
-          <% end %>
-        </div>
-        <div>
-          <%= f.label :address, "住所", class: "col-4"%>
-          <%= f.text_field :address, :placeholder =>"自動入力", :value => "", id: "input_address", size: 50 %>
-          <% if @post.errors.include?(:address) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:address).first %>
-          <% end %>
-        </div>
-        <div>
-          <%= f.label :area_id, "エリア", class: "col-4"%>
-          <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %>
-          <% if @post.errors.include?(:area_id) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:area_id).first %>
-          <% end %>
-        </div>
-        <div>
-          <%= f.label :spot_image, "スポット画像", class: "col-4"%>
-          <%= f.file_field :spot_image, accept: "image/*" %>
-        </div>
-        <div>
-          <%= f.label :name,"タグ (,で区切ると複数タグ登録可能)", class: "col-4"%>
-          <%= f.text_field :name, :placeholder =>"例：夜景,イルミネーション", size: 50 %>
-        </div>
-        <div class="d-flex">
-          <div><%= f.label :confession_result, "告白結果", class: "col-4" %></div>
-          <div class="mt-4 d-flex flex-wrap">
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :confession_result, "告白結果"%></div>
+          <div class="col-md-6 d-flex post-form">
             <div class="mr-4">
               <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
               <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
@@ -81,40 +95,53 @@
               <%= f.label :confession_result, Post.confession_results_i18n[:no_answer] %>
               <i class="fa-solid fa-chess-knight" style="color: red;"></i>
             </div>
+            <% if @post.errors.include?(:confession_result) %>
+              <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:confession_result).first %></p>
+            <% end %>
           </div>
-          <% if @post.errors.include?(:confession_result) %>
-            <p style="color: red; class="offset-4""><%= @post.errors.full_messages_for(:confession_result).first %>
-          <% end %>
         </div>
-        <div class="d-flex">
-          <div><%= f.label :atmosphere_rate, "雰囲気", class: "col-4" %></div>
-          <div class="star_atmosphere_rate mb-2"><%= f.hidden_field :atmosphere_rate %></div>
-          <% if @post.errors.include?(:atmosphere_rate) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:atmosphere_rate).first %>
-          <% end %>
+
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :atmosphere_rate, "雰囲気"%></div>
+          <div class="col-md-6 star_atmosphere_rate post-form">
+           <%= f.hidden_field :atmosphere_rate %>
+            <% if @post.errors.include?(:atmosphere_rate) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:atmosphere_rate).first %></p>
+            <% end %>
+          </div>
         </div>
-        <div class="d-flex">
-          <div><%= f.label :few_people_rat, "人の少なさ", class: "col-4" %></div>
-          <div class="star_few_people_rate  mb-2"><%= f.hidden_field :few_people_rate %></div>
-          <% if @post.errors.include?(:few_people_rate) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:few_people_rate).first %>
-          <% end %>
+
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
+          <div class="col-md-6 star_few_people_rate post-form">
+            <%= f.hidden_field :few_people_rate %>
+            <% if @post.errors.include?(:few_people_rate) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:few_people_rate).first %></p>
+            <% end %>
+          </div>
         </div>
-        <div class="d-flex">
-          <div><%= f.label :standard_rate, "定番度", class: "col-4" %></div>
-          <div class="star_standard_rate  mb-2"><%= f.hidden_field :standard_rate %></div>
-          <% if @post.errors.include?(:standard_rate) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:standard_rate).first %>
-          <% end %>
+
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
+          <div class="col-md-6 star_standard_rate post-form">
+            <%= f.hidden_field :standard_rate %>
+            <% if @post.errors.include?(:standard_rate) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:standard_rate).first %></p>
+            <% end %>
+          </div>
         </div>
-        <div class="d-flex">
-          <div><%= f.label :all_rate, "総合評価", class: "col-4" %></div>
-          <div class="star_all_rate  mb-4"><%= f.hidden_field :all_rate %></div>
-          <% if @post.errors.include?(:all_rate) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:all_rate).first %>
-          <% end %>
+
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-md-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
+          <div class="col-md-6 star_all_rate post-form">
+            <%= f.hidden_field :all_rate %>
+            <% if @post.errors.include?(:all_rate) %>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:all_rate).first %></p>
+            <% end %>
+          </div>
         </div>
-        <div>
+
+        <div class="mt-3">
           <%= f.hidden_field :longitude, :value => "", id: "longitude" %>
           <%= f.hidden_field :latitude, :value => "", id: "latitude" %>
           <%= f.submit "投稿", class: "btn btn-primary", style: "width: 150px;" %>

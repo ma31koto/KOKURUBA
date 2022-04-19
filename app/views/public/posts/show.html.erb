@@ -1,16 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 mx-auto mt-5">
-      <h2><mark class="bg-secondary text-light">スポット詳細</mark></h2><i class="fa-solid fa-comment-pen"></i>
+    <div class="col-12 mt-5">
+      <h2><mark class="bg-secondary text-light">スポット詳細</mark></h2>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-10 d-flex align-items-center">
       <div><h1>【<%= @post.title %>】</h1></div>
-      <div id="favorite_buttons" class="d-flex align-items-center">
-        <%= render "public/favorites/btn", post: @post %>
-      </div>
+      <% if customer_signed_in? %>
+        <div id="favorite_buttons" class="d-flex align-items-center">
+          <%= render "public/favorites/btn", post: @post %>
+        </div>
+      <% end %>
     </div>
     <div class="col-2 d-flex align-items-center">
       <div class="ml-5">
@@ -31,7 +33,11 @@
       </div>
       <div class="ml-5 d-flex align-items-cente">
         <span>●投稿者:</span>
-        <%= link_to customer_path(@post.customer) do %>
+        <% if customer_signed_in? %>
+          <%= link_to customer_path(@post.customer) do %>
+            <%= @post.customer.name %>
+          <% end %>
+        <% else %>
           <%= @post.customer.name %>
         <% end %>
       </div>
@@ -42,56 +48,90 @@
   </div>
 
 
-  <div class="row mt-3 ml-3">
+  <div class="row mt-5 ml-3">
     <div class="col-5">
       <%= image_tag @post.get_spot_image, size: "400x300" %>
     </div>
 
-    <div class="col-5">
-      <div class="d-flex flex-wrap mt-4" style="height: 30px;">
-        <div style="width: 150px;"><h3>総合評価</h3></div>
-        <div class="mr-3"><h3><%= @post.avg_all_rate.round(1).to_f %></h3></div>
-        <div class="star  show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
+    <div class="col-7 mt-3">
+
+      <div class="row">
+        <div class="col-8">
+          <div class="d-flex" style="height: 30px;">
+            <div style="width: 150px;"><h3>総合評価</h3></div>
+            <% if customer_signed_in? %>
+              <div class="mr-3"><h3><%= @post.avg_all_rate.round(1).to_f %></h3></div>
+              <div class="star  show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
+            <% else %>
+              <i class="fa-solid fa-key ml-4"></i>会員限定
+            <% end %>
+          </div>
+
+          <div class="d-flex mt-3 ml-4" style="height: 30px;">
+            <div style="width: 150px;"><p>雰囲気</p></div>
+            <% if customer_signed_in? %>
+              <div class="mr-3"><%= @post.avg_atmosphere_rate.round(1).to_f %></div>
+              <div class="star show-star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
+            <% else %>
+              <i class="fa-solid fa-key"></i>会員限定
+            <% end %>
+          </div>
+
+          <div class="d-flex ml-4" style="height: 30px;">
+            <div style="width: 150px;"><p>人の少なさ</p></div>
+            <% if customer_signed_in? %>
+              <div class="mr-3"><%= @post.avg_few_people_rate.round(1).to_f %></div>
+              <div class="star show-star" data-score="<%= @post.avg_few_people_rate %>"></div>
+            <% else %>
+              <i class="fa-solid fa-key"></i>会員限定
+            <% end %>
+          </div>
+
+          <div class="d-flex ml-4" style="height: 30px;">
+            <div style="width: 150px;"><p>定番度</p></div>
+            <% if customer_signed_in? %>
+              <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
+              <div class="star show-star" data-score="<%= @post.avg_standard_rate %>"></div>
+            <% else %>
+              <i class="fa-solid fa-key"></i>会員限定
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="avg_confession_result">
+            <% if customer_signed_in? %>
+              <% unless @post.avg_confession_result %>
+                <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">未回答</h3>
+              <% else %>
+                <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">
+                  <%= @post.avg_confession_result %>％
+                </h3>
+              <% end %>
+            <% else %>
+              <h4 style="transform: translate(0, 120%);margin: 0; text-align:center;" class="align-items-center"><i class="fa-solid fa-key"></i>会員限定</h4>
+            <% end %>
+          </div>
+        </div>
       </div>
 
-      <div class="d-flex flex-wrap mt-3 ml-4" style="height: 30px;">
-        <div style="width: 150px;"><p>雰囲気</p></div>
-        <div class="mr-3"><%= @post.avg_atmosphere_rate.round(1).to_f %></div>
-        <div class="star show-star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="mt-3 border border-white p-2"<>
+            <div class="row">
+              <div class="col-2">
+                <div class="mr-2">＜住所＞</div>
+                <div class="mr-2">＜内容＞</div>
+              </div>
+              <div class="col-10">
+                <span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
+                <%= @post.introduction %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="d-flex flex-wrap ml-4" style="height: 30px;">
-        <div style="width: 150px;"><p>人の少なさ</p></div>
-        <div class="mr-3"><%= @post.avg_few_people_rate.round(1).to_f %></div>
-        <div class="star show-star" data-score="<%= @post.avg_few_people_rate %>"></div>
-      </div>
-
-      <div class="d-flex flex-wrap ml-4" style="height: 30px;">
-        <div style="width: 150px;"><p>定番度</p></div>
-        <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
-        <div class="star show-star" data-score="<%= @post.avg_standard_rate %>"></div>
-      </div>
-    </div>
-
-    <div class="col-2">
-      <div class="avg_confession_result">
-        <% unless @post.avg_confession_result %>
-          <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">未回答</h3>
-        <% else %>
-          <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">
-            <%= @post.avg_confession_result %>％
-          </h3>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <div class="mt-3 ml-5">
-        <span class="mr-5">＜住所＞</span><span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
-        <span class="mr-5">＜内容＞</span><%= @post.introduction %>
-      </div>
     </div>
   </div>
 
@@ -100,8 +140,10 @@
     <div class="col-12">
       <div class="d-flex flex-wrap">
         <div class="mt-5 ml-3"><h2>コメント一覧　<%= @post.post_comments.count %>件</h2></div>
-        <%= link_to new_post_post_comment_path(@post) do %>
-          <div  class="mt-5 ml-3"><i class="fa-solid fa-comment-dots fa-1x">コメントを書く</i></div>
+        <% if customer_signed_in? %>
+          <%= link_to new_post_post_comment_path(@post) do %>
+            <div  class="mt-5 ml-3"><i class="fa-solid fa-comment-dots fa-1x">コメントを書く</i></div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -110,69 +152,73 @@
 
   <div class="row">
     <div class="col-12 bg-white text-dark" style="padding:20px; border: inset 10px #999966;">
-      <% if @post.post_comments.count == 0 %>
-        <a>コメントなし</a>
-      <% else %>
-        <% @post.post_comments.each do |post_comment| %>
-          <div class="row ml-3">
-            <div class="col-4 d-flex flex-wrap">
-              <div>
-                <%= image_tag post_comment.get_comment_image, size: "200x150" %>
-                <div class="ml-5 mt-1">
-                  <% if post_comment.customer == current_customer %>
-                    <%= link_to "編集する", edit_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
-                  <% end %>
-                </div>
-              </div>
-              <div class="mt-5">
-                <a>●投稿者</a><br/>
-                名前:<%= link_to customer_path(post_comment.customer) do %>
-                       <%= post_comment.customer.name %><br/>
-                     <% end %>
-                性別:<%= post_comment.customer.gender_i18n %><br/>
-                年齢:<%= post_comment.customer.age %>歳
-              </div>
-            </div>
-
-            <div class="col-3">
-              <div class="row">
-                <div class="col-5">
-                  <div style=""><h5>総合評価</h5></div>
-                  <div style=""><a>雰囲気</a></div>
-                  <div style=""><a>人の少なさ</a></div>
-                  <div style=""><a>定番度</a></div>
-                </div>
-                <div class="col-7">
-                  <div class="d-flex">
-                    <div><h5><%= post_comment.all_rate.round(1).to_f %><h5></div>
-                    <div class="star" data-score="<%= post_comment.all_rate %>"></div>
-                  </div>
-                  <div class="d-flex">
-                    <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
-                    <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
-                  </div>
-                  <div class="d-flex">
-                    <div><%= post_comment.few_people_rate.round(1).to_f %></div>
-                    <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
-                  </div>
-                  <div class="d-flex">
-                    <div><%= post_comment.standard_rate.round(1).to_f %></div>
-                    <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+      <% if customer_signed_in? %>
+        <% if @post.post_comments.count == 0 %>
+          <a>コメントなし</a>
+        <% else %>
+          <% @post.post_comments.each do |post_comment| %>
+            <div class="row ml-3">
+              <div class="col-4 d-flex flex-wrap">
+                <div>
+                  <%= image_tag post_comment.get_comment_image, size: "200x150" %>
+                  <div class="ml-5 mt-1">
+                    <% if post_comment.customer == current_customer %>
+                      <%= link_to "編集する", edit_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success" %>
+                    <% end %>
                   </div>
                 </div>
+                <div class="mt-5">
+                  <a>●投稿者</a><br/>
+                  名前:<%= link_to customer_path(post_comment.customer) do %>
+                         <%= post_comment.customer.name %><br/>
+                       <% end %>
+                  性別:<%= post_comment.customer.gender_i18n %><br/>
+                  年齢:<%= post_comment.customer.age %>歳
+                </div>
               </div>
-            </div>
 
-            <div class="col-5">
-              <div class="d-flex">
-                <div><h5><strong><%= post_comment.title %></strong></h5></div>
-                <div class="ml-5"><a><%= post_comment.created_at.strftime('%Y/%m/%d') %></a></div>
+              <div class="col-3">
+                <div class="row">
+                  <div class="col-5">
+                    <div style=""><h5>総合評価</h5></div>
+                    <div style=""><a>雰囲気</a></div>
+                    <div style=""><a>人の少なさ</a></div>
+                    <div style=""><a>定番度</a></div>
+                  </div>
+                  <div class="col-7">
+                    <div class="d-flex">
+                      <div><h5><%= post_comment.all_rate.round(1).to_f %><h5></div>
+                      <div class="star" data-score="<%= post_comment.all_rate %>"></div>
+                    </div>
+                    <div class="d-flex">
+                      <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
+                      <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
+                    </div>
+                    <div class="d-flex">
+                      <div><%= post_comment.few_people_rate.round(1).to_f %></div>
+                      <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
+                    </div>
+                    <div class="d-flex">
+                      <div><%= post_comment.standard_rate.round(1).to_f %></div>
+                      <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <%= post_comment.comment %>
-            </div>
 
-          </div>
+              <div class="col-5">
+                <div class="d-flex">
+                  <div><h5><strong><%= post_comment.title %></strong></h5></div>
+                  <div class="ml-5"><a><%= post_comment.created_at.strftime('%Y/%m/%d') %></a></div>
+                </div>
+                <%= post_comment.comment %>
+              </div>
+
+            </div>
+          <% end %>
         <% end %>
+      <% else %>
+        <i class="fa-solid fa-key"></i>会員限定
       <% end %>
     </div>
   </div>

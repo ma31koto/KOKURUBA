@@ -7,7 +7,7 @@
 <a href="javascript:onSortConfessionRranking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
 
 <div class="mx-auto mt-5">
-  <table class="table-bordered">
+  <table class="table-bordered index-table">
      <thead>
       <tr style="height: 50px; background-color: #666633;" class="text-center align-middle">
         <th width="10%"></th>
@@ -17,70 +17,72 @@
         <th width="10%">雰囲気</th>
         <th width="10%">人の少なさ</th>
         <th width="10%">定番度</th>
-        <th width="8%">告白<br/>成功率</th>
+        <th width="9%">告白<br/>成功率</th>
         <th width="8%">コメント数</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="background-color: #262626;">
       <% posts.each do |post| %>
       <tr>
         <td>
-          <div class="ml-3 align-middle">
-            <%= link_to post_path(post) do %>
-              <%= image_tag post.get_spot_image, size: "150x100" %></br>
-              <%= post.title %>
-            <% end %>
-          </div>
+          <%= link_to post_path(post) do %>
+            <%= image_tag post.get_spot_image, size: "150x100" %></br>
+            <%= post.title %>
+          <% end %>
         </td>
         <td>
-          <div class="ml-3 h6">
-            <%= post.area.name %>
-          </div>
+          <%= post.area.name %>
         </td>
         <td>
-          <div class="ml-3 h6">
-            <% post.tags.each do |tag| %>
-              <%= tag.name %></br>
-            <% end %>
-          </div>
+          <% post.tags.each do |tag| %>
+            <%= tag.name %></br>
+          <% end %>
         </td>
         <td>
-          <div class="ml-3">
-            <%= post.avg_all_rate.round(1).to_f %>
+          <% if customer_signed_in? %>
+            <h5><%= post.avg_all_rate.round(1).to_f %></h5>
             <div class="star" data-score="<%= post.avg_all_rate %>"></div>
-          </div>
+          <% else %>
+            <i class="fa-solid fa-key"></i>会員限定
+          <% end %>
         </td>
         <td>
-          <div class="ml-3">
-            <%= post.avg_atmosphere_rate.round(1).to_f %>
+          <% if customer_signed_in? %>
+            <h5><%= post.avg_atmosphere_rate.round(1).to_f %></h5>
             <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
-          </div>
+          <% else %>
+            <i class="fa-solid fa-key"></i>会員限定
+          <% end %>
         </td>
         <td>
-          <div class="ml-3">
-            <%= post.avg_few_people_rate.round(1).to_f %>
+          <% if customer_signed_in? %>
+            <h5><%= post.avg_few_people_rate.round(1).to_f %></h5>
             <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
-          </div>
+          <% else %>
+            <i class="fa-solid fa-key"></i>会員限定
+          <% end %>
         </td>
         <td>
-          <div class="ml-3">
-            <%= post.avg_standard_rate.round(1).to_f %>
+          <% if customer_signed_in? %>
+            <h5><%= post.avg_standard_rate.round(1).to_f %></h5>
             <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
-          </div>
+          <% else %>
+            <i class="fa-solid fa-key"></i>会員限定
+          <% end %>
         </td>
         <td>
-          <div class="ml-3">
+          <% if customer_signed_in? %>
             <% unless post.avg_confession_result %>
-              未回答
+              <h5>未回答</h5>
             <% else %>
-              <%= post.avg_confession_result %>％
+              <h5><%= post.avg_confession_result %>％</h5>
             <% end %>
-          </div>
+          <% else %>
+            <i class="fa-solid fa-key"></i>会員限定
+          <% end %>
         </td>
         <td>
-          <div class="ml-3">
-            <%= post.post_comments.count %>件
-          </div>
+          <h5 class="ml-3"><%= post.post_comments.count %>件</h5>
         </td>
       </tr>
       <% end %>
