@@ -1,5 +1,5 @@
 class Admin::PostsController < ApplicationController
-  before_action :ensure_customer, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   def index
     @q = Post.ransack(params[:q])
@@ -27,6 +27,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def edit
@@ -46,6 +47,7 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
     if session[:previous_url].count < 4
       redirect_to admin_customers_path
@@ -58,10 +60,6 @@ class Admin::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :introduction, :postal_code, :address, :longitude, :latitude, :area_id, :spot_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
-  end
-
-  def ensure_customer
-    @post = Post.find(params[:id])
   end
 
 end

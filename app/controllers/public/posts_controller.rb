@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_customer!, only: [:new, :create, :edit, :update, :destroy]
   before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
 
   def map_search
@@ -88,7 +89,7 @@ class Public::PostsController < ApplicationController
   def ensure_correct_customer
     @post = Post.find(params[:id])
     unless @post.customer == current_customer
-      redirect_to map_search_posts_path
+      redirect_to customer_path(current_customer)
     end
   end
 

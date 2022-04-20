@@ -1,8 +1,8 @@
 <div class="container">
 
   <div class="row mt-5">
-    <div class="col-12">
-      <h2><mark class="bg-secondary text-light">コメント編集</mark></h2>
+    <div class="col-12 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-comment-dots mr-2"></i>コメント編集</mark></h2>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
           <div class="col-md-6 post-form">
             <%= f.text_field :title, :placeholder =>"例)クリスマスシーズンの東京タワー", size: 50 %>
             <% if @post_comment.errors.include?(:title) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:title).first %>
+              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:title).first %></p>
             <% end %>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="col-md-6 post-form">
             <%= f.text_area :comment, :placeholder =>"例)クリスマスシーズンの東京タワーは色がクリスマスカラーに変わります！", size: "50x3" %>
             <% if @post_comment.errors.include?(:comment) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:comment).first %>
+              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:comment).first %></p>
             <% end %>
           </div>
         </div>
@@ -55,7 +55,7 @@
             </div>
           </div>
           <% if @post_comment.errors.include?(:confession_result) %>
-            <p style="color: red;"><%= @post_comment.errors.full_messages_for(:confession_result).first %>
+            <p style="color: red;"><%= @post_comment.errors.full_messages_for(:confession_result).first %></p>
           <% end %>
         </div>
 
@@ -64,7 +64,7 @@
           <div class="col-md-6 star_atmosphere_rate post-form" data-score="<%= @post_comment.atmosphere_rate %>">
               <%= f.hidden_field :atmosphere_rate %>
             <% if @post_comment.errors.include?(:atmosphere_rate) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:atmosphere_rate).first %>
+              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:atmosphere_rate).first %></p>
             <% end %>
           </div>
         </div>
@@ -74,7 +74,7 @@
           <div class="col-md-6 star_few_people_rate post-form" data-score="<%= @post_comment.few_people_rate %>">
             <%= f.hidden_field :few_people_rate %>
             <% if @post_comment.errors.include?(:few_people_rate) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:few_people_rate).first %>
+              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:few_people_rate).first %></p>
             <% end %>
           </div>
         </div>
@@ -84,7 +84,7 @@
           <div class="col-md-6 star_standard_rate post-form" data-score="<%= @post_comment.standard_rate %>">
             <%= f.hidden_field :standard_rate %>
             <% if @post_comment.errors.include?(:standard_rate) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:standard_rate).first %>
+              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:standard_rate).first %></p>
             <% end %>
           </div>
         </div>
@@ -94,7 +94,7 @@
           <div class="col-md-6 star_all_rate post-form" data-score="<%= @post_comment.all_rate %>">
             <%= f.hidden_field :all_rate %>
             <% if @post_comment.errors.include?(:all_rate) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:all_rate).first %>
+              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:all_rate).first %></p>
             <% end %>
           </div>
         </div>

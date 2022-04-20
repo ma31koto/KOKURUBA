@@ -4,12 +4,10 @@
       <div class="col-2 ml-5 font-weight-bold">
         <%= f.label :name, "エリア名" %>
       </div>
-      <div class="col-2 mr-3">
-        <%= f.text_field :name, placeholder: "エリア名" %>
-          <%# binding.pry %>
+      <div class="col-3 mr-3">
+        <%= f.text_field :name, placeholder: "エリア名", size: 30 %>
         <% if flash[:danger].present?  %>
-          <p style="color: red;">名前を入力してください</p><%#= area.errors.full_messages_for(:name).first %>
-
+          <p style="color: red;">名前を入力してください</p>
         <% end %>
       </div>
       <div class="col-2 ml-5">
@@ -24,7 +22,7 @@
       <div class="ml-3">
         <%= f.text_field :name, size: 30 %>
         <% if @area.errors.include?(:name) %>
-          <p style="color: red;"><%= @area.errors.full_messages_for(:name).first %>
+          <p style="color: red;"><%= @area.errors.full_messages_for(:name).first %></p>
         <% end %>
       </div>
       <div class="ml-5">

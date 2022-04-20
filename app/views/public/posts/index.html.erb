@@ -1,33 +1,36 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-12 mx-auto mt-5">
-      <h2><mark class="bg-secondary text-light">スポット一覧</mark></h2>
-
-      <div class="mt-5">
-        <%= search_form_for @q do |f| %>
-          <%= f.label :title, "タイトル" %>
-          <%= f.search_field :title_cont, :placeholder =>"例：東京タワー" %>
-          <i class="fa-solid fa-x ml-1 mr-1"></i>
-          <%= f.label :area_id, "エリア" %>
-          <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
-          <i class="fa-solid fa-x ml-1 mr-1"></i>
-          <%= f.label :tag, "タグ名" %>
-          <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"例：夜景" %>
-          <%#= f.collection_select :customer_gender_eq, Customer.all, :id, :gender, include_blank: "----", class: "form-control" %>
-          <%= hidden_field_tag(:confession_ranking) %>
-          <%= hidden_field_tag(:all_rate_ranking) %>
-          <%= hidden_field_tag(:atmosphere_rate_ranking) %>
-          <%= hidden_field_tag(:few_people_rate_ranking) %>
-          <%= hidden_field_tag(:standard_rate_ranking) %>
-          <%= f.submit "検索" %>
-        <% end %>
-
-        <div class="mt-2">
-          <%= render "index", posts: @posts %>
-        </div>
-        <%= paginate @posts %>
-      </div>
-
+    <div class="col-12 mt-5 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-location-dot mr-2"></i>スポット一覧</mark></h2>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12 mt-5">
+      <%= search_form_for @q do |f| %>
+        <%= f.label :title, "タイトル" %>
+        <%= f.search_field :title_cont, :placeholder =>"例：東京タワー" %>
+        <i class="fa-solid fa-x ml-1 mr-1"></i>
+        <%= f.label :area_id, "エリア" %>
+        <%= f.collection_select :area_id_eq, Area.all, :id, :name, include_blank: "----", class: "form-control" %>
+        <i class="fa-solid fa-x ml-1 mr-1"></i>
+        <%= f.label :tag, "タグ名" %>
+        <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"例：夜景" %>
+        <%#= f.collection_select :customer_gender_eq, Customer.all, :id, :gender, include_blank: "----", class: "form-control" %>
+        <%= hidden_field_tag(:confession_ranking) %>
+        <%= hidden_field_tag(:all_rate_ranking) %>
+        <%= hidden_field_tag(:atmosphere_rate_ranking) %>
+        <%= hidden_field_tag(:few_people_rate_ranking) %>
+        <%= hidden_field_tag(:standard_rate_ranking) %>
+        <%= f.submit "検索" %>
+      <% end %>
+
+      <div class="mt-2">
+        <%= render "index", posts: @posts %>
+      </div>
+      <%= paginate @posts %>
+    </div>
+  </div>
+
 </div>

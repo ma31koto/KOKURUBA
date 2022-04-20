@@ -1,160 +1,166 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-12 mx-auto mt-5">
-      <h2><mark class="bg-secondary text-light">スポット/コメント投稿一覧</mark></h2>
-
-      <div class="mt-5">
-        <div class="ml-5 d-flex flex-wrap">
-          <div>
-            <%= image_tag @customer.get_profile_image, size: "150x150" %>
-          </div>
-          <div class="ml-5 d-flex align-items-end">
-            名前：<%= @customer.name %><br/>
-            性別：<%= @customer.gender_i18n %><br/>
-            年齢：<%= @customer.age %>歳<br/>
-          </div>
-        </div>
-
-        <div class="customer-list mt-5 ml-5">
-          <ul class="tab-list">
-            <li class="tab box-active">スポット一覧　<%= @customer.posts.count %>件</li>
-            <li class="tab">コメント一覧　<%= @customer.post_comments.count %>件</li>
-          </ul>
-
-          <div class="tabbox-contents">
-            <div class="tabbox box-show">
-              <div class="mx-auto">
-                <table class="table">
-                  <thead>
-                    <tr>
-                    <th width="16%" class="text-center align-middle"></th>
-                    <th width="16%" class="text-center align-middle">スポット名</th>
-                    <th width="16%" class="text-center align-middle">エリア</th>
-                    <th width="16%" class="text-center align-middle">関連タグ</th>
-                    <th width="17%" class="text-center align-middle">総合評価</th>
-                    <th width="16%" class="text-center align-middle">告白成功率</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% @customer.posts.each do |post| %>
-                    <tr>
-                      <td class="text-center align-middle">
-                        <%= link_to admin_post_path(post) do %>
-                          <%= image_tag post.get_spot_image, size: "100x100" %>
-                        <% end %>
-                      </td >
-                        <td class="text-center align-middle">
-                        <%= link_to admin_post_path(post) do %>
-                          <%= post.title %>
-                        <% end %>
-                      </td>
-                      <td class="align-middle"><%= post.area.name %></td>
-                      <td class="align-middle">
-                        <% post.tags.each do |tag| %>
-                          <%= tag.name %><br/>
-                        <% end %>
-                      </td>
-                      <td class="align-middle">
-                        <h3><%= post.avg_all_rate.round(1).to_f %></h3>
-                        <div class="d-flex flex-wrap">
-                          <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
-                          <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count + 1 %>件)</div>
-                        </div>
-                      </td>
-                      <td class="text-center align-middle">
-                        <% unless post.avg_confession_result %>
-                          未回答
-                        <% else %>
-                          <%= post.avg_confession_result %>％
-                        <% end %>
-                      </td>
-                    </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="tabbox">
-              <div class="mx-auto ml-5">
-                <% @post_comments.each do |post_comment| %>
-                  <div class="d-flex flex-wrap mt-4">
-                    <div style="width: 200px;, height: 200px;">
-                      <%= image_tag post_comment.get_comment_image, size: "100x100" %><br/>
-                      <%= post_comment.post.area.name %><br/>
-                      <%= link_to admin_post_path(post_comment.post) do %>
-                        投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
-                      <% end %>
-                    </div>
-                    <div>
-                      <div class="d-flex flex-wrap" style="height: 30px;">
-                        <div style="width: 100px;"><p>総合評価</p></div>
-                        <div><%= post_comment.all_rate.round(1).to_f %></div>
-                        <div class="star" data-score="<%= post_comment.all_rate %>"></div>
-                      </div>
-                      <div class="d-flex flex-wrap" style="height: 30px;">
-                        <div style="width: 100px;"><p>雰囲気</p></div>
-                        <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
-                        <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
-                      </div>
-                      <div class="d-flex flex-wrap" style="height: 30px;">
-                        <div style="width: 100px;"><p>人の少なさ</p></div>
-                        <div><%= post_comment.few_people_rate.round(1).to_f %></div>
-                        <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
-                      </div>
-                      <div class="d-flex flex-wrap" style="height: 30px;">
-                        <div style="width: 100px;"><p>定番度</p></div>
-                        <div><%= post_comment.standard_rate.round(1).to_f %></div>
-                        <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
-                      </div>
-                    </div>
-                    <div class="ml-5">
-                      <h5><strong><%= post_comment.title %></strong></h5>
-                      <%= post_comment.comment %>
-                    </div>
-                    <%= link_to "編集する", edit_admin_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success", style: "height: 40px; margin-left: 5px;" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <script>
-        $(function() {
-          $('.tab').click(function(){
-            $('.tab-active').removeClass('tab-active');
-            $(this).addClass('tab-active');
-            $('.box-show').removeClass('box-show');
-            const index = $(this).index();
-            $('.tabbox').eq(index).addClass('box-show');
-          });
-
-        $('.tab').mouseover(function() {
-          var classes = $(this).attr('class').split(" ");
-          if (classes.includes("tab-active") == true) { return; }
-          $(this).addClass('tab-mouseover');
-        });
-
-        $('.tab').mouseout(function() {
-          $(this).removeClass('tab-mouseover');
-        });
-      });
-
-        $('.star').empty();
-        $('.star').raty({
-          size: 36,
-          starOff:  '<%= asset_path('star-off.png') %>',
-          starOn : '<%= asset_path('star-on.png') %>',
-          starHalf: '<%= asset_path('star-half.png') %>',
-          half: true,
-          readOnly: true,
-        });
-      </script>
-
-
+    <div class="col-md-12 mt-5 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>スポット/コメント投稿一覧</mark></h2>
     </div>
   </div>
+
+  <div class="row mt-5">
+    <div class="col-md-12 ml-5 d-flex flex-wrap">
+      <div>
+        <%= image_tag @customer.get_profile_image, size: "150x150" %>
+      </div>
+      <div class="ml-5 d-flex align-items-end">
+        名前：<%= @customer.name %><br/>
+        性別：<%= @customer.gender_i18n %><br/>
+        年齢：<%= @customer.age %>歳<br/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mt-5 ml-4 customer-list">
+        <ul class="tab-list">
+          <li class="tab box-active">スポット一覧　<%= @customer.posts.count %>件</li>
+          <li class="tab">コメント一覧　<%= @customer.post_comments.count %>件</li>
+        </ul>
+
+        <div class="tabbox-contents">
+          <div class="tabbox box-show">
+            <table class="table">
+              <thead>
+                <tr style="background-color: #A9A9A9;">
+                  <th width="20%" class="align-middle"></th>
+                  <th width="15%" class="align-middle">スポット名</th>
+                  <th width="15%" class="align-middle">エリア</th>
+                  <th width="15%" class="align-middle">関連タグ</th>
+                  <th width="20%" class="align-middle">総合評価</th>
+                  <th width="15%" class="align-middle">告白成功率</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @customer.posts.each do |post| %>
+                <tr>
+                  <td class="align-middle">
+                    <%= link_to admin_post_path(post) do %>
+                      <%= image_tag post.get_spot_image, size: "150x100" %>
+                    <% end %>
+                  </td >
+                    <td class="align-middle">
+                    <%= link_to admin_post_path(post), class: "link-black" do %>
+                      <%= post.title %>
+                    <% end %>
+                  </td>
+                  <td class="align-middle"><%= post.area.name %></td>
+                  <td class="align-middle">
+                    <% post.tags.each do |tag| %>
+                      <%= tag.name %><br/>
+                    <% end %>
+                  </td>
+                  <td class="align-middle">
+                    <h3><%= post.avg_all_rate.round(1).to_f %></h3>
+                    <div class="d-flex">
+                      <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
+                      <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count + 1 %>件)</div>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <% unless post.avg_confession_result %>
+                      <h5 class="ml-2">未回答</h5>
+                    <% else %>
+                      <h5 class="ml-2"><%= post.avg_confession_result %>％</h5>
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tabbox ml-5">
+            <% @post_comments.each do |post_comment| %>
+              <div class="row list-row">
+                <div style="col-md-3">
+                  <%= image_tag post_comment.get_comment_image, size: "150x100" %><br/>
+                  <%= post_comment.post.area.name %><br/>
+                  <%= link_to admin_post_path(post_comment.post) do %>
+                    投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
+                  <% end %>
+                </div>
+                <div class="col-md-3">
+                  <div class="d-flex" style="height: 30px;">
+                    <div style="width: 100px;"><p>総合評価</p></div>
+                    <div><%= post_comment.all_rate.round(1).to_f %></div>
+                    <div class="star ml-1" data-score="<%= post_comment.all_rate %>"></div>
+                  </div>
+                  <div class="d-flex" style="height: 30px;">
+                    <div style="width: 100px;"><p>雰囲気</p></div>
+                    <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
+                    <div class="star ml-1" data-score="<%= post_comment.atmosphere_rate %>"></div>
+                  </div>
+                  <div class="d-flex" style="height: 30px;">
+                    <div style="width: 100px;"><p>人の少なさ</p></div>
+                    <div><%= post_comment.few_people_rate.round(1).to_f %></div>
+                    <div class="star ml-1" data-score="<%= post_comment.few_people_rate %>"></div>
+                  </div>
+                  <div class="d-flex" style="height: 30px;">
+                    <div style="width: 100px;"><p>定番度</p></div>
+                    <div><%= post_comment.standard_rate.round(1).to_f %></div>
+                    <div class="star ml-1" data-score="<%= post_comment.standard_rate %>"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-5">
+                  <div class="d-flex">
+                    <div><h5><strong><%= post_comment.title %></strong></h5></div>
+                    <div class="ml-5"><a>●投稿日：<%= post_comment.created_at.strftime('%Y/%m/%d') %></a></div>
+                  </div>
+                  <%= post_comment.comment %>
+                </div>
+
+                <div class="floot-right">
+                  <%= link_to "編集", edit_admin_post_post_comment_path(post_comment.customer, post_comment), class: "btn btn-success", style: "height: 40px; margin-left: 5px;" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(function() {
+      $('.tab').click(function(){
+        $('.tab-active').removeClass('tab-active');
+        $(this).addClass('tab-active');
+        $('.box-show').removeClass('box-show');
+        const index = $(this).index();
+        $('.tabbox').eq(index).addClass('box-show');
+      });
+
+    $('.tab').mouseover(function() {
+      var classes = $(this).attr('class').split(" ");
+      if (classes.includes("tab-active") == true) { return; }
+      $(this).addClass('tab-mouseover');
+    });
+
+    $('.tab').mouseout(function() {
+      $(this).removeClass('tab-mouseover');
+    });
+  });
+
+    $('.star').empty();
+    $('.star').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+    });
+  </script>
+
 </div>

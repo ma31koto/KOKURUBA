@@ -1,8 +1,8 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-12 mt-5">
-      <h2><mark class="bg-secondary text-light">スポット投稿</mark></h2>
+    <div class="col-12 mt-5 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-location-dot mr-2"></i>スポット投稿</mark></h2>
     </div>
   </div>
 
@@ -81,7 +81,7 @@
           <div class="col-md-4 post-item"><%= f.label :confession_result, "告白結果"%></div>
           <div class="col-md-6 d-flex post-form">
             <div class="mr-4">
-              <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
+              <%= f.radio_button :confession_result, Post.confession_results.key(0), checked: true %>
               <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
               <i class="fa-solid fa-heart" style="color: red;"></i>
             </div>
@@ -102,14 +102,25 @@
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :atmosphere_rate, "雰囲気"%></div>
+          <div class="col-md-4 post-item">
+            <%= f.label :atmosphere_rate, "雰囲気"%>
+          </div>
           <div class="col-md-6 star_atmosphere_rate post-form">
            <%= f.hidden_field :atmosphere_rate %>
-            <% if @post.errors.include?(:atmosphere_rate) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:atmosphere_rate).first %></p>
-            <% end %>
           </div>
         </div>
+
+        <% if @post.errors.include?(:atmosphere_rate) %>
+          <div class="row d-flex text-left  offset-2">
+            <div class="col-md-4 post-item">
+              <%#= f.label :atmosphere_rate, "雰囲気"%>
+            </div>
+            <div class="col-md-6  post-form">
+             <%#= f.hidden_field :atmosphere_rate %>
+            <p style="color: red;"><%= @post.errors.full_messages_for(:atmosphere_rate).first %></p>
+            </div>
+          </div>
+         <% end %>
 
         <div class="row d-flex text-left  offset-2">
           <div class="col-md-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>

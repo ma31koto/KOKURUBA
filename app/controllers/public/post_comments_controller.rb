@@ -1,4 +1,5 @@
 class Public::PostCommentsController < ApplicationController
+  before_action :authenticate_customer!
   before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
 
   def new
@@ -44,7 +45,8 @@ class Public::PostCommentsController < ApplicationController
   def ensure_correct_customer
     @post_comment = PostComment.find(params[:id])
     unless @post_comment.customer == current_customer
-      redirect_to map_search_posts_path
+      redirect_to customer_path(current_customer)
     end
   end
+
 end

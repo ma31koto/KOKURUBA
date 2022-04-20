@@ -1,9 +1,13 @@
 <div class="container">
-  <div class="row">
-    <div class="col-12 mx-auto mt-5">
-      <h2><mark class="bg-secondary text-light">お気に入り一覧</mark></h2>
 
-      <div class="mt-5">
+  <div class="row">
+    <div class="col-12 mt-5 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-bookmark mr-2"></i>お気に入り一覧</mark></h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mt-5">
         <%= search_form_for(@q, url: favorites_list_posts_path) do |f| %>
           <%= f.label :title, "タイトル" %>
           <%= f.search_field :title_cont, :placeholder =>"例：東京タワー" %>

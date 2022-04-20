@@ -1,8 +1,9 @@
 class Admin::AreasController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @areas = Area.all
     @area = Area.new
-    # binding.pry
   end
 
   def create
@@ -10,13 +11,8 @@ class Admin::AreasController < ApplicationController
     if @area.save
       redirect_to admin_areas_path, notice:'エリア名を作成しました!'
     else
-      # @areas = Area.all
-      # @area = Area.new(area_params)
-      # @area = Area.new
-      # binding.pry
       flash[:danger] = @area.errors.full_messages
 	    redirect_to admin_areas_path
-      # render :index
     end
   end
 

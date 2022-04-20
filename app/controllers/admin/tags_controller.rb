@@ -1,14 +1,17 @@
 class Admin::TagsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @tags = Tag.all
     @tag = Tag.new
   end
 
   def create
-    tag = Tag.new(tag_params)
-    if tag.save
+    @tag = Tag.new(tag_params)
+    if @tag.save
       redirect_to admin_tags_path, notice:'タグ名を作成しました!'
     else
+      flash[:danger] = @tag.errors.full_messages
       redirect_to admin_tags_path
     end
   end
@@ -37,4 +40,5 @@ class Admin::TagsController < ApplicationController
   def tag_params
     params.require(:tag).permit(:name)
   end
+  
 end

@@ -1,4 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho&display=swap');
 
 @charset "UTF-8";
 
@@ -13,6 +15,15 @@ body {
   color: white;
   background-color: black;
 }
+
+.heading-en {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.heading-ja {
+  font-family: 'BIZ UDMincho', serif;
+}
+
 
 .navbar {
   background-color: #333333;
@@ -155,17 +166,9 @@ body {
 .avg_confession_result {
   background-image: url("../images/avg_confession_result.png");
   background-size: cover;
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
 }
-
-// .ranking-tab {
-//   width: 50px;
-//   height: 50px;
-//   margin-left: 10px;
-//   background-color: #9933FF	;
-// }
-
 
 .page-link {
   position: relative;
@@ -209,36 +212,84 @@ body {
 }
 
 .biography{
-    margin: 0;
-    position: relative;
-    padding: 0.5em 1.5em;
-    border-top: solid 1px white;
-    border-bottom: solid 1px white;
-    height: 150px;
-    width: 500px;
+  margin: 0;
+  position: relative;
+  padding: 0.5em 1.5em;
+  border-top: solid 1px #BDB76B;
+  border-bottom: solid 1px #BDB76B;
+  height: 150px;
+  width: 500px;
 }
 .biography:before, .biography:after{
-    content: '';
-    position: absolute;
-    top: -10px;
-    width: 1px;
-    height: -webkit-calc(100% + 20px);
-    height: calc(100% + 20px);
-    background-color: white;
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  height: -webkit-calc(100% + 20px);
+  height: calc(100% + 20px);
+  background-color: #BDB76B;
 }
 .biography:before {left: 10px;}
 .biography:after {right: 10px;}
 .biography p {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .follow-count {
-    padding: 0 1em;
-    margin: 2em 0;
-    color: white;
-    background: #404040;
-    border-left: solid 10px white;
-    width: 150px;
+  padding: 0 1.3em;
+  margin: 2em 0;
+  color: white;
+  background: #404040;
+  border-left: solid 10px white;
+  width: 150px;
 }
 
+.link-black {
+  text-decoration: none;
+  color: black;
+  text-decoration: underline;
+}
+
+.link-black:hover {
+  color: #808000;
+  text-decoration: underline;
+}
+
+.link-white {
+  text-decoration: none;
+  color: white;
+  text-decoration: underline;
+}
+
+.link-white:hover {
+  color: #808000;
+  text-decoration: underline;
+}
+
+.link-gold {
+  text-decoration: none;
+  color: #BDB76B;
+  text-decoration: underline;
+}
+
+.link-gold:hover {
+  color: #808000;
+  text-decoration: underline;
+}
+
+.list-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  justify-content: space-around;
+}
+
+.post-info {
+  border-color: white;
+  border-top: solid 10px;
+  border-left: solid 1px;
+  border-right: solid 1px;
+  border-bottom: solid 1px;
+}

@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_customer!
   before_action :ensure_correct_customer, only: [:edit, :update]
 
   def show
@@ -9,11 +10,9 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-    # binding.pry
     if @customer.update(customer_params)
       redirect_to customer_path(@customer), notice: "会員の情報が更新されました!"
     else
-      # binding.pry
       render :edit
     end
   end
@@ -41,4 +40,5 @@ class Public::CustomersController < ApplicationController
       redirect_to customer_path(current_customer)
     end
   end
+
 end

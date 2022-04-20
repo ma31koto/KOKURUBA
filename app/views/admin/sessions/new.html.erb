@@ -1,29 +1,29 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-10 mx-auto mt-5">
-      <h2><mark class="bg-secondary text-light">管理者ログイン</mark></h2>
-
-      <div class="ml-5">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="mb-2 mt-5">
-            <%= f.label :email, "メールアドレス", class: "col-2" %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"sample@example.com", class: "col-5"%>
-            <% if @admin.errors.include?(:email) %>
-              <p style="color: red;" class="offset-3"><%= @admin.errors.full_messages_for(:email).first %>
-            <% end %>
-          </div>
-          <div class="mb-2">
-            <%= f.label :password, "パスワード", class: "col-2"%>
-            <%= f.password_field :password, autocomplete: "current-password", class: "col-5"%>
-            <% if @admin.errors.include?(:password) %>
-              <p style="color: red;" class="offset-3"><%= @admin.errors.full_messages_for(:password).first %>
-            <% end %>
-          </div>
-
-          <%= f.submit "ログイン", class: "btn btn-primary offset-2"%>
-        <% end %>
-      </div>
-
+    <div class="col-12 mt-5 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>管理者ログイン</mark></h2>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="mb-2 mt-5">
+          <%= f.label :email, "メールアドレス", class: "col-2" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"sample@example.com", size: 30%>
+        </div>
+        <div class="mb-2">
+          <%= f.label :password, "パスワード", class: "col-2"%>
+          <%= f.password_field :password, autocomplete: "current-password", size: 30 %>
+        </div>
+        <% flash.each do |message_type, message| %>
+          <%= content_tag :div, message, class: "message_type offset-2", style: "color: red;" %>
+        <% end %>
+
+        <%= f.submit "ログイン", class: "btn btn-primary offset-2"%>
+      <% end %>
+    </div>
+  </div>
+
 </div>

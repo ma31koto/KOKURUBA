@@ -4,10 +4,10 @@
       <div class="col-2 ml-5 font-weight-bold">
         <%= f.label :name, "タグ名" %>
       </div>
-      <div class="col-2 mr-3">
-        <%= f.text_field :name, placeholder: "タグ名" %>
-        <% if @tag.errors.include?(:name) %>
-          <p style="color: red;"><%= @tag.errors.full_messages_for(:name).first %>
+      <div class="col-3 mr-3">
+        <%= f.text_field :name, placeholder: "タグ名", size: 30 %>
+        <% if flash[:danger].present?  %>
+          <p style="color: red;">名前を入力してください</p>
         <% end %>
       </div>
       <div class="col-2 ml-5">
@@ -22,7 +22,7 @@
       <div class="ml-3">
         <%= f.text_field :name, size: 30 %>
         <% if @tag.errors.include?(:name) %>
-          <p style="color: red;"><%= @tag.errors.full_messages_for(:name).first %>
+          <p style="color: red;"><%= @tag.errors.full_messages_for(:name).first %></p>
         <% end %>
       </div>
       <div class="ml-5">

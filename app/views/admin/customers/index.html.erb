@@ -1,49 +1,52 @@
 <div class="container">
+
   <div class="row">
-    <div class="col-12 mx-auto mt-5">
-      <h2><mark class="bg-secondary text-light">会員一覧</mark></h2>
-
-　　　<div class="mt-2">
-        <table class="table table-light text-body text-center align-middle table-bordered">
-          <thead>
-            <tr class="table-bg-color">
-              <th>ID</th>
-              <th>プロフィール画像</th></th>
-              <th>名前</th>
-              <th>メールアドレス</th>
-              <th>会員ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @customers.each do |customer| %>
-            <tr>
-              <td><%= customer.id %></td>
-              <td>
-                <%= link_to admin_customer_path(customer) do %>
-                  <%= image_tag customer.get_profile_image, size: "50x50" %>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to admin_customer_path(customer) do %>
-                  <%= customer.name %>
-                <% end %>
-              </td>
-              <td><%= customer.email %></td>
-              <td>
-                <%if customer.is_deleted == false %>
-                  <p class="text-success">有効</p>
-                <% else %>
-                  <p class="text-danger">退会</p>
-                <% end %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= paginate @customers %>
-      </div>
-
+    <div class="col-12 mt-5 heading-ja">
+      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>会員一覧</mark></h2>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12 mt-5">
+      <table class="table table-light text-body text-center align-middle table-bordered">
+        <thead>
+          <tr class="table-bg-color">
+            <th>ID</th>
+            <th>プロフィール画像</th></th>
+            <th>名前</th>
+            <th>メールアドレス</th>
+            <th>会員ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @customers.each do |customer| %>
+          <tr>
+            <td class="align-middle"><%= customer.id %></td>
+            <td>
+              <%= link_to admin_customer_path(customer) do %>
+                <%= image_tag customer.get_profile_image, size: "50x50" %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= link_to admin_customer_path(customer), class: "link-black" do %>
+                <%= customer.name %>
+              <% end %>
+            </td>
+            <td class="align-middle"><%= customer.email %></td>
+            <td class="align-middle">
+              <%if customer.is_deleted == false %>
+                <a class="text-success">有効</a>
+              <% else %>
+                <a class="text-danger">退会</a>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @customers %>
+    </div>
+  </div>
+
 </div>
 

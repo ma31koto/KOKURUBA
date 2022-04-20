@@ -58,6 +58,7 @@ ja:
         postal_code: 郵便番号
         address: 住所
         title: タイトル
+        introduction: 説明文
         atmosphere_rate: 雰囲気
         few_people_rate: 人の少なさ
         standard_rate: 定番度
@@ -76,14 +77,6 @@ ja:
         name: 名前
       tag:
         name: 名前
-
-
-
-
-
-
-
-
 
   date:
     abbr_day_names:

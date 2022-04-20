@@ -1,10 +1,10 @@
 並び替え
-<%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-secondary btn-sm rounded-pill ml-1", style: "width:100px;") %>
-<a href="javascript:onSortAllRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
-<a href="javascript:onSortAtmosphereRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
-<a href="javascript:onSortFewPeopleRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1"  style="width:100px;">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
-<a href="javascript:onSortStandardRateRanking()" class="btn btn-secondary btn-sm rounded-pill ml-1"  style="width:100px;">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a>
-<a href="javascript:onSortConfessionRranking()" class="btn btn-secondary btn-sm rounded-pill ml-1" style="width:100px;">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
+<%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-sm rounded-pill ml-1", style: "border: 1px solid #666600; color: white; width:100px;") %>
+<a href="javascript:onSortAllRateRanking()" class="btn btn-sm rounded-pill ml-1" style="border: 1px solid #666600; color: white; width:100px;">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
+<a href="javascript:onSortAtmosphereRateRanking()" class="btn btn-sm rounded-pill ml-1" style="border: 1px solid #666600; color: white; width:100px;">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
+<a href="javascript:onSortFewPeopleRateRanking()" class="btn btn-sm rounded-pill ml-1"  style="border: 1px solid #666600; color: white; width:100px;">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
+<a href="javascript:onSortStandardRateRanking()" class="btn btn-sm rounded-pill ml-1"  style="border: 1px solid #666600; color: white; width:100px;">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a>
+<a href="javascript:onSortConfessionRranking()" class="btn btn-sm rounded-pill ml-1" style="border: 1px solid #666600; color: white; width:100px;">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
 
 <div class="mx-auto mt-5">
   <table class="table-bordered index-table">
@@ -25,7 +25,7 @@
       <% posts.each do |post| %>
       <tr>
         <td>
-          <%= link_to post_path(post) do %>
+          <%= link_to post_path(post), class: "link-white" do %>
             <%= image_tag post.get_spot_image, size: "150x100" %></br>
             <%= post.title %>
           <% end %>
