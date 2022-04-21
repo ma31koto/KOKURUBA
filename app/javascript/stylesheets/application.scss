@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
 
 @charset "UTF-8";
 
@@ -44,7 +45,7 @@ body {
   background-image: url("../images/home_top.png");
   background-size: cover;
   width: 1000px;
-  height: 500px;
+  height: 550px;
 }
 
 .admin_customer_list {
@@ -93,7 +94,6 @@ body {
   transition: background-color 0.5s;
 }
 
-
 .tabbox {
   display: none;
   padding: 15px;
@@ -104,19 +104,36 @@ body {
 }
 
 .table-bordered thead th {
-  border: 1.5px solid #808000;
+  border: 1px solid #808000;
 }
 
 .table-bordered tbody td {
-  border: 1.5px solid #808000;
+  border: 1px solid #808000;
 }
 
 .table-bordered th {
-  border: 1.5px solid #808000;
+  border: 1px solid #808000;
 }
 
 .table-bordered td {
-  border: 1.5px solid #808000;
+  border: 1px solid #808000;
+  padding: 10px;
+}
+
+.table-bordered-show thead th {
+  border: 1px solid #C0C0C0;
+}
+
+.table-bordered-show tbody td {
+  border: 1px solid #C0C0C0;
+}
+
+.table-bordered-show th {
+  border: 1px solid #C0C0C0;
+}
+
+.table-bordered-show td {
+  border: 1px solid #C0C0C0;
   padding: 10px;
 }
 
@@ -202,14 +219,25 @@ body {
 .post-item {
   background-color: #262626;
   padding: 10px;
-  margin-bottom: 3px;
+  margin-top: 3px;
 }
 
 .post-form {
   background-color: #404040;
   padding: 10px;
-  margin-bottom: 3px;
+  margin-top: 3px;
 }
+
+.post-item-error {
+  background-color: #262626;
+  padding: 10px;
+}
+
+.post-form-error {
+  background-color: #404040;
+  padding: 10px;
+}
+
 
 .biography{
   margin: 0;
@@ -281,9 +309,9 @@ body {
 .list-row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  padding: 10px;
   justify-content: space-around;
+  border-bottom: 1px solid #808000;
 }
 
 .post-info {
@@ -292,4 +320,8 @@ body {
   border-left: solid 1px;
   border-right: solid 1px;
   border-bottom: solid 1px;
+}
+
+.home {
+  font-family: 'Shippori Mincho', serif;
 }

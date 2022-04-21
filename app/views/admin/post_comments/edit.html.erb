@@ -59,7 +59,7 @@
             <div class="col-md-6 post-form">
               <%= f.text_field :title, :placeholder =>"例)クリスマスシーズンの東京タワー", size: 50 %>
               <% if @post_comment.errors.include?(:title) %>
-                <p style="color: red;"><%= @post_comment.errors.full_messages_for(:title).first %></p>
+                <a style="color: red;"><%= @post_comment.errors.full_messages_for(:title).first %></a>
               <% end %>
             </div>
           </div>
@@ -68,7 +68,7 @@
             <div class="col-md-6 post-form">
               <%= f.text_area :comment, :placeholder =>"例)クリスマスシーズンの東京タワーは色がクリスマスカラーに変わります！", size: "50x3" %>
               <% if @post_comment.errors.include?(:comment) %>
-                <p style="color: red;"><%= @post_comment.errors.full_messages_for(:comment).first %></p>
+                <a style="color: red;"><%= @post_comment.errors.full_messages_for(:comment).first %></a>
               <% end %>
             </div>
           </div>
@@ -99,7 +99,7 @@
               </div>
             </div>
             <% if @post_comment.errors.include?(:confession_result) %>
-              <p style="color: red;"><%= @post_comment.errors.full_messages_for(:confession_result).first %></p>
+              <a style="color: red;"><%= @post_comment.errors.full_messages_for(:confession_result).first %></a>
             <% end %>
           </div>
 
@@ -107,9 +107,6 @@
             <div class="col-md-4 post-item"><%= f.label :atmosphere_rate, "雰囲気" %></div>
             <div class="col-md-6 star_atmosphere_rate post-form" data-score="<%= @post_comment.atmosphere_rate %>">
                 <%= f.hidden_field :atmosphere_rate %>
-              <% if @post_comment.errors.include?(:atmosphere_rate) %>
-                <p style="color: red;"><%= @post_comment.errors.full_messages_for(:atmosphere_rate).first %></p>
-              <% end %>
             </div>
           </div>
 
@@ -117,9 +114,6 @@
             <div class="col-md-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
             <div class="col-md-6 star_few_people_rate post-form" data-score="<%= @post_comment.few_people_rate %>">
               <%= f.hidden_field :few_people_rate %>
-              <% if @post_comment.errors.include?(:few_people_rate) %>
-                <p style="color: red;"><%= @post_comment.errors.full_messages_for(:few_people_rate).first %></p>
-              <% end %>
             </div>
           </div>
 
@@ -127,9 +121,6 @@
             <div class="col-md-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
             <div class="col-md-6 star_standard_rate post-form" data-score="<%= @post_comment.standard_rate %>">
               <%= f.hidden_field :standard_rate %>
-              <% if @post_comment.errors.include?(:standard_rate) %>
-                <p style="color: red;"><%= @post_comment.errors.full_messages_for(:standard_rate).first %></p>
-              <% end %>
             </div>
           </div>
 
@@ -137,9 +128,6 @@
             <div class="col-md-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
             <div class="col-md-6 star_all_rate post-form" data-score="<%= @post_comment.all_rate %>">
               <%= f.hidden_field :all_rate %>
-              <% if @post_comment.errors.include?(:all_rate) %>
-                <p style="color: red;"><%= @post_comment.errors.full_messages_for(:all_rate).first %></p>
-              <% end %>
             </div>
           </div>
 

@@ -1,13 +1,17 @@
 <div class="container mt-5 text-center">
   <div class="row">
-    <div class="col-11 mx-auto">
+    <div class="col-12 mx-auto">
 
-      <div class="home-top-image">
-        <h1 class="display-1" style="padding-top:150px;">KOKURUBA</h1>
-        <h3>  告る場　〜TOKYO〜</h3>
-        <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-success mt-3" %>
-        <%= link_to "ログイン", new_customer_session_path, class: "btn btn-primary  mt-3 mr-3 ml-3" %>
-        <%= link_to "サービス紹介",  homes_about_path, class: "btn btn-warning  mt-3" %>
+      <div class="home-top-image ml-5">
+        <h1 class="display-1 home" style="padding-top:150px;">KOKURUBA</h1>
+        <div class="d-flex home justify-content-center" style="background-color: rgba(0,0,0,0.6);">
+          <div class="mr-5"><h3>告る場</h3></div>
+          <div><h3>〜TOKYO〜</h3></div>
+        </div>
+
+        <%= link_to "新規登録", new_customer_registration_path, class: "col-2 btn btn-success mt-3 font-weight-bold" %>
+        <%= link_to "ログイン", new_customer_session_path, class: "col-2 btn btn-primary  mt-3 mr-3 ml-3 font-weight-bold" %>
+        <%= link_to "サービス紹介",  homes_about_path, class: "col-2 btn btn-warning  mt-3 font-weight-bold" %>
       </div>
 
     </div>

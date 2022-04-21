@@ -45,7 +45,7 @@
           <div class="col-md-6 post-form">
             <%= f.text_field :title, :placeholder =>"例：東京タワー", size:50 %>
             <% if @post.errors.include?(:title) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:title).first %></p>
+              <a style="color: red;"><%= @post.errors.full_messages_for(:title).first %></a>
             <% end %>
           </div>
         </div>
@@ -54,7 +54,7 @@
           <div class="col-md-6 post-form">
             <%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x5" %>
             <% if @post.errors.include?(:introduction) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:introduction).first %></p>
+              <a style="color: red;"><%= @post.errors.full_messages_for(:introduction).first %></a>
             <% end %>
           </div>
         </div>
@@ -63,7 +63,7 @@
           <div class="col-md-6 post-form">
             <%= f.text_field :postal_code, :placeholder =>"自動入力",id: "postal_code", size: 50 %>
             <% if @post.errors.include?(:postal_code) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:postal_code).first %></p>
+              <a style="color: red;"><%= @post.errors.full_messages_for(:postal_code).first %></a>
             <% end %>
           </div>
         </div>
@@ -72,7 +72,7 @@
           <div class="col-md-6 post-form">
             <%= f.text_field :address, :placeholder =>"自動入力", id: "input_address", size: 50 %>
             <% if @post.errors.include?(:address) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:address).first %></p>
+              <a style="color: red;"><%= @post.errors.full_messages_for(:address).first %></a>
             <% end %>
           </div>
         </div>
@@ -81,7 +81,7 @@
           <div class="col-md-6 post-form">
             <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %>
             <% if @post.errors.include?(:area_id) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></p>
+              <a style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></a>
             <% end %>
           </div>
         </div>
@@ -117,7 +117,7 @@
               <i class="fa-solid fa-chess-knight" style="color: red;"></i>
             </div>
           <% if @post.errors.include?(:confession_result) %>
-            <p style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:confession_result).first %></p>
+            <a style="color: red;" class="offset-4"><%= @post.errors.full_messages_for(:confession_result).first %></a>
           <% end %>
           </div>
         </div>
@@ -126,9 +126,6 @@
           <div class="col-md-4 post-item"><%= f.label :atmosphere_rate, "雰囲気"%></div>
           <div class="col-md-6 star_atmosphere_rate post-form" data-score="<%= @post.atmosphere_rate %>">
            <%= f.hidden_field :atmosphere_rate %>
-            <% if @post.errors.include?(:atmosphere_rate) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:atmosphere_rate).first %></p>
-            <% end %>
           </div>
         </div>
 
@@ -136,9 +133,6 @@
           <div class="col-md-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
           <div class="col-md-6 star_few_people_rate post-form" data-score="<%= @post.few_people_rate %>">
             <%= f.hidden_field :few_people_rate %>
-            <% if @post.errors.include?(:few_people_rate) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:few_people_rate).first %></p>
-            <% end %>
           </div>
         </div>
 
@@ -146,9 +140,6 @@
           <div class="col-md-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
           <div class="col-md-6 star_standard_rate post-form" data-score="<%= @post.standard_rate %>">
             <%= f.hidden_field :standard_rate %>
-            <% if @post.errors.include?(:standard_rate) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:standard_rate).first %></p>
-            <% end %>
           </div>
         </div>
 
@@ -156,9 +147,6 @@
           <div class="col-md-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
           <div class="col-md-6 star_all_rate post-form" data-score="<%= @post.all_rate %>">
             <%= f.hidden_field :all_rate %>
-            <% if @post.errors.include?(:all_rate) %>
-              <p style="color: red;"><%= @post.errors.full_messages_for(:all_rate).first %></p>
-            <% end %>
           </div>
         </div>
 
