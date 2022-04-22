@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-12 mt-5 heading-ja">
+    <div class="col-12 mt-5 heading-ja">
       <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>スポット/コメント投稿一覧</mark></h2>
     </div>
   </div>
@@ -20,11 +20,11 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-12">
       <div class="mt-5 ml-4 customer-list">
         <ul class="tab-list">
-          <li class="tab box-active">スポット一覧　<%= @customer.posts.count %>件</li>
-          <li class="tab">コメント一覧　<%= @customer.post_comments.count %>件</li>
+          <li class="tab box-active"><span class="mr-3">スポット一覧</span><%= @customer.posts.count %>件</li>
+          <li class="tab"><span class="mr-3">コメント一覧</span><%= @customer.post_comments.count %>件</li>
         </ul>
 
         <div class="tabbox-contents">
@@ -82,14 +82,14 @@
           <div class="tabbox">
             <% @post_comments.each do |post_comment| %>
               <div class="row list-row">
-                <div style="col-md-3">
+                <div style="col-3">
                   <%= image_tag post_comment.get_comment_image, size: "150x100" %><br/>
                   <%= post_comment.post.area.name %><br/>
                   <%= link_to admin_post_path(post_comment.post) do %>
                     投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
                   <% end %>
                 </div>
-                <div class="col-md-3" style="border-left: 1px dotted #808000;">
+                <div class="col-3" style="border-left: 1px dotted #808000;">
                   <div class="d-flex" style="height: 30px;">
                     <div style="width: 100px;"><p>総合評価</p></div>
                     <div><%= post_comment.all_rate.round(1).to_f %></div>
@@ -140,6 +140,7 @@
   </div>
 
   <script>
+    // タブメニュー機能
     $(function() {
       $('.tab').click(function(){
         $('.tab-active').removeClass('tab-active');
@@ -160,6 +161,7 @@
     });
   });
 
+　　// 評価機能
     $('.star').empty();
     $('.star').raty({
       size: 36,

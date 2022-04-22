@@ -27,15 +27,20 @@ class Post < ApplicationRecord
     (spot_image.attached?) ? spot_image : 'no_image.jpg'
   end
 
+  # タグ追加機能
   def save_tag(sent_tags)
+    # タグが存在していれば、タグの名前を配列として全て取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    # 現在取得したタグから送られてきたタグを除いてoldtagとする
     old_tags = current_tags - sent_tags
+    # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
     new_tags = sent_tags - current_tags
 
+    # 古いタグを消す
     old_tags.each do |old|
       self.tags.delete Tag.find_by(name: old)
     end
-
+    # 新しいタグを保存
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
@@ -46,17 +51,18 @@ class Post < ApplicationRecord
     favorites.where(customer_id: customer.id).exists?
   end
 
+  # 告白成功率の計算
   def avg_confession_result
-    # 告白の成功率を定義
     # 分子：numerator
     # 分母：enominator
+
     post_numerator = 0
     post_denominator = 0
 
     all_numerator = 0
     all_denominator = 0
 
-
+　　# 全体分子に対する、post投稿主の告白結果の数値変換
     if self.confession_result == "yes"
       post_numerator = 1
     elsif self.confession_result == "no"
@@ -64,7 +70,7 @@ class Post < ApplicationRecord
     elsif self.confession_result == "no_answer"
       post_numerator = 0
     end
-
+　　# 全体分母に対する、post投稿主の告白結果の数値変換
     if self.confession_result == "yes"
       post_denominator = 1
     elsif self.confession_result == "no"
@@ -73,11 +79,12 @@ class Post < ApplicationRecord
       post_denominator = 0
     end
 
-
+　　# 全体分子の計算
     all_numerator = post_numerator +  post_comments.where(confession_result: 0).count
+    # 全体分母の計算
     all_denominator = post_denominator +  post_comments.where(confession_result: 0).or(post_comments.where(confession_result: 1)).count
 
-
+　　# 全体分母が０の時、計算をしないものとする
     if all_denominator == 0
       return false
     elsif all_denominator > 0
@@ -85,6 +92,7 @@ class Post < ApplicationRecord
     end
   end
 
+　# 告白成功率のランキング検索の際、未回答を−１と定義
   def avg_confession_result_num
     if avg_confession_result == false
       return -1
@@ -93,6 +101,7 @@ class Post < ApplicationRecord
     end
   end
 
+　# スポットの平均評価
   def avg_atmosphere_rate
     (self.atmosphere_rate + self.post_comments.sum(:atmosphere_rate)).to_f/(1 + self.post_comments.count).to_f
   end
@@ -109,6 +118,7 @@ class Post < ApplicationRecord
     (self.all_rate + self.post_comments.sum(:all_rate)).to_f/(1 + self.post_comments.count).to_f
   end
 
+　# 以下ランキング検索機能
   def self.avg_confession_result_ranking(sort,posts)
     if sort == 'asc'
       posts.sort { |a, b| b.avg_confession_result_num <=> a.avg_confession_result_num }

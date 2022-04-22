@@ -24,7 +24,7 @@
           <%= f.submit "検索" %>
         <% end %>
 
-        並び替え
+        <a>並び替え</a>
         <%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-sm rounded-pill ml-1", style: "border: 2px solid #666600; color: white; width:110px;") %>
         <a href="javascript:onSortAllRateRanking()" class="btn btn-sm rounded-pill ml-1" style="border: 2px solid #666600; color: white; width:110px;">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
         <a href="javascript:onSortAtmosphereRateRanking()" class="btn btn-sm rounded-pill ml-1" style="border: 2px solid #666600; color: white; width:110px;">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
@@ -100,6 +100,7 @@
       </div>
 
       <script>
+        // 評価機能
         $('.star').empty();
         $('.star').raty({
           size: 20,
@@ -110,6 +111,7 @@
           readOnly: true,
         });
 
+　　　　　//ランキング機能
           $('#confession_desc').hide();
           $('#confession_asc').hide();
           <% if params[:confession_ranking] =='asc' %>

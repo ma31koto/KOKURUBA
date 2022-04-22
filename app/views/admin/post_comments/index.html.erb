@@ -16,7 +16,7 @@
         <%= f.submit "検索" %>
       <% end %>
 
-      並び替え
+      <a>並び替え</a>
       <%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-sm rounded-pill ml-1", style: "border: 2px solid #666600; color: white; width:110px;") %>
       <%= sort_link(@q, :all_rate, "総合評価", default_order: :desc, class: "btn btn-sm rounded-pill ml-1", style: "border: 2px solid #666600; color: white; width:110px;") %>
       <%= sort_link(@q, :atmosphere_rate, "雰囲気", default_order: :desc, class: "btn btn-sm rounded-pill ml-1", style: "border: 2px solid #666600; color: white; width:110px;") %>
@@ -94,6 +94,7 @@
   </div>
 
   <script>
+    // 評価機能
     $('.star').empty();
     $('.star').raty({
       size: 20,

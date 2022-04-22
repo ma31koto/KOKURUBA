@@ -5,7 +5,8 @@ class Public::FavoritesController < ApplicationController
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
     @q = Post.where(id: favorites).ransack(params[:q])
     @posts = @q.result(distinct: true).page(params[:page]).per(8)
-
+　　
+　　# ランキング検索機能
     if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
       @posts_pre = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
       @posts = Kaminari.paginate_array(@posts_pre).page(params[:page]).per(8)

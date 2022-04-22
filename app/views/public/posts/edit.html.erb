@@ -21,8 +21,8 @@
       <%= form_with model:@post, url: post_path(@post), method: :patch, local: true do |f| %>
 
         <div class="row text-left offset-2">
-          <div class="col-md-4 post-item"><%= f.label :title, "タイトル" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :title, "タイトル" %></div>
+          <div class="col-6 post-form">
             <%= f.text_field :title, :placeholder =>"例：東京タワー", size:50 %>
             <% if @post.errors.include?(:title) %>
               <a style="color: red;"><%= @post.errors.full_messages_for(:title).first %></a>
@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :introduction, "説明文" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :introduction, "説明文" %></div>
+          <div class="col-6 post-form">
             <%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x5" %>
             <% if @post.errors.include?(:introduction) %>
               <a style="color: red;"><%= @post.errors.full_messages_for(:introduction).first %></a>
@@ -39,8 +39,8 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :postal_code, "郵便番号" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :postal_code, "郵便番号" %></div>
+          <div class="col-6 post-form">
             <%= f.text_field :postal_code, :placeholder =>"自動入力",id: "postal_code", size: 50 %>
             <% if @post.errors.include?(:postal_code) %>
               <a style="color: red;"><%= @post.errors.full_messages_for(:postal_code).first %></a>
@@ -48,8 +48,8 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :address, "住所" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :address, "住所" %></div>
+          <div class="col-6 post-form">
             <%= f.text_field :address, :placeholder =>"自動入力", id: "input_address", size: 50 %>
             <% if @post.errors.include?(:address) %>
               <a style="color: red;"><%= @post.errors.full_messages_for(:address).first %></a>
@@ -57,8 +57,8 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :area_id, "エリア" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :area_id, "エリア" %></div>
+          <div class="col-6 post-form">
             <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %>
             <% if @post.errors.include?(:area_id) %>
               <a style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></a>
@@ -66,21 +66,21 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :spot_image, "スポット画像" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :spot_image, "スポット画像" %></div>
+          <div class="col-6 post-form">
             <%= f.file_field :spot_image, accept: "image/*" %>
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :name,"タグ (,区切りで複数タグ登録可能)" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :name,"タグ (,区切りで複数タグ登録可能)" %></div>
+          <div class="col-6 post-form">
             <%= f.text_field :name, :placeholder =>"例：夜景,イルミネーション", :value => @tag_list, size: 50 %>
           </div>
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :confession_result, "告白結果"%></div>
-          <div class="col-md-6 d-flex post-form">
+          <div class="col-4 post-item"><%= f.label :confession_result, "告白結果"%></div>
+          <div class="col-6 d-flex post-form">
             <div class="mr-4">
               <%= f.radio_button :confession_result, Post.confession_results.key(0) %>
               <%= f.label :confession_result, Post.confession_results_i18n[:yes] %>
@@ -103,29 +103,29 @@
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :atmosphere_rate, "雰囲気"%></div>
-          <div class="col-md-6 star_atmosphere_rate post-form" data-score="<%= @post.atmosphere_rate %>">
+          <div class="col-4 post-item"><%= f.label :atmosphere_rate, "雰囲気"%></div>
+          <div class="col-6 star_atmosphere_rate post-form" data-score="<%= @post.atmosphere_rate %>">
            <%= f.hidden_field :atmosphere_rate %>
           </div>
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
-          <div class="col-md-6 star_few_people_rate post-form" data-score="<%= @post.few_people_rate %>">
+          <div class="col-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
+          <div class="col-6 star_few_people_rate post-form" data-score="<%= @post.few_people_rate %>">
             <%= f.hidden_field :few_people_rate %>
           </div>
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
-          <div class="col-md-6 star_standard_rate post-form" data-score="<%= @post.standard_rate %>">
+          <div class="col-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
+          <div class="col-6 star_standard_rate post-form" data-score="<%= @post.standard_rate %>">
             <%= f.hidden_field :standard_rate %>
           </div>
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
-          <div class="col-md-6 star_all_rate post-form" data-score="<%= @post.all_rate %>">
+          <div class="col-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
+          <div class="col-6 star_all_rate post-form" data-score="<%= @post.all_rate %>">
             <%= f.hidden_field :all_rate %>
           </div>
         </div>
@@ -175,7 +175,7 @@
     function initMap() {
       geocoder = new google.maps.Geocoder()
       marker = new google.maps.Marker();
-     // mapの初期位置, 縮尺を定義
+      // mapの初期位置, 縮尺を定義
       map_edit = new google.maps.Map(document.getElementById('map_edit'), {
         center: {lat: <%= @post.latitude %>,lng: <%= @post.longitude %>},
         zoom: 12,
@@ -225,7 +225,7 @@
           if (status == 'OK') {
             map_edit.setCenter(results[0].geometry.location);
 
-            // 再検索でピンを消す
+            // 再検索で前回のピンを消す
             marker.setMap(null);
             marker = new google.maps.Marker({
               map: map_edit,

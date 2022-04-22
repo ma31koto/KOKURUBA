@@ -19,8 +19,8 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :comment, "コメント" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :comment, "コメント" %></div>
+          <div class="col-6 post-form">
             <%= f.text_area :comment, :placeholder =>"例)クリスマスシーズンの東京タワーは色がクリスマスカラーに変わります！", size: "50x3" %>
             <% if @post_comment.errors.include?(:comment) %>
               <a style="color: red;"><%= @post_comment.errors.full_messages_for(:comment).first %></a>
@@ -28,15 +28,15 @@
           </div>
         </div>
         <div class="row text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :comment_image, "コメント画像" %></div>
-          <div class="col-md-6 post-form">
+          <div class="col-4 post-item"><%= f.label :comment_image, "コメント画像" %></div>
+          <div class="col-6 post-form">
             <%= f.file_field :comment_image, accept: "image/*" %>
           </div>
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :confession_result, "告白結果" %></div>
-          <div class="col-md-6 d-flex post-form">
+          <div class="col-4 post-item"><%= f.label :confession_result, "告白結果" %></div>
+          <div class="col-6 d-flex post-form">
             <div class="mr-4">
               <%= f.radio_button :confession_result, PostComment.confession_results.key(0), checked: true %>
               <%= f.label :confession_result, PostComment.confession_results_i18n[:yes] %>
@@ -59,60 +59,60 @@
         </div>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :atmosphere_rate, "雰囲気" %></div>
-          <div class="col-md-6 star_atmosphere_rate post-form">
+          <div class="col-4 post-item"><%= f.label :atmosphere_rate, "雰囲気" %></div>
+          <div class="col-6 star_atmosphere_rate post-form">
             <%= f.hidden_field :atmosphere_rate %>
           </div>
         </div>
         <% if @post_comment.errors.include?(:atmosphere_rate) %>
           <div class="row d-flex text-left  offset-2">
-            <div class="col-md-4 post-item-error"></div>
-            <div class="col-md-6  post-form-error">
+            <div class="col-4 post-item-error"></div>
+            <div class="col-6  post-form-error">
               <a style="color: red;"><%= @post_comment.errors.full_messages_for(:atmosphere_rate).first %></a>
             </div>
           </div>
         <% end %>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
-          <div class="col-md-6 star_few_people_rate post-form">
+          <div class="col-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
+          <div class="col-6 star_few_people_rate post-form">
             <%= f.hidden_field :few_people_rate %>
           </div>
         </div>
         <% if @post_comment.errors.include?(:few_people_rate) %>
           <div class="row d-flex text-left  offset-2">
-            <div class="col-md-4 post-item-error"></div>
-            <div class="col-md-6  post-form-error">
+            <div class="col-4 post-item-error"></div>
+            <div class="col-6  post-form-error">
               <a style="color: red;"><%= @post_comment.errors.full_messages_for(:few_people_rate).first %></a>
             </div>
           </div>
         <% end %>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
-          <div class="col-md-6 star_standard_rate post-form">
+          <div class="col-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
+          <div class="col-6 star_standard_rate post-form">
             <%= f.hidden_field :standard_rate %>
           </div>
         </div>
         <% if @post_comment.errors.include?(:standard_rate) %>
           <div class="row d-flex text-left  offset-2">
-            <div class="col-md-4 post-item-error"></div>
-            <div class="col-md-6  post-form-error">
+            <div class="col-4 post-item-error"></div>
+            <div class="col-6  post-form-error">
               <a style="color: red;"><%= @post_comment.errors.full_messages_for(:standard_rate).first %></a>
             </div>
           </div>
         <% end %>
 
         <div class="row d-flex text-left  offset-2">
-          <div class="col-md-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
-          <div class="col-md-6 star_all_rate post-form">
+          <div class="col-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
+          <div class="col-6 star_all_rate post-form">
             <%= f.hidden_field :all_rate %>
           </div>
         </div>
         <% if @post_comment.errors.include?(:all_rate) %>
           <div class="row d-flex text-left  offset-2">
-            <div class="col-md-4 post-item-error"></div>
-            <div class="col-md-6  post-form-error">
+            <div class="col-4 post-item-error"></div>
+            <div class="col-6  post-form-error">
               <a style="color: red;"><%= @post_comment.errors.full_messages_for(:all_rate).first %></a>
             </div>
           </div>
@@ -126,6 +126,7 @@
   </div>
 
   <script>
+    // 評価機能
     <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
       $('.star_<%= rate %>').empty();
       $('.star_<%= rate %>').raty({

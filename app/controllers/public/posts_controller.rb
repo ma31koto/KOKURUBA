@@ -10,6 +10,7 @@ class Public::PostsController < ApplicationController
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true)
 
+　　# ランキング検索機能
     if params[:confession_ranking] == 'asc' || params[:confession_ranking] == 'desc'
       @posts_pre = Post.avg_confession_result_ranking(params[:confession_ranking],@posts)
       @posts = Kaminari.paginate_array(@posts_pre).page(params[:page]).per(8)
@@ -47,6 +48,7 @@ class Public::PostsController < ApplicationController
     @post.customer_id = current_customer.id
     tag_list = params[:post][:name].split(',')
     if @post.save
+      # タグの登録
       @post.save_tag(tag_list)
       redirect_to post_path(@post), notice:'スポットを投稿完了しました!'
     else
@@ -63,6 +65,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
+      # タグの登録
        @post.save_tag(tag_list)
        redirect_to post_path(@post), notice:'スポット投稿を変更しました!'
     else
