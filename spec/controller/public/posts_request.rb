@@ -43,6 +43,16 @@ RSpec.describe "Posts", type: :request do
         post "/posts", :params => { :post => { :title => "test", :body => "test", :user_id => 1 } } # どうすればいい？
         expect(response).to have_http_status(200)
       end
+      t "ログインユーザーの場合" do
+        sign_in @customer
+        post "/posts", :params => { :post => { :title => nil, :body => "test", :user_id => 1 } } # どうすればいい？
+        expect(response).to 
+      end
+      
+      
+      
+      
+      
       it "ゲストユーザーの場合" do
         post "/posts"
         expect(response).to have_http_status(401)

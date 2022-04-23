@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Area, type: :model do
   describe "データの保存" do
     subject { area.valid? }
-
     let(:area) { create(:area) }
 
     it "有効なデータの保存" do

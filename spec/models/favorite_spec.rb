@@ -4,9 +4,11 @@ RSpec.describe Favorite, type: :model do
   describe "データの保存" do
     subject { favorite.valid? }
 
-    let(:customer) { create(:customer) }
-    let!(:post) { build(:post, member_id: member.id) }
-    let!(:favorite) { build(:favorite, question_id: question.id, member_id: member.id) }
+    let(:favorite) { build(:favorite) }
+
+    it "有効なデータの保存" do
+      expect(FactoryBot.build(:favorite)).to be_valid
+    end
 
     context "空白のバリデーション" do
       it "post_idがない場合" do

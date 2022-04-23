@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Customer, type: :model do
   describe "データの保存" do
     subject { customer.valid? }
-
-    # let!(:other_customer) { create(:customer) }
     let(:customer) { build(:customer) }
 
     context "データの保存" do
@@ -73,5 +71,18 @@ RSpec.describe Customer, type: :model do
         expect(Customer.reflect_on_association(:favorites).macro).to eq :has_many
       end
     end
+
+    context 'customer(followers)モデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:followers).macro).to eq :has_many
+      end
+    end
+
+    context 'customer(followings)モデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:followings).macro).to eq :has_many
+      end
+    end
+
   end
 end

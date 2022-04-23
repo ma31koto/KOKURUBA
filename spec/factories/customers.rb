@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :customer do
     name { Faker::Lorem.characters(number: 5) }
     gender { "man" }
-    age { 27 }
+    age { Faker::Number.binary(digits: 2) }
     email { Faker::Internet.email }
     password { "password" }
     password_confirmation { "password" }
