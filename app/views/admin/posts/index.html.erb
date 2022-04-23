@@ -16,6 +16,7 @@
           <i class="fa-solid fa-x ml-1 mr-1"></i>
           <%= f.label :tag, "タグ名" %>
           <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"例：夜景" %>
+          <%= hidden_field_tag(:new_ranking) %>
           <%= hidden_field_tag(:confession_ranking) %>
           <%= hidden_field_tag(:all_rate_ranking) %>
           <%= hidden_field_tag(:atmosphere_rate_ranking) %>
@@ -25,12 +26,59 @@
         <% end %>
 
         <a>並び替え</a>
-        <%= sort_link(@q, :created_at, "新着", default_order: :desc, class: "btn btn-sm rounded-pill ml-1", style: "border: 2px solid #666600; color: white; width:110px;") %>
-        <a href="javascript:onSortAllRateRanking()" class="btn btn-sm rounded-pill ml-1" style="border: 2px solid #666600; color: white; width:110px;">総合評価<span id="all_rate_asc" style="display:none">▼</span><span id="all_rate_desc" style="display:none">▲</span></a>
-        <a href="javascript:onSortAtmosphereRateRanking()" class="btn btn-sm rounded-pill ml-1" style="border: 2px solid #666600; color: white; width:110px;">雰囲気<span id="atmosphere_rate_asc" style="display:none">▼</span><span id="atmosphere_rate_desc" style="display:none">▲</span></a>
-        <a href="javascript:onSortFewPeopleRateRanking()" class="btn btn-sm rounded-pill ml-1"  style="border: 2px solid #666600; color: white; width:110px;">人の少なさ<span id="few_people_rate_asc" style="display:none">▼</span><span id="few_people_rate_desc" style="display:none">▲</span></a>
-        <a href="javascript:onSortStandardRateRanking()" class="btn btn-sm rounded-pill ml-1"  style="border: 2px solid #666600; color: white; width:110px;">定番度<span id="standard_rate_asc" style="display:none">▼</span><span id="standard_rate_desc" style="display:none">▲</span></a>
-        <a href="javascript:onSortConfessionRranking()" class="btn btn-sm rounded-pill ml-1" style="border: 2px solid #666600; color: white; width:110px;">告白成功率<span id="confession_asc" style="display:none">▼</span><span id="confession_desc" style="display:none">▲</span></a>
+        <a href="javascript:onSortButton('new_ranking', '<%= params[:new_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
+          新着
+          <% if params[:new_ranking] =='asc' %>
+            <span>▲</span>
+          <% elsif params[:new_ranking] =='desc' %>
+            <span>▼</span>
+          <% end %>
+        </a>
+
+        <a href="javascript:onSortButton('all_rate_ranking', '<%= params[:all_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
+          総合評価
+          <% if params[:all_rate_ranking] =='asc' %>
+            <span>▲</span>
+          <% elsif params[:all_rate_ranking] =='desc' %>
+            <span>▼</span>
+          <% end %>
+        </a>
+
+        <a href="javascript:onSortButton('atmosphere_rate_ranking', '<%= params[:atmosphere_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
+          雰囲気
+          <% if params[:atmosphere_rate_ranking] =='asc' %>
+            <span>▲</span>
+          <% elsif params[:atmosphere_rate_ranking] =='desc' %>
+            <span>▼</span>
+          <% end %>
+        </a>
+
+        <a href="javascript:onSortButton('few_people_rate_ranking', '<%= params[:few_people_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
+          人の少なさ
+          <% if params[:few_people_rate_ranking] =='asc' %>
+            <span>▲</span>
+          <% elsif params[:few_people_rate_ranking] =='desc' %>
+            <span>▼</span>
+          <% end %>
+        </a>
+
+        <a href="javascript:onSortButton('standard_rate_ranking', '<%= params[:standard_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
+          定番度
+          <% if params[:standard_rate_ranking] =='asc' %>
+            <span>▲</span>
+          <% elsif params[:standard_rate_ranking] =='desc' %>
+            <span>▼</span>
+          <% end %>
+        </a>
+
+        <a href="javascript:onSortButton('confession_ranking', '<%= params[:confession_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
+          告白成功率
+          <% if params[:confession_ranking] =='asc' %>
+            <span>▲</span>
+          <% elsif params[:confession_ranking] =='desc' %>
+            <span>▼</span>
+          <% end %>
+        </a>
 
         <div class="mx-auto mt-5">
           <table class="table-bordered">
@@ -96,138 +144,34 @@
           </table>
           <%= paginate @posts %>
         </div>
-
       </div>
-
-      <script>
-        // 評価機能
-        $('.star').empty();
-        $('.star').raty({
-          size: 20,
-          starOff:  '<%= asset_path('star-off.png') %>',
-          starOn : '<%= asset_path('star-on.png') %>',
-          starHalf: '<%= asset_path('star-half.png') %>',
-          half: true,
-          readOnly: true,
-        });
-
-　　　　　//ランキング機能
-          $('#confession_desc').hide();
-          $('#confession_asc').hide();
-          <% if params[:confession_ranking] =='asc' %>
-            $('#confession_asc').show();
-          <% elsif params[:confession_ranking] == 'desc' %>
-            $('#confession_desc').show();
-          <% end %>
-          $('.sort_link').each( function(i,elem){
-            var str = $(elem).attr('href').replace('confession_ranking=','');
-            $(elem).attr('href',str);
-            console.log($(elem).attr('href'))
-          })
-
-          $('#all_rate_desc').hide();
-          $('#all_rate_asc').hide();
-          <% if params[:all_rate_ranking] =='asc' %>
-            $('#all_rate_asc').show();
-          <% elsif params[:all_rate_ranking] == 'desc' %>
-            $('#all_rate_desc').show();
-          <% end %>
-          $('.sort_link').each( function(i,elem){
-            var str = $(elem).attr('href').replace('all_rate_ranking=','');
-            $(elem).attr('href',str);
-            console.log($(elem).attr('href'))
-          })
-
-          $('#atmosphere_rate_desc').hide();
-          $('#atmosphere_rate_asc').hide();
-          <% if params[:atmosphere_rate_ranking] =='asc' %>
-            $('#atmosphere_rate_asc').show();
-          <% elsif params[:atmosphere_rate_ranking] == 'desc' %>
-            $('#atmosphere_rate_desc').show();
-          <% end %>
-          $('.sort_link').each( function(i,elem){
-            var str = $(elem).attr('href').replace('atmosphere_rate_ranking=','');
-            $(elem).attr('href',str);
-            console.log($(elem).attr('href'))
-          })
-
-          $('#few_people_rate_desc').hide();
-          $('#few_people_rate_asc').hide();
-          <% if params[:few_people_rate_ranking] =='asc' %>
-            $('#few_people_rate_asc').show();
-          <% elsif params[:few_people_rate_ranking] == 'desc' %>
-            $('#few_people_rate_desc').show();
-          <% end %>
-          $('.sort_link').each( function(i,elem){
-            var str = $(elem).attr('href').replace('few_people_rate_ranking=','');
-            $(elem).attr('href',str);
-            console.log($(elem).attr('href'))
-          })
-
-          $('#standard_rate_desc').hide();
-          $('#standard_rate_asc').hide();
-          <% if params[:standard_rate_ranking] =='asc' %>
-            $('#standard_rate_asc').show();
-          <% elsif params[:standard_rate_ranking] == 'desc' %>
-            $('#standard_rate_desc').show();
-          <% end %>
-          $('.sort_link').each( function(i,elem){
-            var str = $(elem).attr('href').replace('standard_rate_ranking=','');
-            $(elem).attr('href',str);
-            console.log($(elem).attr('href'))
-          })
-
-        function onSortConfessionRranking(){
-          var form = document.getElementById('post_search');
-          <% if params[:confession_ranking] == 'asc' %>
-            document.getElementById('confession_ranking').value='desc';
-          <% else %>
-            document.getElementById('confession_ranking').value='asc';
-          <% end %>
-          form.submit();
-        }
-
-        function onSortAllRateRanking(){
-          var form = document.getElementById('post_search');
-          <% if params[:all_rate_ranking] == 'asc' %>
-            document.getElementById('all_rate_ranking').value='desc';
-          <% else %>
-            document.getElementById('all_rate_ranking').value='asc';
-          <% end %>
-          form.submit();
-        }
-
-        function onSortAtmosphereRateRanking(){
-          var form = document.getElementById('post_search');
-          <% if params[:atmosphere_rate_ranking] == 'asc' %>
-            document.getElementById('atmosphere_rate_ranking').value='desc';
-          <% else %>
-            document.getElementById('atmosphere_rate_ranking').value='asc';
-          <% end %>
-          form.submit();
-        }
-
-        function onSortFewPeopleRateRanking(){
-          var form = document.getElementById('post_search');
-          <% if params[:few_people_rate_ranking] == 'asc' %>
-            document.getElementById('few_people_rate_ranking').value='desc';
-          <% else %>
-            document.getElementById('few_people_rate_ranking').value='asc';
-          <% end %>
-          form.submit();
-        }
-
-        function onSortStandardRateRanking(){
-          var form = document.getElementById('post_search');
-          <% if params[:standard_rate_ranking] == 'asc' %>
-            document.getElementById('standard_rate_ranking').value='desc';
-          <% else %>
-            document.getElementById('standard_rate_ranking').value='asc';
-          <% end %>
-          form.submit();
-        }
-      </script>
-
     </div>
   </div>
 </div>
+
+<script>
+  // 評価機能
+  $('.star').empty();
+  $('.star').raty({
+    size: 20,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    readOnly: true,
+  });
+
+　//ランキング機能
+　// ボタン切り替えでコントローラーにasc,descの情報を渡す
+  function onSortButton(el, value){
+  if(value == 'desc'){
+    document.getElementById(el).value='asc';
+  }else{
+    document.getElementById(el).value='desc';
+  }
+    const form = document.getElementById('post_search');
+    form.submit();
+  }
+</script>
+
+

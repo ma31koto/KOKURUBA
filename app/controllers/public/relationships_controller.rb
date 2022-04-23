@@ -20,5 +20,4 @@ class Public::RelationshipsController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @customers = @customer.followers
   end
-
 end

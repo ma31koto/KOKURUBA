@@ -325,3 +325,13 @@ body {
 .home {
   font-family: 'Shippori Mincho', serif;
 }
+
+.ranking {
+  border: 2px solid #666600;
+  color: white;
+  width: 110px;
+}
+
+.ranking:hover {
+  color: #808000;
+}

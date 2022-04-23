@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
   # スポット投稿・コメント投稿削除の際、4つ前のリンクに遷移させる為、urlを記録
   def url_history
     if session[:previous_url].nil?

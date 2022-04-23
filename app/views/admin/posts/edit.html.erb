@@ -240,28 +240,26 @@
     function codeAddress() {
       let inputAddress = document.getElementById('address').value;
 
-      geocoder.geocode({
-        'address': inputAddress},
-        function (results, status) {
-          if (status == 'OK') {
-            map_edit_admin.setCenter(results[0].geometry.location);
+      geocoder.geocode({'address': inputAddress},function (results, status) {
+        if (status == 'OK') {
+          map_edit_admin.setCenter(results[0].geometry.location);
 
-            // 再検索でピンを消す
-            marker.setMap(null);
-            marker = new google.maps.Marker({
-              map: map_edit_admin,
-              position: results[0].geometry.location
-            });
-            // 検索した場所の情報をfieldフォームに渡す
-            const lat = marker.getPosition().lat();
-            const lng = marker.getPosition().lng();
-            $("#latitude").val(lat);
-            $("#longitude").val(lng);
-            formatAddress(results);
+          // 再検索でピンを消す
+          marker.setMap(null);
+          marker = new google.maps.Marker({
+            map: map_edit_admin,
+            position: results[0].geometry.location
+          });
+          // 検索した場所の情報をfieldフォームに渡す
+          const lat = marker.getPosition().lat();
+          const lng = marker.getPosition().lng();
+          $("#latitude").val(lat);
+          $("#longitude").val(lng);
+          formatAddress(results);
 
-          } else {
-            alert('該当する結果がありませんでした：' + status);
-          }
+        } else {
+          alert('該当する結果がありませんでした：' + status);
+        }
       });
     }
   </script>

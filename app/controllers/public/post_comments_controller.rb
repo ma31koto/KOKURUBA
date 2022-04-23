@@ -12,7 +12,7 @@ class Public::PostCommentsController < ApplicationController
     @post_comment = current_customer.post_comments.new(post_comment_params)
     @post_comment.post_id = @post.id
     if @post_comment.save
-      redirect_to post_path(@post), notice:'コメントを投稿完了しました!'
+      redirect_to post_path(@post), notice: 'コメントを投稿完了しました!'
     else
       render :new
     end
@@ -24,7 +24,7 @@ class Public::PostCommentsController < ApplicationController
   def update
     @post = Post.find(params[:post_id])
     if @post_comment.update(post_comment_params)
-      redirect_to post_path(@post), notice:'コメント投稿を変更しました!'
+      redirect_to post_path(@post), notice: 'コメント投稿を変更しました!'
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class Public::PostCommentsController < ApplicationController
   def destroy
     post = Post.find(params[:post_id])
     PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-    redirect_to post_path(post), notice:'コメント投稿を削除しました!'
+    redirect_to post_path(post), notice: 'コメント投稿を削除しました!'
   end
 
   private
@@ -48,5 +48,4 @@ class Public::PostCommentsController < ApplicationController
       redirect_to customer_path(current_customer)
     end
   end
-
 end

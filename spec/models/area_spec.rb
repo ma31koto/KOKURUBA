@@ -25,5 +25,4 @@ RSpec.describe Area, type: :model do
       end
     end
   end
-
 end

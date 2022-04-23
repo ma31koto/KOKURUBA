@@ -14,7 +14,7 @@ class Admin::PostCommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @post_comment = PostComment.find(params[:id])
     if @post_comment.update(post_comment_params)
-       redirect_to admin_post_path(@post), notice:'コメント投稿を変更しました!'
+      redirect_to admin_post_path(@post), notice: 'コメント投稿を変更しました!'
     else
       render :edit
     end
@@ -23,7 +23,7 @@ class Admin::PostCommentsController < ApplicationController
   def destroy
     post = Post.find(params[:post_id])
     PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-    redirect_to admin_post_path(post), notice:'コメント投稿を削除しました!'
+    redirect_to admin_post_path(post), notice: 'コメント投稿を削除しました!'
   end
 
   private
@@ -31,5 +31,4 @@ class Admin::PostCommentsController < ApplicationController
   def post_comment_params
     params.require(:post_comment).permit(:customer_id, :post_id, :title, :comment, :comment_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
   end
-
 end

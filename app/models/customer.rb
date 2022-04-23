@@ -5,8 +5,8 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :followings, through: :active_relationships,  source: :followed
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :favorites, dependent: :destroy
   has_many :post_comments, dependent: :destroy
@@ -21,19 +21,18 @@ class Customer < ApplicationRecord
   has_one_attached :profile_image
 
   def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+    profile_image.attached? ? profile_image : 'no_image.jpg'
   end
 
   def follow(customer_id)
-    self.active_relationships.create(followed_id: customer_id)
+    active_relationships.create(followed_id: customer_id)
   end
 
   def unfollow(customer_id)
-    self.active_relationships.find_by(followed_id: customer_id).destroy
+    active_relationships.find_by(followed_id: customer_id).destroy
   end
 
   def following?(customer)
-    self.followings.include?(customer)
+    followings.include?(customer)
   end
-
 end

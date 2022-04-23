@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-    sessions: "admin/sessions"
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions",
   }
 
   namespace :admin do
@@ -10,16 +10,16 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:edit, :update, :destroy]
       collection do
-        get 'post_comments_list',to: 'post_comments#index', as: 'post_comments_list'
+        get 'post_comments_list', to: 'post_comments#index', as: 'post_comments_list'
       end
     end
     resources :areas, only: [:index, :create, :edit, :update, :destroy]
     resources :tags, only: [:index, :create, :edit, :update, :destroy]
   end
 
-  devise_for :customers,skip: [:passwords], controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: 'public/sessions',
   }
 
   scope module: :public do
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
       collection do
         get 'map_search' => 'posts#map_search'
-        get 'favorites_list',to: 'favorites#index', as: 'favorites_list'
+        get 'favorites_list', to: 'favorites#index', as: 'favorites_list'
       end
     end
   end

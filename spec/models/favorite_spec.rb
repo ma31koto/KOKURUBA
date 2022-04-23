@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Favorite, type: :model do
-    describe "データの保存" do
+  describe "データの保存" do
     subject { favorite.valid? }
 
     let(:customer) { create(:customer) }
@@ -33,7 +33,5 @@ RSpec.describe Favorite, type: :model do
         expect(Favorite.reflect_on_association(:customer).macro).to eq :belongs_to
       end
     end
-
-
   end
 end

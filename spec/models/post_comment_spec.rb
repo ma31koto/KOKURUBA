@@ -73,6 +73,4 @@ RSpec.describe PostComment, type: :model do
       end
     end
   end
-
-
 end

@@ -17,13 +17,12 @@
           <i class="fa-solid fa-x ml-1 mr-1"></i>
           <%= f.label :tag, "タグ名" %>
           <%= f.search_field :post_tags_tag_name_cont, :placeholder =>"例：夜景" %>
-
+          <%= hidden_field_tag(:new_ranking) %>
           <%= hidden_field_tag(:confession_ranking) %>
           <%= hidden_field_tag(:all_rate_ranking) %>
           <%= hidden_field_tag(:atmosphere_rate_ranking) %>
           <%= hidden_field_tag(:few_people_rate_ranking) %>
           <%= hidden_field_tag(:standard_rate_ranking) %>
-
           <%= f.submit "検索" %>
         <% end %>
 
