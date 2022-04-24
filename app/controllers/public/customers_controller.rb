@@ -4,6 +4,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    session[:path] = request.path
   end
 
   def edit

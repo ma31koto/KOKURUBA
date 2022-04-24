@@ -4,26 +4,27 @@ class Admin::PostCommentsController < ApplicationController
   def index
     @q = PostComment.ransack(params[:q])
     @post_comments = @q.result(distinct: true).page(params[:page]).per(8)
+    session[:path] = request.path
   end
 
   def edit
     @post_comment = PostComment.find(params[:id])
+    session[:previous_url] = request.referer
   end
 
   def update
     @post = Post.find(params[:post_id])
     @post_comment = PostComment.find(params[:id])
     if @post_comment.update(post_comment_params)
-      redirect_to admin_post_path(@post), notice: 'コメント投稿を変更しました!'
+      redirect_to session[:previous_url], notice: 'コメント投稿を変更しました!'
     else
       render :edit
     end
   end
 
   def destroy
-    post = Post.find(params[:post_id])
     PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-    redirect_to admin_post_path(post), notice: 'コメント投稿を削除しました!'
+    redirect_to session[:previous_url], notice: 'コメント投稿を削除しました!'
   end
 
   private

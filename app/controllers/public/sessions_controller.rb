@@ -27,6 +27,14 @@ class Public::SessionsController < Devise::SessionsController
 
   protected
 
+  def after_sign_in_path_for(resource)
+    customer_path(current_customer)
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
+
   def reject_inactive_customer
     @customer = Customer.find_by(email: params[:customer][:email])
     if @customer

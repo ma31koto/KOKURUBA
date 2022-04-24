@@ -60,7 +60,7 @@
 
         <div class="row d-flex text-left  offset-2">
           <div class="col-4 post-item"><%= f.label :atmosphere_rate, "雰囲気" %></div>
-          <div class="col-6 star_atmosphere_rate post-form">
+          <div class="col-6 star_atmosphere_rate post-form" data-score="<%= @post_comment.atmosphere_rate %>">
             <%= f.hidden_field :atmosphere_rate %>
           </div>
         </div>
@@ -75,7 +75,7 @@
 
         <div class="row d-flex text-left  offset-2">
           <div class="col-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
-          <div class="col-6 star_few_people_rate post-form">
+          <div class="col-6 star_few_people_rate post-form" data-score="<%= @post_comment.few_people_rate %>">
             <%= f.hidden_field :few_people_rate %>
           </div>
         </div>
@@ -90,7 +90,7 @@
 
         <div class="row d-flex text-left  offset-2">
           <div class="col-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
-          <div class="col-6 star_standard_rate post-form">
+          <div class="col-6 star_standard_rate post-form" data-score="<%= @post_comment.standard_rate %>">
             <%= f.hidden_field :standard_rate %>
           </div>
         </div>
@@ -105,7 +105,7 @@
 
         <div class="row d-flex text-left  offset-2">
           <div class="col-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
-          <div class="col-6 star_all_rate post-form">
+          <div class="col-6 star_all_rate post-form" data-score="<%= @post_comment.all_rate %>">
             <%= f.hidden_field :all_rate %>
           </div>
         </div>

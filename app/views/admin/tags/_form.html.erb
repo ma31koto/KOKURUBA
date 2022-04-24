@@ -22,14 +22,14 @@
       <div class="ml-3">
         <%= f.text_field :name, size: 30 %>
         <% if @tag.errors.include?(:name) %>
-          <p style="color: red;"><%= @tag.errors.full_messages_for(:name).first %></p>
+          <p style="color: red;"><%= tag.errors.full_messages_for(:name).first %></p>
         <% end %>
       </div>
       <div class="ml-5">
         <%= f.submit "変更", class: "btn btn-success", style: "width: 100px;" %>
       </div>
       <div class="ml-3">
-        <%= link_to "削除", admin_tag_path(tag), method: :delete, date: { confirm: '本当に消しますか？'}, class: "btn btn-danger", style: "width: 100px;" %>
+        <%= link_to "削除", admin_tag_path(tag), method: :delete, data: { confirm: '本当に消しますか？'}, class: "btn btn-danger", style: "width: 100px;" %>
       </div>
     </div>
   <% end %>

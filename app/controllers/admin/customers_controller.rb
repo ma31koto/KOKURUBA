@@ -25,6 +25,7 @@ class Admin::CustomersController < ApplicationController
   def list
     @customer = Customer.find(params[:customer_id])
     @post_comments = PostComment.where(customer_id: params[:customer_id])
+    session[:path] = request.path
   end
 
   private

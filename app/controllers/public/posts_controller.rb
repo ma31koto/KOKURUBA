@@ -4,6 +4,7 @@ class Public::PostsController < ApplicationController
 
   def map_search
     @posts = Post.all
+    session[:path] = request.path
   end
 
   def index
@@ -34,6 +35,7 @@ class Public::PostsController < ApplicationController
       @q = Post.ransack(params[:q])
       @posts = @q.result(distinct: true).page(params[:page]).per(8)
     end
+    session[:path] = request.path
   end
 
   def show
@@ -44,16 +46,17 @@ class Public::PostsController < ApplicationController
   def new
     @post = Post.new
     @posts = Post.all
+    session[:path] = request.path
   end
 
   def create
     @posts = Post.all
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    tag_list = params[:post][:name].split(',')
+    @tag_list = params[:post][:name].split(',')
     if @post.save
       # タグの登録
-      @post.save_tag(tag_list)
+      @post.save_tag(@tag_list)
       redirect_to post_path(@post), notice: 'スポットを投稿完了しました!'
     else
       render :new
@@ -80,11 +83,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    if session[:previous_url].count < 4
-      redirect_to homes_about_path
-    else
-      redirect_to session[:previous_url][session[:previous_url].size - 3], notice: 'スポット投稿を削除しました!'
-    end
+    redirect_to view_context.public_post_destroy_link, notice: 'スポット投稿を削除しました!'
   end
 
   private

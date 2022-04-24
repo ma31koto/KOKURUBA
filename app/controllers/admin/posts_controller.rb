@@ -29,6 +29,7 @@ class Admin::PostsController < ApplicationController
       @q = Post.ransack(params[:q])
       @posts = @q.result(distinct: true).page(params[:page]).per(8)
     end
+    session[:path] = request.path
   end
 
   def show
@@ -42,10 +43,10 @@ class Admin::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:name].split(',')
+    @tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       # タグの登録
-      @post.save_tag(tag_list)
+      @post.save_tag(@tag_list)
       redirect_to admin_post_path(@post), notice: 'スポット投稿を変更しました!'
     else
       render :edit
@@ -55,11 +56,7 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    if session[:previous_url].count < 4
-      redirect_to admin_customers_path
-    else
-      redirect_to session[:previous_url][session[:previous_url].size - 3], notice: 'スポット投稿を削除しました!'
-    end
+    redirect_to view_context.admin_post_destroy_link, notice: 'スポット投稿を削除しました!'
   end
 
   private

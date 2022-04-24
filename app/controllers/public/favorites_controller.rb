@@ -30,6 +30,7 @@ class Public::FavoritesController < ApplicationController
       @q = Post.where(id: favorites).ransack(params[:q])
       @posts = @q.result(distinct: true).page(params[:page]).per(8)
     end
+    session[:path] = request.path
   end
 
   def create
