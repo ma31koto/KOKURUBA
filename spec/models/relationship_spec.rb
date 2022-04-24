@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
   describe "データの保存" do
-    subject { post_tag.valid? }
+    subject { relationship.valid? }
 
     let(:relationship) { build(:relationship) }
 
