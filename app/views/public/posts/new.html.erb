@@ -166,8 +166,10 @@
         <% end %>
 
         <div class="mt-3">
-          <%= f.hidden_field :longitude, :value => "", id: "longitude" %>
-          <%= f.hidden_field :latitude, :value => "", id: "latitude" %>
+          <%#= f.hidden_field :longitude, :value => "", id: "longitude" %>
+          <%#= f.hidden_field :latitude, :value => "", id: "latitude" %>
+          <%= f.hidden_field :longitude, id: "longitude" %>
+          <%= f.hidden_field :latitude, id: "latitude" %>
           <%= f.submit "投稿", class: "btn btn-primary", style: "width: 150px;" %>
         </div>
       <% end %>
@@ -194,7 +196,7 @@
     const latitude = document.getElementById('latitude');
     let marker;
     function formatAddress(results) {
-       const formattedAddress = results[0].formatted_address;
+      const formattedAddress = results[0].formatted_address;
       const postalCode = formattedAddress.match(/〒[0-9]{3}-[0-9]{4}/);
       if(!!postalCode) {
         $("#postal_code").val(postalCode[0].slice(1));
@@ -212,6 +214,20 @@
         center: {lat: 35.6458437,lng: 139.7046171},
         zoom: 12,
       });
+
+      // mapsテーブルにあるそれぞれのレコードをmap上に表示
+      <% if @post.latitude.present? && @post.longitude.present? %>
+        function showPins(setNull = false){
+          var contentString = "住所：<%= @post.address %>";
+          // マーカーを立てる
+          marker = new google.maps.Marker({
+            position:{lat: <%= @post.latitude %>, lng: <%= @post.longitude %>},
+            map: map_new,
+            title: contentString
+          });
+        };
+        showPins();
+      <% end %>
 
       // クリックしたときの処理
       google.maps.event.addListener(map_new, 'click', mylistener);

@@ -162,7 +162,7 @@
     const latitude = document.getElementById('latitude');
     let marker;
     function formatAddress(results) {
-       const formattedAddress = results[0].formatted_address;
+      const formattedAddress = results[0].formatted_address;
       const postalCode = formattedAddress.match(/〒[0-9]{3}-[0-9]{4}/);
       if(!!postalCode) {
         $("#postal_code").val(postalCode[0].slice(1));
@@ -229,14 +229,12 @@
             map: map_edit,
             position: results[0].geometry.location
           });
-
+　　　　　// 検索した場所の情報をfieldフォームに渡す
           const lat = marker.getPosition().lat();
           const lng = marker.getPosition().lng();
           $("#latitude").val(lat);
           $("#longitude").val(lng);
-
           formatAddress(results);
-
         } else {
           alert('該当する結果がありませんでした：' + status);
         }
