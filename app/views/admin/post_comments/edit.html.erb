@@ -17,18 +17,18 @@
               <% end %>
             </div>
             <div class="mt-5 ml-3">
-              タイトル：
+              【タイトル】
               <%= link_to admin_post_path(@post_comment.post), class: "link-white" do %>
                 <%= @post_comment.post.title %><br/>
               <% end %>
-              エリア：<%= @post_comment.post.area.name %><br/>
-              タグ：<% @post_comment.post.tags.each do |tag| %>
+              【エリア】<%= @post_comment.post.area.name %><br/>
+              【タグ】<% @post_comment.post.tags.each do |tag| %>
                       <%=tag.name%>,
                     <% end %>
             </div>
           </div>
         </div>
-        <div class="ml-3">
+        <div class="offset-1">
           <div class="mt-5 mb-1">●コメント投稿者情報</div>
           <div class="d-flex">
             <div class="ml-4">
@@ -37,12 +37,12 @@
               <% end %>
             </div>
             <div class="mt-5 ml-3">
-              名前：
+              【名前】
               <%= link_to admin_customer_path(@post_comment.customer), class: "link-white" do %>
                 <%= @post_comment.customer.name %><br/>
               <% end %>
-              性別：<%= @post_comment.customer.gender_i18n %><br/>
-              年齢：<%= @post_comment.customer.age %>
+              【性別】<%= @post_comment.customer.gender_i18n %><br/>
+              【年齢】<%= @post_comment.customer.age %>
             </div>
           </div>
         </div>

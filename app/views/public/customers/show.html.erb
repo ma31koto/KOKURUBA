@@ -87,7 +87,9 @@
                 <tr>
                   <td class="text-center align-middle">
                     <%= link_to post_path(post) do %>
-                      <%= image_tag post.get_spot_image, size: "150x100" %>
+                      <!--<div class="img_container">-->
+                        <%= image_tag post.get_spot_image, size: "150x100" %>
+                      <!--</div>-->
                     <% end %>
                   </td>
                   <td class="align-middle">
@@ -105,7 +107,7 @@
                     <h3><%= post.avg_all_rate.round(1).to_f %></h3>
                     <div class="d-flex">
                       <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
-                      <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count + 1 %>件)</div>
+                      <div>(<i class="fa-solid fa-comment-dots mr-1"></i><%= post.post_comments.count + 1 %>件)</div>
                     </div>
                   </td>
                   <td class="align-middle">

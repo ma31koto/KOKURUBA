@@ -178,13 +178,13 @@
                     <% end %>
                   </div>
                 </div>
-                <div class="mt-5 ml-3">
+                <div class="mt-5">
                   <a>●投稿者</a><br/>
-                  名前:<%= link_to customer_path(post_comment.customer), class: "link-black" do %>
+                  【名前】<%= link_to customer_path(post_comment.customer), class: "link-black" do %>
                          <%= post_comment.customer.name %><br/>
                        <% end %>
-                  性別:<%= post_comment.customer.gender_i18n %><br/>
-                  年齢:<%= post_comment.customer.age %>歳
+                  【性別】<%= post_comment.customer.gender_i18n %><br/>
+                  【年齢】<%= post_comment.customer.age %>歳
                 </div>
               </div>
 

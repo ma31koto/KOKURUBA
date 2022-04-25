@@ -16,12 +16,12 @@
           <% end %>
         </div>
         <div class="ml-3">
-          名前：
+          【名前】
           <%= link_to admin_customer_path(@post.customer), class: "link-white" do %>
             <%= @post.customer.name %><br/>
           <% end %>
-          性別：<%= @post.customer.gender_i18n %><br/>
-          年齢：<%= @post.customer.age %>
+          【性別】<%= @post.customer.gender_i18n %><br/>
+          【年齢】<%= @post.customer.age %>
         </div>
       </div>
     </div>
