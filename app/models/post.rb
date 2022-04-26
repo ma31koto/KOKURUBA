@@ -53,8 +53,8 @@ class Post < ApplicationRecord
 
   # 告白成功率の計算
   def avg_confession_result
-  # 分子：numerator
-  # 分母：enominator
+    # 分子：numerator
+    # 分母：enominator
 
     post_numerator = 0
     post_denominator = 0
@@ -80,9 +80,9 @@ class Post < ApplicationRecord
     end
 
     # 全体分子の計算
-    all_numerator = post_numerator + post_comments.where(confession_result: 0).count
+    all_numerator = post_numerator + post_comments.yes.count
     # 全体分母の計算
-    all_denominator = post_denominator + post_comments.where(confession_result: 0).or(post_comments.where(confession_result: 1)).count
+    all_denominator = post_denominator + post_comments.yes.count + post_comments.no.count
 
     # 全体分母が０の時、計算をしないものとする
     if all_denominator == 0
