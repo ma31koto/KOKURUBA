@@ -60,7 +60,7 @@
           <div class="col-6 post-form">
             <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %>
             <% if @post.errors.include?(:area_id) %>
-              <a style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></a>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></p>
             <% end %>
           </div>
         </div>
@@ -166,8 +166,6 @@
         <% end %>
 
         <div class="mt-3">
-          <%#= f.hidden_field :longitude, :value => "", id: "longitude" %>
-          <%#= f.hidden_field :latitude, :value => "", id: "latitude" %>
           <%= f.hidden_field :longitude, id: "longitude" %>
           <%= f.hidden_field :latitude, id: "latitude" %>
           <%= f.submit "投稿", class: "btn btn-primary", style: "width: 150px;" %>
@@ -211,7 +209,7 @@
       marker = new google.maps.Marker();
       // mapの初期位置, 縮尺を定義
       map_new = new google.maps.Map(document.getElementById('map_new'), {
-        center: {lat: 35.6458437,lng: 139.7046171},
+        center: {lat: 35.66520323974399,lng: 139.75420730521716},
         zoom: 12,
       });
 

@@ -19,12 +19,13 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def edit
+    session[:previous_url] = request.referer
   end
 
   def update
     @post = Post.find(params[:post_id])
     if @post_comment.update(post_comment_params)
-      redirect_to post_path(@post), notice: 'コメント投稿を変更しました!'
+      redirect_to session[:previous_url], notice: 'コメント投稿を変更しました!'
     else
       render :edit
     end

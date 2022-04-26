@@ -12,9 +12,9 @@
         <%= image_tag @customer.get_profile_image, size: "150x150" %>
       </div>
       <div class="ml-5 d-flex align-items-end">
-        名前：<%= @customer.name %><br/>
-        性別：<%= @customer.gender_i18n %><br/>
-        年齢：<%= @customer.age %>歳<br/>
+        【名前】<%= @customer.name %><br/>
+        【性別】<%= @customer.gender_i18n %><br/>
+        【年齢】<%= @customer.age %>歳<br/>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
                     <h3><%= post.avg_all_rate.round(1).to_f %></h3>
                     <div class="d-flex">
                       <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
-                      <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count + 1 %>件)</div>
+                      <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count%>件)</div>
                     </div>
                   </td>
                   <td class="align-middle">

@@ -21,7 +21,7 @@
             <%= @post.customer.name %><br/>
           <% end %>
           【性別】<%= @post.customer.gender_i18n %><br/>
-          【年齢】<%= @post.customer.age %>
+          【年齢】<%= @post.customer.age %>歳
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@
           <div class="col-6 post-form">
             <%= f.collection_select :area_id, Area.all, :id, :name, include_blank: "----", class: "form-control", size: 50 %>
             <% if @post.errors.include?(:area_id) %>
-              <a style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></a>
+              <p style="color: red;"><%= @post.errors.full_messages_for(:area_id).first %></p>
             <% end %>
           </div>
         </div>
