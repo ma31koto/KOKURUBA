@@ -32,5 +32,5 @@ class Admin::PostCommentsController < ApplicationController
   def post_comment_params
     params.require(:post_comment).permit(:customer_id, :post_id, :title, :comment, :comment_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
   end
-  
+
 end

@@ -29,7 +29,7 @@ customer2 = Customer.create(
   age: 31,
   email: "shun123@gmail.com",
   password: 123456,
-  biography: "みなさんの恋が叶うように思い出に残る素敵な告白場所を紹介してきたいと思います！",
+  biography: "みなさんの恋が叶うように、思い出に残る素敵な告白場所を紹介してきたいと思います！",
   is_deleted: "false"
   )
   customer2.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/customer2.jpg')),filename: 'customer2.jpg')
@@ -235,10 +235,10 @@ post4 = Post.create(
   introduction:
     "ショッピング施設が豊富でレストランも充実しています。また冬にはイルミネーションも
     行っているので、食事終わりにイルミネーションを見るのはいかがでしょうか。",
-  atmosphere_rate: 3.0,
-  few_people_rate: 3.0,
-  standard_rate: 3.0,
-  all_rate: 3.0,
+  atmosphere_rate: 1.0,
+  few_people_rate: 1.0,
+  standard_rate: 1.0,
+  all_rate: 1.0,
   confession_result: "yes",
   area_id: 4,
   customer_id: 2
@@ -400,6 +400,32 @@ post_comment4 = PostComment.create(
   customer_id: 3
   )
   post_comment4.comment_image.attach(io: File.open(Rails.root.join('app/assets/images/odaiba3.jpg')),filename: 'odaiba3.jpg')
+
+post_comment5 = PostComment.create(
+  title: "東京都写真美術館",
+  comment: "美術館好きのお相手なら誘いやすいですね！",
+  atmosphere_rate: 4.5,
+  few_people_rate: 4.5,
+  standard_rate: 4.5,
+  all_rate: 4.5,
+  confession_result: "no",
+  post_id: 5,
+  customer_id: 1
+  )
+  post_comment5.comment_image.attach(io: File.open(Rails.root.join('app/assets/images/ebisu2.jpg')),filename: 'ebisu2.jpg')
+
+post_comment6 = PostComment.create(
+  title: "幻想的！",
+  comment: "水族館なので雰囲気があり告白を切り出しやすかったです！",
+  atmosphere_rate: 4.5,
+  few_people_rate: 4.5,
+  standard_rate: 4.5,
+  all_rate: 4.5,
+  confession_result: "yes",
+  post_id: 10,
+  customer_id: 1
+  )
+  post_comment6.comment_image.attach(io: File.open(Rails.root.join('app/assets/images/aqua2.jpg')),filename: 'aqua2.jpg')
 
 PostTag.create!([
   {post_id:1,

@@ -32,9 +32,8 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:post_id])
     PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
-    redirect_to post_path(post), notice: 'コメント投稿を削除しました!'
+    redirect_to session[:previous_url], notice: 'コメント投稿を削除しました!'
   end
 
   private
@@ -49,5 +48,5 @@ class Public::PostCommentsController < ApplicationController
       redirect_to customer_path(current_customer)
     end
   end
-  
+
 end
