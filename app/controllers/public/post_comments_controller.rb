@@ -49,4 +49,5 @@ class Public::PostCommentsController < ApplicationController
       redirect_to customer_path(current_customer)
     end
   end
+  
 end

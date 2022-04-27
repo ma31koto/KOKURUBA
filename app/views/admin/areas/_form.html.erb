@@ -22,7 +22,9 @@
       <div class="ml-3">
         <%= f.text_field :name, size: 30 %>
         <% if @area.errors.include?(:name) %>
-          <p style="color: red;"><%= area.errors.full_messages_for(:name).first %></p>
+          <p style="color: red;">
+            <%= area.errors.full_messages_for(:name).first %>
+          </p>
         <% end %>
       </div>
       <div class="ml-5">

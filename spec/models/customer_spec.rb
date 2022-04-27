@@ -27,6 +27,21 @@ RSpec.describe Customer, type: :model do
         is_expected.to eq false
       end
 
+      it "年齢が1未満" do
+        customer.age = -1
+        is_expected.to eq false
+      end
+
+      it "年齢が101以上" do
+        customer.age = 101
+        is_expected.to eq false
+      end
+
+      it "年齢が数値以外" do
+        customer.age = "あ"
+        is_expected.to eq false
+      end
+
       it "メールアドレスが空欄" do
         customer.email = ""
         is_expected.to eq false

@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
       <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-location-dot mr-2"></i>スポット一覧</mark></h2>
@@ -144,34 +145,35 @@
           </table>
           <%= paginate @posts %>
         </div>
+
       </div>
     </div>
   </div>
+
+  <script>
+    // 評価機能
+    $('.star').empty();
+    $('.star').raty({
+      size: 20,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+    });
+
+  　//ランキング機能
+  　// ボタン切り替えでコントローラーにasc,descの情報を渡す
+    function onSortButton(el, value){
+    if(value == 'desc'){
+      document.getElementById(el).value='asc';
+    }else{
+      document.getElementById(el).value='desc';
+    }
+      const form = document.getElementById('post_search');
+      form.submit();
+    }
+  </script>
+
 </div>
-
-<script>
-  // 評価機能
-  $('.star').empty();
-  $('.star').raty({
-    size: 20,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    half: true,
-    readOnly: true,
-  });
-
-　//ランキング機能
-　// ボタン切り替えでコントローラーにasc,descの情報を渡す
-  function onSortButton(el, value){
-  if(value == 'desc'){
-    document.getElementById(el).value='asc';
-  }else{
-    document.getElementById(el).value='desc';
-  }
-    const form = document.getElementById('post_search');
-    form.submit();
-  }
-</script>
-
 

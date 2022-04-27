@@ -33,4 +33,5 @@ class Admin::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:profile_image, :name, :gender, :age, :biography, :email, :is_deleted)
   end
+  
 end

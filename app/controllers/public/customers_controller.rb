@@ -41,4 +41,5 @@ class Public::CustomersController < ApplicationController
       redirect_to customer_path(current_customer)
     end
   end
+  
 end

@@ -17,4 +17,5 @@ class PostComment < ApplicationRecord
   def get_comment_image
     comment_image.attached? ? comment_image : 'no_image.jpg'
   end
+  
 end

@@ -11,7 +11,7 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="mb-2 mt-5">
           <%= f.label :email, "メールアドレス", class: "col-2" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"sample@example.com", size: 30%>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder =>"sample@example.com", size: 30 %>
         </div>
         <div class="mb-2">
           <%= f.label :password, "パスワード", class: "col-2"%>
@@ -21,7 +21,7 @@
           <%= content_tag :div, message, class: "message_type offset-2", style: "color: red;" %>
         <% end %>
 
-        <%= f.submit "ログイン", class: "btn btn-primary offset-2"%>
+        <%= f.submit "ログイン", class: "btn btn-primary offset-2" %>
       <% end %>
     </div>
   </div>
