@@ -40,11 +40,20 @@ body {
   font-size: 13px
 }
 
+.home {
+  font-family: 'Shippori Mincho', serif;
+}
+
 .home-top-image {
   background-image: url("../images/home_top.png");
   background-size: cover;
   width: 1000px;
   height: 550px;
+  margin:0 auto;
+}
+
+.home-sub-title {
+  font-size: 30px;
 }
 
 .admin_customer_list {
@@ -328,9 +337,6 @@ body {
   border-bottom: solid 1px;
 }
 
-.home {
-  font-family: 'Shippori Mincho', serif;
-}
 
 .ranking {
   border: 2px solid #666600;
@@ -345,4 +351,51 @@ body {
 .img_filter:hover {
   filter: brightness(60%);
   transition-duration: 0.3s;
+}
+
+@media screen and (max-width: 425px) {
+  .home-title {
+   font-size: 50px;
+  }
+
+  .home-sub-title {
+   font-size: 15px;
+  }
+
+  .home-top-image {
+    width: 400px;
+    height: 500px;
+  }
+
+  .home-btn {
+    font-size: 12px;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+
+  .logo-img {
+    width:  150px;
+    height: 150px;
+  }
+
+  .home-about-title {
+    font-size: 22px;
+  }
+
+  .about-font {
+    font-size: 30px;
+  }
+
+  .biography{
+    margin-top: 10px;
+    height: 150px;
+    width: 100%;
+    font-size: 15px;
+  }
+
+
+
+
 }

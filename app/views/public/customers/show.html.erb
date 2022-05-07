@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-12 mt-5 heading-en">
+    <div class="col-md-12 mt-5 heading-en">
       <h2>
         <mark class="bg-secondary text-light">
         <i class="fa-solid fa-user"></i>
@@ -16,8 +16,8 @@
   </div>
 
   <div class="row mt-5 p-4 ml-3 mr-2" style="background-color: #262626;">
-    <div class="col-3">
-      <div class="ml-5 d-flex flex-wrap">
+    <div class="col-md-3 col-6">
+      <div class="ml-md-5 d-flex flex-wrap">
         <div class="mx-auto">
           <%= image_tag @customer.get_profile_image, size: "150x150" %>
         </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div class="col-3 heading-en">
+    <div class="col-md-3 col-6 heading-en">
       <div class="mt-3">
         <div class="mb-4" style="color: #BDB76B;">【名前】<%= @customer.name %></div>
         <div class="mb-4" style="color: #BDB76B;">【性別】<%= @customer.gender_i18n %></div>
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-md-6 col">
       <div class="offset-1 biography text-white-80">
         <%= @customer.biography %>
       </div>
