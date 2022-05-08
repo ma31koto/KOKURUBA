@@ -199,6 +199,12 @@ body {
   height: 130px;
 }
 
+.avg_confession_result_position {
+  transform: translate(0, 100%);
+  margin: 0;
+  text-align:center;
+}
+
 .page-link {
   position: relative;
   display: block;
@@ -292,6 +298,10 @@ body {
   width: 180px;
 }
 
+.spot-review-item {
+  width: 150px;
+}
+
 .link-black {
   text-decoration: none;
   color: black;
@@ -356,6 +366,7 @@ body {
   filter: brightness(60%);
   transition-duration: 0.3s;
 }
+
 
 @media screen and (max-width: 425px) {
   .home-title {
@@ -434,7 +445,6 @@ body {
   }
 
   .table-customer-edit td {
-    max-width: 350px;
     display: block;
   }
 
@@ -444,6 +454,11 @@ body {
 
   .customer-commnet {
     font-size: 14px;
+  }
+
+  .customer-comment-img {
+    width:  70px;
+    height: 60px;
   }
 
   .customer-comment-review {
@@ -463,5 +478,68 @@ body {
   #map {
     width: 350px;
     height: 350px;
+  }
+
+  .spot-title {
+    font-size: 25px;
+  }
+
+  .spot-img {
+    width: 300px;
+    height: 250px;
+  }
+
+  .spot-review {
+    font-size: 15px;
+  }
+
+  .spot-review-item {
+    width: 80px;
+  }
+
+  .avg_confession_result {
+    width: 100px;
+    height: 100px;
+  }
+
+  .post-info {
+    width: 330px;
+    font-size: 12px;
+  }
+
+  .spot-sub-info {
+    font-size: 12px;
+  }
+
+  .avg_confession_result_position {
+    transform: translate(0, 50%);
+  }
+
+  .comment-title {
+    font-size: 25px;
+  }
+
+  .comment-input {
+    font-size: 15px;
+  }
+
+  .comment-img {
+    width: 100px;
+    height: 75px;
+  }
+
+  .comment-sub-info {
+    font-size: 12px;
+  }
+
+  .comment-review-item {
+    font-size: 15px;
+    margin: 2px 0px;
+    padding-left: 5px;
+  }
+
+  .comment-review-integer {
+    font-size: 15px;
+    margin: 0;
   }
 }

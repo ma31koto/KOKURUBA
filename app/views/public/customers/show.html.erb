@@ -125,7 +125,7 @@
             <% @customer.post_comments.each do |post_comment| %>
               <div class="row list-row">
                 <div class="col-md-3 col-4 ml-md-2 customer-commnet">
-                  <%= image_tag post_comment.get_comment_image, size: "150x100", class: "customer-spot-img" %><br/>
+                  <%= image_tag post_comment.get_comment_image, size: "150x100", class: "customer-comment-img" %><br/>
                   エリア：<%= post_comment.post.area.name %><br/>
                   <%= link_to post_path(post_comment.post) do %>
                     投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
