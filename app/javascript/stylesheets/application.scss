@@ -395,30 +395,38 @@ body {
     font-size: 15px;
   }
 
+  .follow-count {
+    width: auto;
+  }
+
   .link-white {
     font-size: 14px;
   }
 
   .img_filter {
-    width:  50px;
+    width:  100px;
     height: 50px;
   }
 
   .scroll table{
-  width:100%;
+    width: 100%;
   }
+
   .scroll{
-  overflow: auto;/*tableをスクロールさせる*/
-  white-space: nowrap;/*tableのセル内にある文字の折り返しを禁止*/
+    overflow: auto;/*tableをスクロールさせる*/
+    white-space: nowrap;/*tableのセル内にある文字の折り返しを禁止*/
   }
+
   .scroll::-webkit-scrollbar{/*tableにスクロールバーを追加*/
-   height: 5px;
+    height: 5px;
   }
+
   .scroll::-webkit-scrollbar-track{/*tableにスクロールバーを追加*/
-   background: #F1F1F1;
+    background: #F1F1F1;
   }
+
   .scroll::-webkit-scrollbar-thumb {/*tableにスクロールバーを追加*/
-   background: #BCBCBC;
+    background: #BCBCBC;
   }
 
 }
