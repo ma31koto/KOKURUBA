@@ -435,12 +435,12 @@ body {
 
   .table-customer-edit td {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     display: block;
   }
 
   .biography-edit {
-    max-width: 350px;
+    max-width: 030px;
   }
 
   .customer-commnet {
@@ -452,12 +452,17 @@ body {
     font-size: 14px;
   }
 
+  .star img {
+    width: 13px;
+    height: 13px;
+  }
+
   #address {
     width: 350px;
   }
-  
+
   #map {
-    width: 400px;
-    height: 500px;
+    width: 350px;
+    height: 350px;
   }
 }
