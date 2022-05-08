@@ -149,6 +149,10 @@ body {
   background-color: #CCCC99;
 }
 
+.customer-comment-review {
+  width: 100px;
+}
+
 #map {
   width: 950px;
   height: 500px;
@@ -403,9 +407,9 @@ body {
     font-size: 14px;
   }
 
-  .img_filter {
+  .customer-spot-img {
     width:  100px;
-    height: 50px;
+    height: 60px;
   }
 
   .scroll table{
@@ -429,4 +433,31 @@ body {
     background: #BCBCBC;
   }
 
+  .table-customer-edit td {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+  }
+
+  .biography-edit {
+    max-width: 350px;
+  }
+
+  .customer-commnet {
+    font-size: 14px;
+  }
+
+  .customer-comment-review {
+    width: 70px;
+    font-size: 14px;
+  }
+
+  #address {
+    width: 350px;
+  }
+  
+  #map {
+    width: 400px;
+    height: 500px;
+  }
 }
