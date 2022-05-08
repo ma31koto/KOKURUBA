@@ -191,28 +191,28 @@
 
               <div class="col-md-3 col-7" style="border-left: 1px dotted #808000;">
                 <div class="row mt-3">
-                  <div class="col-5 p-0">
+                  <div class="col-5 px-md-2 p-0">
                     <div class="h5 comment-review-item">総合評価</div>
                     <div class="comment-review-item">雰囲気</div>
                     <div class="comment-review-item">人の少なさ</div>
                     <div class="comment-review-item">定番度</div>
                   </div>
-                  <div class="col-7">
+                  <div class="col-7 p-0">
                     <div class="d-flex">
                       <div class="h5 comment-review-integer"><%= post_comment.all_rate.round(1).to_f %></div>
-                      <div class="star" data-score="<%= post_comment.all_rate %>"></div>
+                      <div class="star ml-md-2" data-score="<%= post_comment.all_rate %>"></div>
                     </div>
                     <div class="d-flex">
                       <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
-                      <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
+                      <div class="star ml-md-3" data-score="<%= post_comment.atmosphere_rate %>"></div>
                     </div>
                     <div class="d-flex">
                       <div><%= post_comment.few_people_rate.round(1).to_f %></div>
-                      <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
+                      <div class="star ml-md-3" data-score="<%= post_comment.few_people_rate %>"></div>
                     </div>
                     <div class="d-flex">
                       <div><%= post_comment.standard_rate.round(1).to_f %></div>
-                      <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+                      <div class="star ml-md-3" data-score="<%= post_comment.standard_rate %>"></div>
                     </div>
                   </div>
                 </div>
