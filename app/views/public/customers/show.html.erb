@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-12 mt-5 heading-en">
+    <div class="col-md-12 col-12 mt-5 heading-en">
       <h2>
         <mark class="bg-secondary text-light">
         <i class="fa-solid fa-user"></i>
@@ -51,7 +51,7 @@
             <%= @customer.followings.count %> フォロー<br/>
           <% end %>
         </div>
-        <div class="follow-count ml-5">
+        <div class="follow-count ml-md-5 ml-2">
           <%= link_to customer_followers_path(@customer), class: "link-white" do %>
             <%= @customer.followers.count %> フォロワー<br/>
           <% end %>
@@ -70,7 +70,7 @@
         </ul>
 
         <div class="tabbox-contents">
-          <div class="tabbox box-show">
+          <div class="tabbox box-show scroll">
             <table class="table table-bordered-show">
               <thead>
                 <tr style="background-color: #A9A9A9;">
@@ -87,7 +87,7 @@
                 <tr>
                   <td class="text-center align-middle">
                     <%= link_to post_path(post) do %>
-                      <%= image_tag post.get_spot_image, size: "150x100", class:"img_filter" %>
+                      <%= image_tag post.get_spot_image, size: "150x100", class:"img_filter " %>
                     <% end %>
                   </td>
                   <td class="align-middle">
