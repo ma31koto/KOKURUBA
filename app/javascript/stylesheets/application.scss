@@ -485,6 +485,11 @@ body {
     height: 350px;
   }
 
+  #map_edit {
+    width: 350px;
+    height: 350px;
+  }
+
   .spot-title {
     font-size: 25px;
   }
@@ -548,11 +553,47 @@ body {
     margin: 0;
   }
 
-  .spot-new-container {
+  .spot-container {
     font-size: 12px;
   }
 
-  .spot-new-form {
+  .spot-form {
     width: 200px;
   }
+
+  .comment-container {
+    font-size: 12px;
+  }
+
+  .comment-form {
+    width: 200px;
+  }
+
+  .spot-index-container {
+    font-size: 13px;
+  }
+
+  .search_x {
+    display: none;
+  }
+
+  .search-item {
+    width: 60px;
+  }
+
+  .search-form {
+    width: 204px;
+  }
+
+  .search-btn {
+    margin-left: 65px;
+  }
+
+  .ranking {
+    border: 1px solid #666600;
+    color: white;
+    width: 100px;
+    font-size: 13px;
+  }
+
 }

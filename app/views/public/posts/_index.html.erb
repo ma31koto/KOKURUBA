@@ -1,59 +1,63 @@
-<a>並び替え</a>
-<a href="javascript:onSortButton('new_ranking', '<%= params[:new_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
-  新着
-  <% if params[:new_ranking] =='asc' %>
-    <span>▲</span>
-  <% elsif params[:new_ranking] =='desc' %>
-    <span>▼</span>
-  <% end %>
-</a>
+<div class="d-md-flex ml-md-0 ml-4">
+  <div class="mt-md-1">並び替え</div>
+  <div>
+    <a href="javascript:onSortButton('new_ranking', '<%= params[:new_ranking]%>')" class="btn btn-sm rounded-pill ml-1 mb-1 ranking">
+      新着
+      <% if params[:new_ranking] =='asc' %>
+        <span>▲</span>
+      <% elsif params[:new_ranking] =='desc' %>
+        <span>▼</span>
+      <% end %>
+    </a>
 
-<a href="javascript:onSortButton('all_rate_ranking', '<%= params[:all_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
-  総合評価
-  <% if params[:all_rate_ranking] =='asc' %>
-    <span>▲</span>
-  <% elsif params[:all_rate_ranking] =='desc' %>
-    <span>▼</span>
-  <% end %>
-</a>
+    <a href="javascript:onSortButton('all_rate_ranking', '<%= params[:all_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 mb-1 ranking">
+      総合評価
+      <% if params[:all_rate_ranking] =='asc' %>
+        <span>▲</span>
+      <% elsif params[:all_rate_ranking] =='desc' %>
+        <span>▼</span>
+      <% end %>
+    </a>
 
-<a href="javascript:onSortButton('atmosphere_rate_ranking', '<%= params[:atmosphere_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
-  雰囲気
-  <% if params[:atmosphere_rate_ranking] =='asc' %>
-    <span>▲</span>
-  <% elsif params[:atmosphere_rate_ranking] =='desc' %>
-    <span>▼</span>
-  <% end %>
-</a>
+    <a href="javascript:onSortButton('atmosphere_rate_ranking', '<%= params[:atmosphere_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 mb-1 ranking">
+      雰囲気
+      <% if params[:atmosphere_rate_ranking] =='asc' %>
+        <span>▲</span>
+      <% elsif params[:atmosphere_rate_ranking] =='desc' %>
+        <span>▼</span>
+      <% end %>
+    </a>
 
-<a href="javascript:onSortButton('few_people_rate_ranking', '<%= params[:few_people_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
-  人の少なさ
-  <% if params[:few_people_rate_ranking] =='asc' %>
-    <span>▲</span>
-  <% elsif params[:few_people_rate_ranking] =='desc' %>
-    <span>▼</span>
-  <% end %>
-</a>
+    <a href="javascript:onSortButton('few_people_rate_ranking', '<%= params[:few_people_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 mb-1 ranking">
+      人の少なさ
+      <% if params[:few_people_rate_ranking] =='asc' %>
+        <span>▲</span>
+      <% elsif params[:few_people_rate_ranking] =='desc' %>
+        <span>▼</span>
+      <% end %>
+    </a>
 
-<a href="javascript:onSortButton('standard_rate_ranking', '<%= params[:standard_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
-  定番度
-  <% if params[:standard_rate_ranking] =='asc' %>
-    <span>▲</span>
-  <% elsif params[:standard_rate_ranking] =='desc' %>
-    <span>▼</span>
-  <% end %>
-</a>
+    <a href="javascript:onSortButton('standard_rate_ranking', '<%= params[:standard_rate_ranking]%>')" class="btn btn-sm rounded-pill ml-1 mb-1 ranking">
+      定番度
+      <% if params[:standard_rate_ranking] =='asc' %>
+        <span>▲</span>
+      <% elsif params[:standard_rate_ranking] =='desc' %>
+        <span>▼</span>
+      <% end %>
+    </a>
 
-<a href="javascript:onSortButton('confession_ranking', '<%= params[:confession_ranking]%>')" class="btn btn-sm rounded-pill ml-1 ranking">
-  告白成功率
-  <% if params[:confession_ranking] =='asc' %>
-    <span>▲</span>
-  <% elsif params[:confession_ranking] =='desc' %>
-    <span>▼</span>
-  <% end %>
-</a>
+    <a href="javascript:onSortButton('confession_ranking', '<%= params[:confession_ranking]%>')" class="btn btn-sm rounded-pill ml-1 mb-1 ranking">
+      告白成功率
+      <% if params[:confession_ranking] =='asc' %>
+        <span>▲</span>
+      <% elsif params[:confession_ranking] =='desc' %>
+        <span>▼</span>
+      <% end %>
+    </a>
+  </div>
+</div>
 
-<div class="mx-auto mt-5">
+<div class="mx-auto mt-5 scroll">
   <table class="table-bordered index-table">
      <thead>
       <tr style="height: 50px; background-color: #666633;" class="text-center align-middle">
