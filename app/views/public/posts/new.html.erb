@@ -31,7 +31,7 @@
         <div class="row text-left  offset-md-2">
           <div class="col-md-4 col-4 post-item ml-md-0 ml-3"><%= f.label :introduction, "説明文" %></div>
           <div class="col-md-6 col-7 post-form">
-            <%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x5", class: "spot-new-form" %>
+            <%= f.text_area :introduction, :placeholder =>"例：夜になると外から見ても綺麗ですし、中の展望台から見渡す夜景もとても雰囲気があります！", size: "50x5", class: "spot-form" %>
             <% if @post.errors.include?(:introduction) %>
               <a style="color: red;"><%= @post.errors.full_messages_for(:introduction).first %></a>
             <% end %>
