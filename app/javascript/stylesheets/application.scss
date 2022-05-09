@@ -480,6 +480,11 @@ body {
     height: 350px;
   }
 
+  #map_new {
+    width: 350px;
+    height: 350px;
+  }
+
   .spot-title {
     font-size: 25px;
   }
@@ -541,5 +546,9 @@ body {
   .comment-review-integer {
     font-size: 15px;
     margin: 0;
+  }
+
+  .spot-new-container {
+    font-size: 12px;
   }
 }
