@@ -64,7 +64,7 @@
               <div class="mr-md-3 mr-1 h3 spot-review"><%= @post.avg_all_rate.round(1).to_f %></div>
               <div class="star show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
             <% else %>
-              <i class="fa-solid fa-key ml-4"></i>会員限定
+              <i class="fa-solid fa-key ml-md-4"></i>会員限定
             <% end %>
           </div>
 
@@ -110,7 +110,7 @@
                 </div>
               <% end %>
             <% else %>
-              <h4 style="transform: translate(0, 120%);margin: 0; text-align:center;" class="align-items-center"><i class="fa-solid fa-key"></i>会員限定</h4>
+              <div style="transform: translate(0, 120%);margin: 0; text-align:center;" class="align-items-center avg_confession_result_seacret h4"><i class="fa-solid fa-key"></i>会員限定</div>
             <% end %>
           </div>
         </div>
