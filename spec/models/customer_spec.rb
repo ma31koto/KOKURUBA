@@ -11,7 +11,7 @@ RSpec.describe Customer, type: :model do
       end
     end
 
-    context "空白のバリデーション" do
+    context "バリデーションテスト" do
       it "名前が空欄" do
         customer.name = ""
         is_expected.to eq false
@@ -49,6 +49,11 @@ RSpec.describe Customer, type: :model do
 
       it "パスワードが空欄" do
         customer.password = ""
+        is_expected.to eq false
+      end
+      
+      it "自己紹介文が169文字以上" do
+        customer.biography = Faker::Lorem.characters(number: 169)
         is_expected.to eq false
       end
     end

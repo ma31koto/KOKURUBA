@@ -51,6 +51,7 @@ ja:
         age: 年齢
         email: メールアドレス
         password: パスワード
+        biography: 自己紹介文
       admin:
         email: メールアドレス
         password: パスワード

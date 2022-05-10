@@ -15,6 +15,7 @@ class Customer < ApplicationRecord
   validates :name, presence: true
   validates :gender, presence: true
   validates :age, presence: true, numericality: {only_integer: true, greater_than: 1, less_than_or_equal_to: 100}
+  validates :biography, length: { maximum: 168 }
 
   enum gender: { man: 0, woman: 1, another: 2, no_answer: 3 }
 
@@ -35,5 +36,5 @@ class Customer < ApplicationRecord
   def following?(customer)
     followings.include?(customer)
   end
-  
+
 end
