@@ -154,7 +154,7 @@ body {
 }
 
 #map {
-  width: 950px;
+  width: 900px;
   height: 500px;
 }
 
@@ -351,7 +351,6 @@ body {
   border-bottom: solid 1px;
 }
 
-
 .ranking {
   border: 2px solid #666600;
   color: white;
@@ -367,6 +366,13 @@ body {
   transition-duration: 0.3s;
 }
 
+.week-popular-spot {
+  font-size: 14px;
+  color: #BDB76B;
+  border-bottom: 1px solid #BDB76B;
+  margin-top: 70px;
+  margin-bottom: 12px;
+}
 
 @media screen and (max-width: 425px) {
   .home-title {
@@ -438,19 +444,19 @@ body {
   }
 
   .scroll{
-    overflow: auto;/*tableをスクロールさせる*/
-    white-space: nowrap;/*tableのセル内にある文字の折り返しを禁止*/
+    overflow: auto;
+    white-space: nowrap;
   }
 
-  .scroll::-webkit-scrollbar{/*tableにスクロールバーを追加*/
+  .scroll::-webkit-scrollbar{
     height: 5px;
   }
 
-  .scroll::-webkit-scrollbar-track{/*tableにスクロールバーを追加*/
+  .scroll::-webkit-scrollbar-track{
     background: #F1F1F1;
   }
 
-  .scroll::-webkit-scrollbar-thumb {/*tableにスクロールバーを追加*/
+  .scroll::-webkit-scrollbar-thumb {
     background: #BCBCBC;
   }
 
@@ -535,7 +541,7 @@ body {
     transform: translate(0, 100%);
     font-size: 20px;
   }
-  
+
   .avg_confession_result_seacret {
     transform: translate(0, 120%);
     font-size: 15px;
@@ -619,6 +625,10 @@ body {
   .follow-img {
     width: 50px;
     height: 50px;
+  }
+
+  .week-popular-spot-container {
+    display: none;
   }
 
 }

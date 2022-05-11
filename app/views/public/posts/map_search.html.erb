@@ -7,10 +7,22 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12 mt-md-5 mt-3 offset-md-1">
+    <div class="col-md-10 mt-md-5 mt-3 pl-md-5">
       <input id="address" type="textbox" value="" size="50">
       <input type="button" value="地図を検索" onclick="codeAddress()" class="mt-md-0 mt-2">
       <div id='map' class="mt-3"></div>
+    </div>
+
+    <div class="col-md-2 pl-md-4 week-popular-spot-container">
+      <div class="week-popular-spot">今週の人気スポット</div>
+      <% @posts_week.each do |post_week| %>
+        <div class="mb-md-4">
+          <%= link_to post_path(post_week), class: "link-white" do %>
+            <%= image_tag post_week.get_spot_image, size: "100x75", class: "img-filter" %></br>
+            <%= post_week.title %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 

@@ -4,6 +4,9 @@ class Public::PostsController < ApplicationController
 
   def map_search
     @posts = Post.all
+    @posts_week = Post.where(created_at: Time.zone.today.beginning_of_day.ago(7.days)...Time.zone.today.end_of_day)
+                      .order(all_rate: "DESC")
+                      .take(4)
     session[:path] = request.path
   end
 
@@ -86,7 +89,14 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :introduction, :postal_code, :address, :longitude, :latitude, :area_id, :spot_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
+    params.require(:post).permit(
+      :title,
+      :introduction,
+      :postal_code, :address, :longitude, :latitude, :area_id,
+      :spot_image,
+      :confession_result,
+      :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate
+      )
   end
 
   def ensure_correct_customer
