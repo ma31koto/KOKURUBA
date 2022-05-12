@@ -18,11 +18,11 @@
 
     <div class="col-md-2 pl-md-4 week-popular-spot-container">
       <div class="week-popular-spot">今月の人気スポット</div>
-      <% @posts_week.each do |post_week| %>
+      <% @week_posts.each do |week_post| %>
         <div class="mb-md-4 ml-md-3 week-spot-title">
-          <%= link_to post_path(post_week), class: "link-white" do %>
-            <%= image_tag post_week.get_spot_image, size: "100x75", class: "img-filter" %></br>
-            <%= post_week.title %>
+          <%= link_to post_path(week_post), class: "link-white" do %>
+            <%= image_tag week_post.get_spot_image, size: "100x75", class: "img-filter" %></br>
+            <%= week_post.title %>
           <% end %>
         </div>
       <% end %>

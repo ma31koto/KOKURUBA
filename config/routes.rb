@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
-    root :to =>"homes#top"
+    root :to => "homes#top"
     get 'homes/about' => 'homes#about'
     resources :customers, only: [:show, :edit, :update] do
       collection do

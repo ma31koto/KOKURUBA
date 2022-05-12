@@ -1,5 +1,6 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @q = Post.ransack(params[:q])
@@ -30,16 +31,13 @@ class Admin::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def edit
-    @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
-    @post = Post.find(params[:id])
     @tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       # タグの登録
@@ -51,7 +49,6 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to view_context.admin_post_destroy_link, notice: 'スポット投稿を削除しました!'
   end
@@ -59,7 +56,19 @@ class Admin::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :introduction, :postal_code, :address, :longitude, :latitude, :area_id, :spot_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
+    params.require(:post).permit(
+      :title,
+      :introduction,
+      :postal_code, :address, :longitude, :latitude,
+      :area_id,
+      :spot_image,
+      :confession_result,
+      :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate
+      )
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 
   # ランキング検索の際、viewから送られてくる値

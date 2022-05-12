@@ -1,14 +1,13 @@
 class Public::PostCommentsController < ApplicationController
   before_action :authenticate_customer!
+  before_action :set_post, only: [:new, :create, :update]
   before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
 
   def new
     @post_comment = PostComment.new
-    @post = Post.find(params[:post_id])
   end
 
   def create
-    @post = Post.find(params[:post_id])
     @post_comment = current_customer.post_comments.new(post_comment_params)
     @post_comment.post_id = @post.id
     if @post_comment.save
@@ -23,7 +22,6 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:post_id])
     if @post_comment.update(post_comment_params)
       redirect_to session[:previous_url], notice: 'コメント投稿を変更しました!'
     else
@@ -39,7 +37,18 @@ class Public::PostCommentsController < ApplicationController
   private
 
   def post_comment_params
-    params.require(:post_comment).permit(:customer_id, :post_id, :title, :comment, :comment_image, :confession_result, :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate)
+    params.require(:post_comment).permit(
+      :customer_id, :post_id,
+      :title,
+      :comment,
+      :comment_image,
+      :confession_result,
+      :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate
+      )
+  end
+
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 
   def ensure_correct_customer

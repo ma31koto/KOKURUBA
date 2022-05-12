@@ -1,13 +1,14 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
+  before_action :set_session_path, only: [:map_search, :index, :new]
 
   def map_search
     @posts = Post.all
-    @posts_week = Post.where(created_at: Time.zone.today.beginning_of_day.ago(1.month)...Time.zone.today.end_of_day)
+    @week_posts = Post.where(created_at: Time.zone.today.beginning_of_day.ago(1.month)...Time.zone.today.end_of_day)
                       .order(all_rate: "DESC")
                       .take(4)
-    session[:path] = request.path
   end
 
   def index
@@ -35,18 +36,15 @@ class Public::PostsController < ApplicationController
       return
     end
     @posts = Kaminari.paginate_array(@posts_pre).page(params[:page]).per(8)
-    session[:path] = request.path
   end
 
   def show
-    @post = Post.find(params[:id])
     @posts = Post.all
   end
 
   def new
     @post = Post.new
     @posts = Post.all
-    session[:path] = request.path
   end
 
   def create
@@ -64,12 +62,10 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
-    @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
       # タグの登録
@@ -81,7 +77,6 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to view_context.public_post_destroy_link, notice: 'スポット投稿を削除しました!'
   end
@@ -92,7 +87,8 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(
       :title,
       :introduction,
-      :postal_code, :address, :longitude, :latitude, :area_id,
+      :postal_code, :address, :longitude, :latitude,
+      :area_id,
       :spot_image,
       :confession_result,
       :atmosphere_rate, :few_people_rate, :standard_rate, :all_rate
@@ -100,10 +96,18 @@ class Public::PostsController < ApplicationController
   end
 
   def ensure_correct_customer
-    @post = Post.find(params[:id])
     unless @post.customer == current_customer
       redirect_to customer_path(current_customer)
     end
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  #スポット投稿削除後のリンク遷移先の記憶
+  def set_session_path
+    session[:path] = request.path
   end
 
   # ランキング検索の際、viewから送られてくる値

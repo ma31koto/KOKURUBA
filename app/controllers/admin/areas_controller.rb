@@ -1,5 +1,6 @@
 class Admin::AreasController < ApplicationController
   before_action :authenticate_admin!
+  before_action :set_area, only: [:edit, :update, :destroy]
 
   def index
     @areas = Area.all
@@ -17,11 +18,9 @@ class Admin::AreasController < ApplicationController
   end
 
   def edit
-    @area = Area.find(params[:id])
   end
 
   def update
-    @area = Area.find(params[:id])
     if @area.update(area_params)
       redirect_to admin_areas_path, notice: 'エリア名を変更しました!'
     else
@@ -30,8 +29,7 @@ class Admin::AreasController < ApplicationController
   end
 
   def destroy
-    area = Area.find(params[:id])
-    area.destroy
+    @area.destroy
     redirect_to admin_areas_path, notice: 'エリア名を削除しました!'
   end
 
@@ -40,5 +38,9 @@ class Admin::AreasController < ApplicationController
   def area_params
     params.require(:area).permit(:name)
   end
-  
+
+  def set_area
+    @area = Area.find(params[:id])
+  end
+
 end
