@@ -153,17 +153,6 @@
   </table>
 
   <script>
-    // 評価機能
-    $('.star').empty();
-    $('.star').raty({
-      size: 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      half: true,
-      readOnly: true,
-    });
-
     //ランキング機能
     //ボタン切り替えでコントローラーにasc,descの情報を渡す
     function onSortButton(el, value){
@@ -176,4 +165,5 @@
       form.submit();
     }
   </script>
+  <%= render 'layouts/star_review' %>
 </div>

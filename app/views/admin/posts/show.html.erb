@@ -207,21 +207,11 @@
   </div>
 
   <script>
-    //評価機能
-    $('.star').empty();
-    $('.star').raty({
-      size: 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      half: true,
-      readOnly: true,
-    });
-
     // スポット内容をもっと見る機能
     $('.see-more').click(function(){
       $(this).closest(".content-body").find(".truncated").hide();
       $(this).closest(".content-body").find(".untruncated").show();
     })
   </script>
+  <%= render 'layouts/star_review' %>
 </div>
