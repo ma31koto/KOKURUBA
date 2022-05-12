@@ -1,15 +1,20 @@
 <div class="container">
-
   <div class="row">
     <div class="col-md-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>ログイン</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-right-to-bracket mr-2"></i>ログイン
+        </mark>
+      </h2>
     </div>
   </div>
 
   <div class="row">
     <div class="col-12 mx-auto mt-5">
       <div class="ml-5">
-        <p><mark class="bg-secondary text-light">・会員の方はこちらからログイン</mark></p>
+        <p>
+          <mark class="bg-secondary text-light">・会員の方はこちらからログイン</mark>
+        </p>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="mb-2">
             <%= f.label :email, "メールアドレス", class: "col-md-2 col-12" %>
@@ -22,16 +27,17 @@
           <% flash.each do |message_type, message| %>
             <%= content_tag :div, message, class: "message_type offset-2", style: "color: red;" %>
           <% end %>
-
           <%= f.submit "ログイン", class: "btn btn-primary offset-md-2"%>
         <% end %>
-
         <div class="mt-5">
-          <p><mark class="bg-secondary text-light">・会員登録がお済みでない方</mark></p>
-          <p><%= link_to "こちら", new_customer_registration_path %>からログインしてください。</p>
+          <p>
+            <mark class="bg-secondary text-light">・会員登録がお済みでない方</mark>
+          </p>
+          <p>
+            <%= link_to "こちら", new_customer_registration_path %>からログインしてください。
+          </p>
         </div>
       </div>
     </div>
   </div>
-
 </div>

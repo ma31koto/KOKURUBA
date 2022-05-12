@@ -1,7 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-comment-dots mr-2"></i>コメント編集</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-comment-dots mr-2"></i>コメント編集
+        </mark>
+      </h2>
     </div>
   </div>
 
@@ -22,8 +26,8 @@
             <% end %>
             【エリア】<%= @post_comment.post.area.name %><br/>
             【タグ】<% @post_comment.post.tags.each do |tag| %>
-                    <%=tag.name%>,
-                  <% end %>
+                      <%=tag.name%>,
+                    <% end %>
           </div>
         </div>
         <div class="offset-2">
@@ -46,93 +50,115 @@
     </div>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-12 text-center">
-        <%= form_with model:@post_comment, url: admin_post_post_comment_path(@post_comment.post, @post_comment), method: :patch, local: true do |f| %>
-
-          <div class="row text-left offset-2">
-            <div class="col-4 post-item"><%= f.label :title, "タイトル" %></div>
-            <div class="col-6 post-form">
-              <%= f.text_field :title, :placeholder =>"例)クリスマスシーズンの東京タワー", size: 50 %>
-              <% if @post_comment.errors.include?(:title) %>
-                <a style="color: red;"><%= @post_comment.errors.full_messages_for(:title).first %></a>
-              <% end %>
-            </div>
+  <div class="row">
+    <div class="col-12 mt-5 text-center">
+      <%= form_with model:@post_comment, url: admin_post_post_comment_path(@post_comment.post, @post_comment), method: :patch, local: true do |f| %>
+        <div class="row text-left offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :title, "タイトル" %>
           </div>
-          <div class="row text-left offset-2">
-            <div class="col-4 post-item"><%= f.label :comment, "コメント" %></div>
-            <div class="col-6 post-form">
-              <%= f.text_area :comment, :placeholder =>"例)クリスマスシーズンの東京タワーは色がクリスマスカラーに変わります！", size: "50x3" %>
-              <% if @post_comment.errors.include?(:comment) %>
-                <a style="color: red;"><%= @post_comment.errors.full_messages_for(:comment).first %></a>
-              <% end %>
-            </div>
-          </div>
-          <div class="row text-left offset-2">
-            <div class="col-4 post-item"><%= f.label :comment_image, "コメント画像" %></div>
-            <div class="col-6 post-form">
-              <%= f.file_field :comment_image, accept: "image/*" %>
-            </div>
-          </div>
-
-          <div class="row d-flex text-left  offset-2">
-            <div class="col-4 post-item"><%= f.label :confession_result, "告白結果" %></div>
-            <div class="col-6 d-flex post-form">
-              <div class="mr-4">
-                <%= f.radio_button :confession_result, PostComment.confession_results.key(0) %>
-                <%= f.label :confession_result, PostComment.confession_results_i18n[:yes] %>
-                <i class="fa-solid fa-heart" style="color: red;"></i>
-              </div>
-              <div class="mr-4">
-                <%= f.radio_button :confession_result, PostComment.confession_results.key(1) %>
-                <%= f.label :confession_result, PostComment.confession_results_i18n[:no] %>
-                <i class="fa-solid fa-heart-crack" style="color: red;"></i>
-              </div>
-              <div>
-                <%= f.radio_button :confession_result, PostComment.confession_results.key(2) %>
-                <%= f.label :confession_result, PostComment.confession_results_i18n[:no_answer] %>
-                <i class="fa-solid fa-chess-knight" style="color: red;"></i>
-              </div>
-            </div>
-            <% if @post_comment.errors.include?(:confession_result) %>
-              <a style="color: red;"><%= @post_comment.errors.full_messages_for(:confession_result).first %></a>
+          <div class="col-6 post-form">
+            <%= f.text_field :title, :placeholder =>"例)クリスマスシーズンの東京タワー", size: 50 %>
+            <% if @post_comment.errors.include?(:title) %>
+              <a style="color: red;">
+                <%= @post_comment.errors.full_messages_for(:title).first %>
+              </a>
             <% end %>
           </div>
+        </div>
 
-          <div class="row d-flex text-left  offset-2">
-            <div class="col-4 post-item"><%= f.label :atmosphere_rate, "雰囲気" %></div>
-            <div class="col-6 star_atmosphere_rate post-form" data-score="<%= @post_comment.atmosphere_rate %>">
-                <%= f.hidden_field :atmosphere_rate %>
+        <div class="row text-left offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :comment, "コメント" %>
+          </div>
+          <div class="col-6 post-form">
+            <%= f.text_area :comment, :placeholder =>"例)クリスマスシーズンの東京タワーは色がクリスマスカラーに変わります！", size: "50x3" %>
+            <% if @post_comment.errors.include?(:comment) %>
+              <a style="color: red;">
+                <%= @post_comment.errors.full_messages_for(:comment).first %>
+              </a>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row text-left offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :comment_image, "コメント画像" %>
+          </div>
+          <div class="col-6 post-form">
+            <%= f.file_field :comment_image, accept: "image/*" %>
+          </div>
+        </div>
+
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :confession_result, "告白結果" %>
+          </div>
+          <div class="col-6 d-flex post-form">
+            <div class="mr-4">
+              <%= f.radio_button :confession_result, PostComment.confession_results.key(0) %>
+              <%= f.label :confession_result, PostComment.confession_results_i18n[:yes] %>
+              <i class="fa-solid fa-heart" style="color: red;"></i>
+            </div>
+            <div class="mr-4">
+              <%= f.radio_button :confession_result, PostComment.confession_results.key(1) %>
+              <%= f.label :confession_result, PostComment.confession_results_i18n[:no] %>
+              <i class="fa-solid fa-heart-crack" style="color: red;"></i>
+            </div>
+            <div>
+              <%= f.radio_button :confession_result, PostComment.confession_results.key(2) %>
+              <%= f.label :confession_result, PostComment.confession_results_i18n[:no_answer] %>
+              <i class="fa-solid fa-chess-knight" style="color: red;"></i>
             </div>
           </div>
+          <% if @post_comment.errors.include?(:confession_result) %>
+            <a style="color: red;">
+              <%= @post_comment.errors.full_messages_for(:confession_result).first %>
+            </a>
+          <% end %>
+        </div>
 
-          <div class="row d-flex text-left  offset-2">
-            <div class="col-4 post-item"><%= f.label :few_people_rat, "人の少なさ" %></div>
-            <div class="col-6 star_few_people_rate post-form" data-score="<%= @post_comment.few_people_rate %>">
-              <%= f.hidden_field :few_people_rate %>
-            </div>
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :atmosphere_rate, "雰囲気" %>
           </div>
+          <div class="col-6 star_atmosphere_rate post-form" data-score="<%= @post_comment.atmosphere_rate %>">
+              <%= f.hidden_field :atmosphere_rate %>
+          </div>
+        </div>
 
-          <div class="row d-flex text-left  offset-2">
-            <div class="col-4 post-item"><%= f.label :standard_rate, "定番度" %></div>
-            <div class="col-6 star_standard_rate post-form" data-score="<%= @post_comment.standard_rate %>">
-              <%= f.hidden_field :standard_rate %>
-            </div>
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :few_people_rat, "人の少なさ" %>
           </div>
+          <div class="col-6 star_few_people_rate post-form" data-score="<%= @post_comment.few_people_rate %>">
+            <%= f.hidden_field :few_people_rate %>
+          </div>
+        </div>
 
-          <div class="row d-flex text-left  offset-2">
-            <div class="col-4 post-item"><%= f.label :all_rate, "総合評価" %></div>
-            <div class="col-6 star_all_rate post-form" data-score="<%= @post_comment.all_rate %>">
-              <%= f.hidden_field :all_rate %>
-            </div>
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :standard_rate, "定番度" %>
           </div>
+          <div class="col-6 star_standard_rate post-form" data-score="<%= @post_comment.standard_rate %>">
+            <%= f.hidden_field :standard_rate %>
+          </div>
+        </div>
 
-          <div class="mt-3">
-            <%= f.submit "変更", class: "btn btn-success", style: "width: 150px;" %>
-            <%= link_to "削除", admin_post_post_comment_path(@post_comment.post, @post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger ml-3", style: "width: 150px;" %>
+        <div class="row d-flex text-left  offset-2">
+          <div class="col-4 post-item">
+            <%= f.label :all_rate, "総合評価" %>
           </div>
-        <% end %>
-      </div>
+          <div class="col-6 star_all_rate post-form" data-score="<%= @post_comment.all_rate %>">
+            <%= f.hidden_field :all_rate %>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <%= f.submit "変更", class: "btn btn-success", style: "width: 150px;" %>
+          <%= link_to "削除", admin_post_post_comment_path(@post_comment.post, @post_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger ml-3", style: "width: 150px;" %>
+        </div>
+      <% end %>
     </div>
   </div>
 
@@ -150,7 +176,6 @@
       })
     <% end %>
   </script>
-
 </div>
 
 

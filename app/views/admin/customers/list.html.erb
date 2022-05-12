@@ -1,13 +1,16 @@
 <div class="container">
-
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>スポット/コメント投稿一覧</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-user mr-2"></i>スポット/コメント投稿一覧
+        </mark>
+      </h2>
     </div>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-md-12 ml-5 d-flex flex-wrap">
+  <div class="row">
+    <div class="col-12 mt-5 ml-5 d-flex flex-wrap">
       <div>
         <%= image_tag @customer.get_profile_image, size: "150x150" %>
       </div>
@@ -23,10 +26,15 @@
     <div class="col-12">
       <div class="mt-5 ml-4 customer-list">
         <ul class="tab-list">
-          <li class="tab tab-active"><span class="mr-3">スポット一覧</span><%= @customer.posts.count %>件</li>
-          <li class="tab"><span class="mr-3">コメント一覧</span><%= @customer.post_comments.count %>件</li>
+          <li class="tab tab-active">
+            <span class="mr-3">スポット一覧</span>
+            <%= @customer.posts.count %>件
+          </li>
+          <li class="tab">
+            <span class="mr-3">コメント一覧</span>
+            <%= @customer.post_comments.count %>件
+          </li>
         </ul>
-
         <div class="tabbox-contents">
           <div class="tabbox box-show">
             <table class="table table-bordered-show">
@@ -48,19 +56,23 @@
                       <%= image_tag post.get_spot_image, size: "150x100", class:"img_filter" %>
                     <% end %>
                   </td >
-                    <td class="align-middle">
+                  <td class="align-middle">
                     <%= link_to admin_post_path(post), class: "link-black" do %>
                       <%= post.title %>
                     <% end %>
                   </td>
-                  <td class="align-middle"><%= post.area.name %></td>
+                  <td class="align-middle">
+                    <%= post.area.name %>
+                  </td>
                   <td class="align-middle">
                     <% post.tags.each do |tag| %>
                       <%= tag.name %><br/>
                     <% end %>
                   </td>
                   <td class="align-middle">
-                    <h3><%= post.avg_all_rate.round(1).to_f %></h3>
+                    <h3>
+                      <%= post.avg_all_rate.round(1).to_f %>
+                    </h3>
                     <div class="d-flex">
                       <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
                       <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count%>件)</div>
@@ -89,37 +101,63 @@
                     投稿元スポットへ<i class="fa-solid fa-right-to-bracket"></i>
                   <% end %>
                 </div>
+
                 <div class="col-3" style="border-left: 1px dotted #808000;">
                   <div class="d-flex" style="height: 30px;">
-                    <div style="width: 100px;"><p>総合評価</p></div>
-                    <div><%= post_comment.all_rate.round(1).to_f %></div>
+                    <div style="width: 100px;">
+                      <p>総合評価</p>
+                    </div>
+                    <div>
+                      <%= post_comment.all_rate.round(1).to_f %>
+                    </div>
                     <div class="star ml-1" data-score="<%= post_comment.all_rate %>"></div>
                   </div>
+
                   <div class="d-flex" style="height: 30px;">
-                    <div style="width: 100px;"><p>雰囲気</p></div>
-                    <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
+                    <div style="width: 100px;">
+                      <p>雰囲気</p>
+                    </div>
+                    <div>
+                      <%= post_comment.atmosphere_rate.round(1).to_f %>
+                    </div>
                     <div class="star ml-1" data-score="<%= post_comment.atmosphere_rate %>"></div>
                   </div>
+
                   <div class="d-flex" style="height: 30px;">
-                    <div style="width: 100px;"><p>人の少なさ</p></div>
-                    <div><%= post_comment.few_people_rate.round(1).to_f %></div>
+                    <div style="width: 100px;">
+                      <p>人の少なさ</p>
+                    </div>
+                    <div>
+                      <%= post_comment.few_people_rate.round(1).to_f %>
+                    </div>
                     <div class="star ml-1" data-score="<%= post_comment.few_people_rate %>"></div>
                   </div>
+
                   <div class="d-flex" style="height: 30px;">
-                    <div style="width: 100px;"><p>定番度</p></div>
-                    <div><%= post_comment.standard_rate.round(1).to_f %></div>
+                    <div style="width: 100px;">
+                      <p>定番度</p>
+                    </div>
+                    <div>
+                      <%= post_comment.standard_rate.round(1).to_f %>
+                    </div>
                     <div class="star ml-1" data-score="<%= post_comment.standard_rate %>"></div>
                   </div>
                 </div>
+
                 <div class="col-5">
                   <div class="row">
                     <div class="col-9">
-                      <h5><strong><%= post_comment.title %></strong></h5>
+                      <h5>
+                        <strong><%= post_comment.title %></strong>
+                      </h5>
                     </div>
                     <div class="col-3">
-                      <a><%= post_comment.created_at.strftime('%Y/%m/%d') %></a>
+                      <a>
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                      </a>
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col-12">
                       <%= post_comment.comment %>
@@ -132,7 +170,6 @@
               </div>
             <% end %>
           </div>
-          
         </div>
       </div>
     </div>
@@ -149,16 +186,16 @@
         $('.tabbox').eq(index).addClass('box-show');
       });
 
-    $('.tab').mouseover(function() {
-      var classes = $(this).attr('class').split(" ");
-      if (classes.includes("tab-active") == true) { return; }
-      $(this).addClass('tab-mouseover');
-    });
+      $('.tab').mouseover(function() {
+        var classes = $(this).attr('class').split(" ");
+        if (classes.includes("tab-active") == true) { return; }
+        $(this).addClass('tab-mouseover');
+      });
 
-    $('.tab').mouseout(function() {
-      $(this).removeClass('tab-mouseover');
+      $('.tab').mouseout(function() {
+        $(this).removeClass('tab-mouseover');
+      });
     });
-  });
 
 　　// 評価機能
     $('.star').empty();
@@ -171,5 +208,4 @@
       readOnly: true,
     });
   </script>
-
 </div>

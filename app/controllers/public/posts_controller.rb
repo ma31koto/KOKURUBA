@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
 
   def map_search
     @posts = Post.all
-    @posts_week = Post.where(created_at: Time.zone.today.beginning_of_day.ago(7.days)...Time.zone.today.end_of_day)
+    @posts_week = Post.where(created_at: Time.zone.today.beginning_of_day.ago(1.month)...Time.zone.today.end_of_day)
                       .order(all_rate: "DESC")
                       .take(4)
     session[:path] = request.path

@@ -1,14 +1,21 @@
 <div class="container">
-
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-location-dot mr-2"></i>スポット詳細</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-location-dot mr-2"></i>スポット詳細
+        </mark>
+      </h2>
     </div>
   </div>
 
-  <div class="row mt-5">
-    <div class="col-10 d-flex align-items-center">
-      <div><h1>【<%= @post.title %>】</h1></div>
+  <div class="row">
+    <div class="col-10 mt-5 d-flex align-items-center">
+      <div>
+        <h1>
+          【<%= @post.title %>】
+        </h1>
+      </div>
     </div>
     <div class="col-2 d-flex align-items-center">
       <div class="ml-5">
@@ -17,8 +24,8 @@
     </div>
   </div>
 
-  <div class="row ml-3">
-    <div class="col-12 d-flex">
+  <div class="row">
+    <div class="col-12 ml-3 d-flex">
       <div class="d-flex align-items-cente">
         ●関連タグ：
         <% @post.tags.each do |tag| %>
@@ -43,7 +50,6 @@
     </div>
 
     <div class="col-7 mt-3">
-
       <div class="row">
         <div class="col-8">
           <div class="d-flex" style="height: 30px;">
@@ -99,7 +105,6 @@
                     <a><%= @post.introduction.truncate(60)%></a>
                     <p class="see-more link-gold">&lt;more&gt;</p>
                   </div>
-
                   <div class="untruncated" style="display: none">
                     <a><%= @post.introduction %></a>
                   </div>
@@ -111,14 +116,18 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
   <div class="row">
     <div class="col-12">
       <div class="d-flex">
-        <div class="mt-5 ml-3"><h2><span class="mr-3">コメント一覧</span><%= @post.post_comments.count %>件</h2></div>
+        <div class="mt-5 ml-3">
+          <h2>
+            <span class="mr-3">コメント一覧</span>
+            <%= @post.post_comments.count %>件
+          </h2>
+        </div>
       </div>
     </div>
   </div>
@@ -191,7 +200,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         <% end %>
       <% end %>
@@ -216,5 +224,4 @@
       $(this).closest(".content-body").find(".untruncated").show();
     })
   </script>
-
 </div>

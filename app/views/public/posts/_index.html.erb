@@ -91,7 +91,9 @@
           </td>
           <td>
             <% if customer_signed_in? %>
-              <h5><%= post.avg_all_rate.round(1).to_f %></h5>
+              <h5>
+                <%= post.avg_all_rate.round(1).to_f %>
+              </h5>
               <div class="star" data-score="<%= post.avg_all_rate %>"></div>
             <% else %>
               <i class="fa-solid fa-key"></i>会員限定
@@ -99,7 +101,9 @@
           </td>
           <td>
             <% if customer_signed_in? %>
-              <h5><%= post.avg_atmosphere_rate.round(1).to_f %></h5>
+              <h5>
+                <%= post.avg_atmosphere_rate.round(1).to_f %>
+              </h5>
               <div class="star" data-score="<%= post.avg_atmosphere_rate %>"></div>
             <% else %>
               <i class="fa-solid fa-key"></i>会員限定
@@ -107,7 +111,9 @@
           </td>
           <td>
             <% if customer_signed_in? %>
-              <h5><%= post.avg_few_people_rate.round(1).to_f %></h5>
+              <h5>
+                <%= post.avg_few_people_rate.round(1).to_f %>
+              </h5>
               <div class="star" data-score="<%= post.avg_few_people_rate %>"></div>
             <% else %>
               <i class="fa-solid fa-key"></i>会員限定
@@ -115,7 +121,9 @@
           </td>
           <td>
             <% if customer_signed_in? %>
-              <h5><%= post.avg_standard_rate.round(1).to_f %></h5>
+              <h5>
+                <%= post.avg_standard_rate.round(1).to_f %>
+              </h5>
               <div class="star" data-score="<%= post.avg_standard_rate %>"></div>
             <% else %>
               <i class="fa-solid fa-key"></i>会員限定
@@ -126,42 +134,46 @@
               <% unless post.avg_confession_result %>
                 <h5>未回答</h5>
               <% else %>
-                <h5><%= post.avg_confession_result %>％</h5>
+                <h5>
+                  <%= post.avg_confession_result %>％
+                </h5>
               <% end %>
             <% else %>
               <i class="fa-solid fa-key"></i>会員限定
             <% end %>
           </td>
           <td>
-            <h5 class="ml-3"><%= post.post_comments.count %>件</h5>
+            <h5 class="ml-3">
+              <%= post.post_comments.count %>件
+            </h5>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <script>
+    // 評価機能
+    $('.star').empty();
+    $('.star').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+    });
+
+    //ランキング機能
+    //ボタン切り替えでコントローラーにasc,descの情報を渡す
+    function onSortButton(el, value){
+    if(value == 'desc'){
+      document.getElementById(el).value='asc';
+    }else{
+      document.getElementById(el).value='desc';
+    }
+      const form = document.getElementById('post_search');
+      form.submit();
+    }
+  </script>
 </div>
-
-<script>
-  // 評価機能
-  $('.star').empty();
-  $('.star').raty({
-    size: 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    half: true,
-    readOnly: true,
-  });
-
-  //ランキング機能
-  //ボタン切り替えでコントローラーにasc,descの情報を渡す
-  function onSortButton(el, value){
-  if(value == 'desc'){
-    document.getElementById(el).value='asc';
-  }else{
-    document.getElementById(el).value='desc';
-  }
-    const form = document.getElementById('post_search');
-    form.submit();
-  }
-</script>

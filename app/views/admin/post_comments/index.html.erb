@@ -1,8 +1,11 @@
 <div class="container">
-
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-comment-dots mr-2"></i>コメント一覧</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-comment-dots mr-2"></i>コメント一覧
+        </mark>
+      </h2>
     </div>
   </div>
 
@@ -42,50 +45,58 @@
           </thead>
           <tbody style="background-color: #262626;">
             <% @post_comments.each do |post_comment| %>
-            <tr>
-              <td>
-                <%= image_tag post_comment.get_comment_image, size: "120x70" %></br>
-                <%= post_comment.title %>
-                <div>
-                  <%= link_to admin_post_path(post_comment.post) do %>
-                    スポット元へ<i class="fa-solid fa-right-to-bracket"></i>
-                  <% end %>
-                </div>
-              </td>
-              <td>
-                <h5><%= post_comment.all_rate.round(1).to_f %></h5>
-                <div class="star" data-score="<%= post_comment.all_rate %>"></div>
-              </td>
-              <td>
-                <h5><%= post_comment.atmosphere_rate.round(1).to_f %></h5>
-                <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
-              </td>
-              <td>
-                <h5><%= post_comment.few_people_rate.round(1).to_f %></h5>
-                <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
-              </td>
-              <td>
-                <h5><%= post_comment.standard_rate.round(1).to_f %></h5>
-                <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
-              </td>
-              <td>
-                <div>
-                  <%= link_to admin_customer_path(post_comment.customer), class: "link-white" do %>
-                    ●投稿者：<%= post_comment.customer.name %>
-                  <% end %>
-                </div>
-                <%= post_comment.comment %>
-              </td>
-              <td>
-                <%= post_comment.confession_result_i18n %>
-              </td>
-              <td>
-                <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-              </td>
-              <td>
-                <%= link_to "編集", edit_admin_post_post_comment_path(post_comment.post, post_comment), class: "btn btn-success" %>
-              </td>
-            </tr>
+              <tr>
+                <td>
+                  <%= image_tag post_comment.get_comment_image, size: "120x70" %></br>
+                  <%= post_comment.title %>
+                  <div>
+                    <%= link_to admin_post_path(post_comment.post) do %>
+                      スポット元へ<i class="fa-solid fa-right-to-bracket"></i>
+                    <% end %>
+                  </div>
+                </td>
+                <td>
+                  <h5>
+                    <%= post_comment.all_rate.round(1).to_f %>
+                  </h5>
+                  <div class="star" data-score="<%= post_comment.all_rate %>"></div>
+                </td>
+                <td>
+                  <h5>
+                    <%= post_comment.atmosphere_rate.round(1).to_f %>
+                  </h5>
+                  <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
+                </td>
+                <td>
+                  <h5>
+                    <%= post_comment.few_people_rate.round(1).to_f %>
+                  </h5>
+                  <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
+                </td>
+                <td>
+                  <h5>
+                    <%= post_comment.standard_rate.round(1).to_f %>
+                  </h5>
+                  <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+                </td>
+                <td>
+                  <div>
+                    <%= link_to admin_customer_path(post_comment.customer), class: "link-white" do %>
+                      ●投稿者：<%= post_comment.customer.name %>
+                    <% end %>
+                  </div>
+                  <%= post_comment.comment %>
+                </td>
+                <td>
+                  <%= post_comment.confession_result_i18n %>
+                </td>
+                <td>
+                  <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                </td>
+                <td>
+                  <%= link_to "編集", edit_admin_post_post_comment_path(post_comment.post, post_comment), class: "btn btn-success" %>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>
@@ -106,5 +117,4 @@
       readOnly: true,
     });
   </script>
-
 </div>

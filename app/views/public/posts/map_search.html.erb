@@ -1,8 +1,11 @@
 <div class="container">
-
   <div class="row">
     <div class="col-md-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-magnifying-glass-location mr-2"></i>マップ検索</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-magnifying-glass-location mr-2"></i>マップ検索
+        </mark>
+      </h2>
     </div>
   </div>
 
@@ -14,9 +17,9 @@
     </div>
 
     <div class="col-md-2 pl-md-4 week-popular-spot-container">
-      <div class="week-popular-spot">今週の人気スポット</div>
+      <div class="week-popular-spot">今月の人気スポット</div>
       <% @posts_week.each do |post_week| %>
-        <div class="mb-md-4">
+        <div class="mb-md-4 ml-md-3 week-spot-title">
           <%= link_to post_path(post_week), class: "link-white" do %>
             <%= image_tag post_week.get_spot_image, size: "100x75", class: "img-filter" %></br>
             <%= post_week.title %>
@@ -59,7 +62,6 @@
           marker.addListener('click', function() {
             infowindow.open(map, marker);
           });
-
         })();
       <% end %>
     }
@@ -81,6 +83,5 @@
   </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
-
 </div>
 

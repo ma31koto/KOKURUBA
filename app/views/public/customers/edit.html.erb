@@ -1,8 +1,11 @@
 <div class="container">
-
   <div class="row">
     <div class="col-md-12 mt-5 heading-en">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>My Page 編集</mark></mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-user mr-2"></i>My Page 編集
+        </mark>
+      </h2>
     </div>
   </div>
 
@@ -15,10 +18,12 @@
           </thead>
           <tbody>
             <tr>
-              <td  class="font-weight-bolder table-bg-color">
+              <td class="font-weight-bolder table-bg-color">
                 <%= f.label :profile_image, "プロフィール写真", class: "ml-3" %>
               </td>
-              <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+              <td>
+                <%= f.file_field :profile_image, accept: "image/*" %>
+              </td>
             </tr>
             <tr>
               <td  class="font-weight-bolder table-bg-color">
@@ -27,12 +32,14 @@
               <td>
                 <%= f.text_field :name, size: 30 %>
                 <% if @customer.errors.include?(:name) %>
-                  <p style="color: red;"><%= @customer.errors.full_messages_for(:name).first %></p>
+                  <p style="color: red;">
+                    <%= @customer.errors.full_messages_for(:name).first %>
+                  </p>
                 <% end %>
               </td>
             </tr>
             <tr>
-              <td  class="font-weight-bolder table-bg-color">
+              <td class="font-weight-bolder table-bg-color">
                 <%= f.label :gender, "性別", class: "ml-3" %>
               </td>
               <td>
@@ -48,18 +55,22 @@
                 <%= f.radio_button :gender, Customer.genders.key(3) %>
                 <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
                 <% if @customer.errors.include?(:gender) %>
-                  <p style="color: red;"><%= @customer.errors.full_messages_for(:gender).first %></p>
+                  <p style="color: red;">
+                    <%= @customer.errors.full_messages_for(:gender).first %>
+                  </p>
                 <% end %>
               </td>
             </tr>
             <tr>
-              <td  class="font-weight-bolder table-bg-color">
+              <td class="font-weight-bolder table-bg-color">
                 <%= f.label :age, "年齢", class: "ml-3" %>
               </td>
               <td>
                 <%= f.text_field :age, size: 5  %>歳
                 <% if @customer.errors.include?(:age) %>
-                  <p style="color: red;"><%= @customer.errors.full_messages_for(:age).first %></p>
+                  <p style="color: red;">
+                    <%= @customer.errors.full_messages_for(:age).first %>
+                  </p>
                 <% end %>
               </td>
             </tr>
@@ -70,7 +81,9 @@
               <td>
                 <%= f.text_area :biography, size: "60x4", class: "biography-edit" %>
                 <% if @customer.errors.include?(:biography) %>
-                  <p style="color: red;"><%= @customer.errors.full_messages_for(:biography).first %></p>
+                  <p style="color: red;">
+                    <%= @customer.errors.full_messages_for(:biography).first %>
+                  </p>
                 <% end %>
               </td>
             </tr>
@@ -87,7 +100,6 @@
             </tr>
           </tbody>
         </table>
-
         <div class="d-flex justify-content-center">
           <%= f.submit "変更", class: "btn btn-success mr-3", style: "width: 150px;" %>
           <%= link_to "退会", unsubscribe_customers_path, class: "btn btn-danger", style: "width: 150px;" %>
@@ -95,6 +107,5 @@
       <% end %>
     </div>
   </div>
-
 </div>
 

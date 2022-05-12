@@ -1,8 +1,11 @@
 <div class="container follow-container">
-  
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>フォロー 一覧</mark></mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-user mr-2"></i>フォロー 一覧
+        </mark>
+      </h2>
     </div>
   </div>
 
@@ -28,20 +31,24 @@
           <table class="table text-light ">
             <tbody>
               <% @customers.each do |customer| %>
-              <tr>
-                <th class="text-center">
-                  <%= link_to customer_path(customer), class: "link-white" do %>
-                    <%= image_tag customer.get_profile_image, size: "80x80", class:"img_filter follow-img" %>
-                  <% end %>
-                </th>
-                <th class="align-middle">
-                  <%= link_to customer_path(customer), class: "link-white" do %>
-                    <%= customer.name %>
-                  <% end %>
-                </th>
-                <th class="align-middle"><%= customer.followings.count %> フォロー</th>
-                <th class="align-middle"><%= customer.followers.count %> フォロワー</th>
-              </tr>
+                <tr>
+                  <th class="text-center">
+                    <%= link_to customer_path(customer), class: "link-white" do %>
+                      <%= image_tag customer.get_profile_image, size: "80x80", class:"img_filter follow-img" %>
+                    <% end %>
+                  </th>
+                  <th class="align-middle">
+                    <%= link_to customer_path(customer), class: "link-white" do %>
+                      <%= customer.name %>
+                    <% end %>
+                  </th>
+                  <th class="align-middle">
+                    <%= customer.followings.count %> フォロー
+                  </th>
+                  <th class="align-middle">
+                    <%= customer.followers.count %> フォロワー
+                  </th>
+                </tr>
               <% end %>
             </tbody>
           <% else %>
@@ -51,6 +58,5 @@
       </div>
     </div>
   </div>
-
 </div>
 
