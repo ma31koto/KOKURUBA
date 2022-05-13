@@ -41,7 +41,7 @@
 
 ## ◆設計書
 ・ER図</br>
-[ER.pdf](https://github.com/ma31koto/KOKURUBA/files/8685959/ER.pdf)
+https://github.com/ma31koto/KOKURUBA/files/8685959/ER.pdf
 ・テーブル定義書</br>
 https://docs.google.com/spreadsheets/d/1N9lSC_y8pFyS9C14Lqt-CnbO44N1_A5_fyNidsl46zg/edit#gid=1373217982</br>
 ・詳細設計</br>
