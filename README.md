@@ -1,7 +1,6 @@
 ## KOKURUBA <告る場>
 
-![readme](https://user-images.githubusercontent.com/94063037/168272617-8fc09ab3-c4fa-4957-9cf7-98a08d6dd9db.gif)
-
+![readme](https://user-images.githubusercontent.com/94063037/168276636-f3924304-9f04-48af-8031-1956e496db62.gif)
 
 ### ◆サイト概要
 告白場所レビューサイト</br>
