@@ -208,19 +208,6 @@
   </div>
 
   <script>
-    //評価機能
-    <% ["atmosphere_rate","few_people_rate","standard_rate","all_rate"].each do |rate| %>
-      $('.star_<%= rate %>').empty();
-      $('.star_<%= rate %>').raty({
-        size     : 36,
-        starOff:  '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf: '<%= asset_path('star-half.png') %>',
-        scoreName: 'post[<%= rate %>]',
-        half: true,
-      })
-    <% end %>
-
     //地図機能
     let map_edit_admin
     const longitude = document.getElementById('longitude')
@@ -308,6 +295,6 @@
       });
     }
   </script>
-
+  <%= render 'layouts/star_save_post' %>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"  data-turbolinks-track="reload" async defer></script>
 </div>
