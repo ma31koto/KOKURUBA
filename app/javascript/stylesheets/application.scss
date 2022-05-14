@@ -56,10 +56,6 @@ body {
   font-size: 30px;
 }
 
-.admin_customer_list {
-  color: black;
-}
-
 .tabbox-contents{
   color: black;
 }
@@ -192,14 +188,14 @@ body {
   height: 25px;
 }
 
-.avg_confession_result {
+.avg-confession-result {
   background-image: url("../images/avg_confession_result.png");
   background-size: cover;
   width: 130px;
   height: 130px;
 }
 
-.avg_confession_result_position {
+.avg-confession-result-position {
   transform: translate(0, 100%);
   margin: 0;
   text-align:center;
@@ -228,10 +224,6 @@ body {
   text-decoration: none;
   background-color: #808000;
   border-color: #666600;
-}
-
-.field_with_errors{
-  display: contents;
 }
 
 .post-item {
@@ -361,7 +353,7 @@ body {
   color: #808000;
 }
 
-.img_filter:hover {
+.img-filter:hover {
   filter: brightness(60%);
   transition-duration: 0.3s;
 }
@@ -541,12 +533,12 @@ body {
     font-size: 12px;
   }
 
-  .avg_confession_result_position {
+  .avg-confession-result-position {
     transform: translate(0, 100%);
     font-size: 20px;
   }
 
-  .avg_confession_result_seacret {
+  .avg-confession-result-seacret {
     transform: translate(0, 120%);
     font-size: 15px;
   }

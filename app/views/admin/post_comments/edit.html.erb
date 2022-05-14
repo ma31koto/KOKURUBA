@@ -16,7 +16,7 @@
           <div class="mt-5 mb-1">●スポット元情報</div>
           <div class="ml-4">
             <%= link_to admin_post_path(@post_comment.post) do %>
-              <%= image_tag @post_comment.post.get_spot_image, size: "200x150", class:"img_filter" %>
+              <%= image_tag @post_comment.post.get_spot_image, size: "200x150", class:"img-filter" %>
             <% end %>
           </div>
           <div class="mt-5 ml-3">
@@ -34,7 +34,7 @@
           <div class="mt-5 mb-1">●コメント投稿者情報</div>
           <div class="ml-4">
             <%= link_to admin_customer_path(@post_comment.customer) do %>
-              <%= image_tag @post_comment.customer.get_profile_image, size: "150x150", class:"img_filter" %>
+              <%= image_tag @post_comment.customer.get_profile_image, size: "150x150", class:"img-filter" %>
             <% end %>
           </div>
           <div class="mt-5 ml-3">

@@ -109,17 +109,17 @@
         </div>
 
         <div class="col-4  p-0">
-          <div class="avg_confession_result ml-md-5">
+          <div class="avg-confession-result ml-md-5">
             <% if customer_signed_in? %>
               <% unless @post.avg_confession_result %>
-                <div class="align-items-center avg_confession_result_position h3">未回答</div>
+                <div class="align-items-center avg-confession-result-position h3">未回答</div>
               <% else %>
-                <div class="align-items-center avg_confession_result_position h3">
+                <div class="align-items-center avg-confession-result-position h3">
                   <%= @post.avg_confession_result %>％
                 </div>
               <% end %>
             <% else %>
-              <div style="transform: translate(0, 120%);margin: 0; text-align:center;" class="align-items-center avg_confession_result_seacret h4">
+              <div style="transform: translate(0, 120%);margin: 0; text-align:center;" class="align-items-center avg-confession-result-seacret h4">
                 <i class="fa-solid fa-key"></i>会員限定
               </div>
             <% end %>
