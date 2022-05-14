@@ -1,0 +1,12 @@
+<div class="d-flex">
+  <div class="follow-count ml-md-2 ml-3">
+    <%= link_to customer_followings_path(customer), class: "link-white" do %>
+      <%= customer.followings.count %> フォロー<br/>
+    <% end %>
+  </div>
+  <div class="follow-count ml-md-5 ml-4">
+    <%= link_to customer_followers_path(customer), class: "link-white" do %>
+      <%= customer.followers.count %> フォロワー<br/>
+    <% end %>
+  </div>
+</div>

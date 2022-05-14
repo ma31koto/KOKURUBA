@@ -4,6 +4,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @relationship = Relationship.find_by(follower_id: @customer.id, followed_id: current_customer.id)
     session[:path] = request.path
   end
 
@@ -41,5 +42,5 @@ class Public::CustomersController < ApplicationController
       redirect_to customer_path(current_customer)
     end
   end
-  
+
 end

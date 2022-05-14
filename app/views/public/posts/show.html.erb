@@ -13,7 +13,7 @@
     <div class="col-md-10 d-flex align-items-center">
       <div class="spot-title h1">【<%= @post.title %>】</div>
       <% if customer_signed_in? %>
-        <div id="favorite_buttons" class="d-flex align-items-center">
+        <div id="favorite-buttons" class="d-flex align-items-center">
           <%= render "public/favorites/btn", post: @post %>
         </div>
       <% end %>

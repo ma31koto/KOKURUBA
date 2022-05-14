@@ -21,13 +21,9 @@
           <%= image_tag @customer.get_profile_image, size: "150x150" %>
         </div>
         <div class="mx-auto mt-3">
-          <% if @customer == current_customer %>
-            <%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-success" %>
-          <% elsif current_customer.following?(@customer) %>
-            <%= link_to "フォロー外す", customer_relationship_path(@customer), method: :delete, class: "btn btn-danger" %>
-          <% elsif %>
-            <%= link_to 'フォローする', customer_relationships_path(@customer), method: :post, class: "btn btn-primary"  %>
-          <% end %>
+          <div id="follow-buttons">
+            <%= render "public/relationships/btn", customer: @customer, relationship: @relationship %>
+          </div>
         </div>
       </div>
     </div>
@@ -44,17 +40,8 @@
       <div class="offset-1 biography text-white-80">
         <%= @customer.biography %>
       </div>
-      <div class="d-flex">
-        <div class="follow-count ml-md-2 ml-3">
-          <%= link_to customer_followings_path(@customer), class: "link-white" do %>
-            <%= @customer.followings.count %> フォロー<br/>
-          <% end %>
-        </div>
-        <div class="follow-count ml-md-5 ml-4">
-          <%= link_to customer_followers_path(@customer), class: "link-white" do %>
-            <%= @customer.followers.count %> フォロワー<br/>
-          <% end %>
-        </div>
+      <div id="follow-counts">
+        <%= render "public/relationships/count", customer: @customer %>
       </div>
     </div>
   </div>

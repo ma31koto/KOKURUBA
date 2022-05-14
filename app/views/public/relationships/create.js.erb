@@ -1,0 +1,2 @@
+$('#follow-buttons').html("<%= j(render "public/relationships/btn", customer: @customer, relationship: @relationship) %>");
+$('#follow-counts').html("<%= j(render "public/relationships/count", customer: @customer) %>");
