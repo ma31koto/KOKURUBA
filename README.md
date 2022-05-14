@@ -42,7 +42,7 @@
 
 ## ◆設計書
 ・ER図</br>
-![suteru](https://user-images.githubusercontent.com/94063037/168263357-495b05fd-c06b-4fa0-a437-b222e52ba327.jpg)
+![suteru](https://user-images.githubusercontent.com/94063037/168416198-66ff953a-1e71-4087-9fc8-cc19eddf53c8.png)
 ・実装機能一覧</br>
 |     | 機能                          |  gem / 備考                      |
 | --- | ----------------------------- | -------------------------------- |
