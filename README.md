@@ -43,6 +43,13 @@
 ## ◆設計書
 ・ER図</br>
 ![suteru](https://user-images.githubusercontent.com/94063037/168263357-495b05fd-c06b-4fa0-a437-b222e52ba327.jpg)
+・実装機能一覧</br>
+|     | 機能                          |  gem / 備考  |
+| --- | ----------------------------- | ------------ |
+|  1  |ユーザー/管理者(ログイン機能)  | devise       |
+|  2  |フォロー機能                   | Ajax(非同期) |
+
+
 ・テーブル定義書</br>
 https://docs.google.com/spreadsheets/d/1N9lSC_y8pFyS9C14Lqt-CnbO44N1_A5_fyNidsl46zg/edit#gid=1373217982</br>
 ・詳細設計</br>
