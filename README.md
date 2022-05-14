@@ -40,9 +40,9 @@
 　念の為告白場所を調べておきたい場合。
 
 ## ◆設計書
-## ・ER図
+### ・ER図
 ![suteru](https://user-images.githubusercontent.com/94063037/168416198-66ff953a-1e71-4087-9fc8-cc19eddf53c8.png)
-・実装機能一覧</br>
+###・実装機能一覧
 |     | 機能                          |  gem / 備考                      |
 | --- | ----------------------------- | -------------------------------- |
 |  1  |会員/管理者(ログイン機能)      | devise                           |
@@ -66,9 +66,9 @@
 |  19 |ドメイン指定                   | お名前.com / AWSRoute 53         |
 |  20 |https設定                      | Certbot                          |
 
-##・テーブル定義書</br>
-https://docs.google.com/spreadsheets/d/1N9lSC_y8pFyS9C14Lqt-CnbO44N1_A5_fyNidsl46zg/edit#gid=1373217982</br>
-##・詳細設計</br>
+### ・テーブル定義書
+https://docs.google.com/spreadsheets/d/1N9lSC_y8pFyS9C14Lqt-CnbO44N1_A5_fyNidsl46zg/edit#gid=1373217982
+### ・詳細設計
 https://docs.google.com/spreadsheets/d/1htXMWH3dE_1wGEddYUeKXyawQNXqKhFoa-4Hzsyh8f0/edit#gid=2133469642
 
 ## ◆開発環境
@@ -80,3 +80,13 @@ https://docs.google.com/spreadsheets/d/1htXMWH3dE_1wGEddYUeKXyawQNXqKhFoa-4Hzsyh
 
 ## ◆使用素材
 canva https://www.canva.com/ja_jp/
+
+## ◆使用方法
+会員用</br>
+メールアドレス:makoto123@gmail.com</br>
+パスワード:123456</br>
+
+管理者用</br>
+メールアドレス:kokutokyo@gmail.com</br>
+パスワード:kokutokyo123</br>
+管理者用ログインURL: /admin/sign_inと打ち込む。
