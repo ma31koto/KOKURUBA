@@ -49,22 +49,23 @@
 |  1  |会員/管理者(ログイン機能)      | devise                           |
 |  2  |フォロー機能                   | Ajax(非同期)                     |
 |  3  |スポット投稿機能               | ×                                |
-|  3  |コメント機能                   | ×                                |
-|  3  |地図検索・表示機能             | Google Map API                   |
-|  4  |住所情報取得機能               | geocoder                         |
-|  5  |星レビュー機能                 | raty.js                          |
-|  6  |告白成功率機能                 | × 　　　　　                     |
-|  7  |タグ機能                       | ×                                |
-|  8  |検索機能                       | ransack                          |
-|  9  |ランキング機能                 | ×                                |
-|  10 |お気に入り機能                 | Ajax(非同期)                     |
-|  11 |ページネーション機能           | kaminari                         |
-|  12 |rails/devise日本語化           | rails-i18n                       |
-|  13 |レスポンシブ対応(会員側)       | Bootstrap                        |
-|  14 |コード解析                     | RuboCop                          |
-|  15 |単体・結合テスト(一部)	      | RSpec                            |
-|  16 |自動デプロイ                   | AWS, Github Actions(CI/CDツール) |
-|  17 |ドメイン指定                   | お名前.com / AWSRoute 53         |
+|  4  |コメント機能                   | ×                                |
+|  5  |地図検索・表示機能             | Google Map API                   |
+|  6  |住所情報取得機能               | geocoder                         |
+|  7  |星レビュー機能                 | raty.js                          |
+|  8  |告白成功率機能                 | × 　　　　　                     |
+|  9  |タグ機能                       | ×                                |
+|  10 |検索機能                       | ransack                          |
+|  11 |ランキング機能                 | ×                                |
+|  12 |お気に入り機能                 | Ajax(非同期)                     |
+|  13 |ページネーション機能           | kaminari                         |
+|  14 |rails/devise日本語化           | rails-i18n                       |
+|  15 |レスポンシブ対応(会員側)       | Bootstrap                        |
+|  16 |コード解析                     | RuboCop                          |
+|  17 |単体・結合テスト(一部)	      | RSpec                            |
+|  18 |自動デプロイ                   | AWS, Github Actions(CI/CDツール) |
+|  19 |ドメイン指定                   | お名前.com / AWSRoute 53         |
+|  20 |https設定                      | Certbot                          |
 
 ・テーブル定義書</br>
 https://docs.google.com/spreadsheets/d/1N9lSC_y8pFyS9C14Lqt-CnbO44N1_A5_fyNidsl46zg/edit#gid=1373217982</br>
