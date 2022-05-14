@@ -40,7 +40,7 @@
 　念の為告白場所を調べておきたい場合。
 
 ## ◆設計書
-#・ER図</br>
+##・ER図</br>
 ![suteru](https://user-images.githubusercontent.com/94063037/168416198-66ff953a-1e71-4087-9fc8-cc19eddf53c8.png)
 ・実装機能一覧</br>
 |     | 機能                          |  gem / 備考                      |
@@ -66,9 +66,9 @@
 |  19 |ドメイン指定                   | お名前.com / AWSRoute 53         |
 |  20 |https設定                      | Certbot                          |
 
-#・テーブル定義書</br>
+##・テーブル定義書</br>
 https://docs.google.com/spreadsheets/d/1N9lSC_y8pFyS9C14Lqt-CnbO44N1_A5_fyNidsl46zg/edit#gid=1373217982</br>
-#・詳細設計</br>
+##・詳細設計</br>
 https://docs.google.com/spreadsheets/d/1htXMWH3dE_1wGEddYUeKXyawQNXqKhFoa-4Hzsyh8f0/edit#gid=2133469642
 
 ## ◆開発環境
