@@ -370,6 +370,45 @@ body {
   font-size: 12px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.page-top {
+  position: fixed;
+  right: 5px;
+  bottom: 20px;
+  height: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transform: rotate(90deg);
+  font-size: 90%;
+  line-height: 1.5rem;
+  color: white;
+  padding: 0 0 0 35px;
+  border-top: solid 1px;
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  z-index: 10000;
+}
+.page-top::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 0px;
+  width: 15px;
+  border-top: solid 1px;
+  transform: rotate(35deg);
+  transform-origin: left top;
+}
+
+.page-top:hover {
+  color: #BDB76B;
+}
+
+
 @media screen and (max-width: 425px) {
   .home-title {
    font-size: 50px;
@@ -627,4 +666,7 @@ body {
     display: none;
   }
 
+  .page-top {
+    display: none;
+ }
 }
