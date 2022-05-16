@@ -12,12 +12,12 @@
   <div class="row">
     <div class="col-12 mt-5">
       <%= search_form_for(@q, url: post_comments_list_admin_posts_path) do |f| %>
-        <%= f.label :title, "タイトル" %>
-        <%= f.search_field :title_cont, :placeholder =>"例：東京タワー"%>
-        <i class="fa-solid fa-x ml-1 mr-1"></i>
-        <%= f.label :comment, "コメント" %>
-        <%= f.search_field :comment_cont, :placeholder =>"----" %>
-        <%= f.submit "検索" %>
+          <%= f.label :title, "タイトル" %>
+          <%= f.search_field :title_cont, :placeholder =>"例：東京タワー"%>
+          <i class="fa-solid fa-x ml-1 mr-1"></i>
+          <%= f.label :comment, "コメント" %>
+          <%= f.search_field :comment_cont, :placeholder =>"----" %>
+          <%= f.submit "検索", class: "ml-3" %>
       <% end %>
 
       <a>並び替え</a>
@@ -51,7 +51,9 @@
                   <%= post_comment.title %>
                   <div>
                     <%= link_to admin_post_path(post_comment.post) do %>
-                      スポット元へ<i class="fa-solid fa-right-to-bracket"></i>
+                      <div class="comment-font">
+                        スポット元へ<i class="fa-solid fa-right-to-bracket"></i>
+                       </div>
                     <% end %>
                   </div>
                 </td>
@@ -81,11 +83,14 @@
                 </td>
                 <td>
                   <div>
+                    【投稿者】
                     <%= link_to admin_customer_path(post_comment.customer), class: "link-white" do %>
-                      ●投稿者：<%= post_comment.customer.name %>
+                      <%= post_comment.customer.name %>
                     <% end %>
                   </div>
-                  <%= post_comment.comment %>
+                  <div class="comment-font">
+                    <%= post_comment.comment %>
+                  </div>
                 </td>
                 <td>
                   <%= post_comment.confession_result_i18n %>
