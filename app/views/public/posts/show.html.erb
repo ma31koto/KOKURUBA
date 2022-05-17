@@ -141,7 +141,7 @@
                 <%if @post.introduction.length > 95 %>
                   <div class="truncated">
                     <a><%= @post.introduction.truncate(95)%></a>
-                    <p class="see-more link-gold">&lt;more&gt;</p>
+                    <a class="see-more link-gold ml-5">&lt;more&gt;</a>
                   </div>
                   <div class="untruncated" style="display: none">
                     <a><%= @post.introduction %></a>

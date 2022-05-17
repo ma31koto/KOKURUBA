@@ -111,17 +111,17 @@
       <div class="row">
         <div class="col-12">
           <div class="row mt-4 p-2 post-info">
-            <div class="col-2">
+            <div class="col-2 px-2">
               <div class="mr-2">＜住所＞</div>
               <div class="mr-2">＜内容＞</div>
             </div>
-            <div class="col-10">
+            <div class="col-10 px-2">
               <span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
               <div class="content-body">
                 <%if @post.introduction.length > 95 %>
                   <div class="truncated">
                     <a><%= @post.introduction.truncate(95)%></a>
-                    <p class="see-more link-gold">&lt;more&gt;</p>
+                    <a class="see-more link-gold ml-5">&lt;more&gt;</a>
                   </div>
                   <div class="untruncated" style="display: none">
                     <a><%= @post.introduction %></a>
