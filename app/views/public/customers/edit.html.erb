@@ -66,7 +66,12 @@
                 <%= f.label :age, "年齢", class: "ml-3" %>
               </td>
               <td>
-                <%= f.text_field :age, size: 5  %>歳
+                <div class="d-felx">
+                  <div>
+                    <%= f.text_field :age, size: 5 %>
+                  </div>
+                  <div class="ml-3">歳</div>
+                </div>
                 <% if @customer.errors.include?(:age) %>
                   <p style="color: red;">
                     <%= @customer.errors.full_messages_for(:age).first %>
