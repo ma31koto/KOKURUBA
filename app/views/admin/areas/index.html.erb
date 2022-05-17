@@ -3,8 +3,7 @@
     <div class="col-12 mt-5 heading-ja">
       <h2>
         <mark class="bg-secondary text-light">
-          <i class="fa-solid fa-map mr-2"></i>
-          エリア一覧・追加
+          <i class="fa-solid fa-map mr-2"></i>エリア一覧・追加
         </mark>
       </h2>
     </div>
@@ -23,11 +22,15 @@
         </thead>
         <tbody>
           <% @areas.each do |area| %>
-          <tr>
-            <td></td>
-            <td><%= area.name %></td>
-            <td><%= link_to "編集する", edit_admin_area_path(area), class:"btn btn-success" %></td>
-          </tr>
+            <tr>
+              <td></td>
+              <td>
+                <%= area.name %>
+              </td>
+              <td>
+                <%= link_to "編集する", edit_admin_area_path(area), class:"btn btn-success" %>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>

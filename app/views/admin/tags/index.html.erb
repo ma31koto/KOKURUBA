@@ -9,7 +9,7 @@
     </div>
   </div>
 
- <div class="row">
+  <div class="row">
     <div class="col-12 mt-5 offset-2">
       <%= render 'form', tag: @tag %>
       <table class="table text-light col-8">
@@ -24,8 +24,12 @@
           <% @tags.each do |tag| %>
           <tr>
             <td></td>
-            <td><%= tag.name %></td>
-            <td><%= link_to "編集する", edit_admin_tag_path(tag), class:"btn btn-success" %></td>
+            <td>
+              <%= tag.name %>
+            </td>
+            <td>
+              <%= link_to "編集する", edit_admin_tag_path(tag), class:"btn btn-success" %>
+            </td>
           </tr>
           <% end %>
         </tbody>

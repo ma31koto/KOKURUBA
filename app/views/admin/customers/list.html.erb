@@ -50,42 +50,42 @@
               </thead>
               <tbody>
                 <% @customer.posts.each do |post| %>
-                <tr>
-                  <td class="align-middle">
-                    <%= link_to admin_post_path(post) do %>
-                      <%= image_tag post.get_spot_image, size: "150x100", class:"img-filter" %>
-                    <% end %>
-                  </td >
-                  <td class="align-middle">
-                    <%= link_to admin_post_path(post), class: "link-black" do %>
-                      <%= post.title %>
-                    <% end %>
-                  </td>
-                  <td class="align-middle">
-                    <%= post.area.name %>
-                  </td>
-                  <td class="align-middle">
-                    <% post.tags.each do |tag| %>
-                      <%= tag.name %><br/>
-                    <% end %>
-                  </td>
-                  <td class="align-middle">
-                    <h3>
-                      <%= post.avg_all_rate.round(1).to_f %>
-                    </h3>
-                    <div class="d-flex">
-                      <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
-                      <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count%>件)</div>
-                    </div>
-                  </td>
-                  <td class="align-middle">
-                    <% unless post.avg_confession_result %>
-                      <h5 class="ml-2">未回答</h5>
-                    <% else %>
-                      <h5 class="ml-2"><%= post.avg_confession_result %>％</h5>
-                    <% end %>
-                  </td>
-                </tr>
+                  <tr>
+                    <td class="align-middle">
+                      <%= link_to admin_post_path(post) do %>
+                        <%= image_tag post.get_spot_image, size: "150x100", class:"img-filter" %>
+                      <% end %>
+                    </td >
+                    <td class="align-middle">
+                      <%= link_to admin_post_path(post), class: "link-black" do %>
+                        <%= post.title %>
+                      <% end %>
+                    </td>
+                    <td class="align-middle">
+                      <%= post.area.name %>
+                    </td>
+                    <td class="align-middle">
+                      <% post.tags.each do |tag| %>
+                        <%= tag.name %><br/>
+                      <% end %>
+                    </td>
+                    <td class="align-middle">
+                      <h3>
+                        <%= post.avg_all_rate.round(1).to_f %>
+                      </h3>
+                      <div class="d-flex">
+                        <div class="star mr-2" data-score="<%= post.avg_all_rate %>"></div>
+                        <div>(<i class="fa-solid fa-comment-dots"></i><%= post.post_comments.count%>件)</div>
+                      </div>
+                    </td>
+                    <td class="align-middle">
+                      <% unless post.avg_confession_result %>
+                        <h5 class="ml-2">未回答</h5>
+                      <% else %>
+                        <h5 class="ml-2"><%= post.avg_confession_result %>％</h5>
+                      <% end %>
+                    </td>
+                  </tr>
                 <% end %>
               </tbody>
             </table>

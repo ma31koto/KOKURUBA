@@ -1,8 +1,11 @@
 <div class="container">
-
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
-      <h2><mark class="bg-secondary text-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>管理者ログイン</mark></h2>
+      <h2>
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-right-to-bracket mr-2"></i>管理者ログイン
+        </mark>
+      </h2>
     </div>
   </div>
 
@@ -20,10 +23,8 @@
         <% flash.each do |message_type, message| %>
           <%= content_tag :div, message, class: "message_type offset-2", style: "color: red;" %>
         <% end %>
-
         <%= f.submit "ログイン", class: "btn btn-primary offset-2" %>
       <% end %>
     </div>
   </div>
-
 </div>

@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-12 mt-5 heading-ja">
       <h2>
-        <mark class="bg-secondary text-light"><i class="fa-solid fa-user mr-2"></i>会員編集
+        <mark class="bg-secondary text-light">
+          <i class="fa-solid fa-user mr-2"></i>会員編集
         </mark>
       </h2>
     </div>
@@ -54,7 +55,9 @@
                 <%= f.radio_button :gender, Customer.genders.key(3) %>
                 <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
                 <% if @customer.errors.include?(:gender) %>
-                  <p style="color: red;"><%= @customer.errors.full_messages_for(:gender).first %></p>
+                  <p style="color: red;">
+                    <%= @customer.errors.full_messages_for(:gender).first %>
+                  </p>
                 <% end %>
               </td>
             </tr>

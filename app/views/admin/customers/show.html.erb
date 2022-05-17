@@ -17,38 +17,52 @@
         </thead>
         <tbody>
           <tr>
-            <td class="font-weight-bolder table-bg-color col-3">プロフィール写真</td>
-            <td><%= image_tag @customer.get_profile_image, size: "100x100" %></td>
+            <td class="font-weight-bolder table-bg-color col-3">
+              プロフィール写真
+            </td>
+            <td>
+              <%= image_tag @customer.get_profile_image, size: "100x100" %>
+            </td>
           </tr>
           <tr>
             <td class="font-weight-bolder table-bg-color col-3">
               名前
             </td>
-            <td><%= @customer.name %></td>
+            <td>
+              <%= @customer.name %>
+            </td>
           </tr>
           <tr>
             <td class="font-weight-bolder table-bg-color col-3">
               性別
             </td>
-            <td><%= @customer.gender_i18n %></td>
+            <td>
+              <%= @customer.gender_i18n %>
+            </td>
           </tr>
           <tr>
             <td class="font-weight-bolder table-bg-color col-3">
               年齢
             </td>
-            <td><%= @customer.age %>歳</td>
+            <td>
+              <%= @customer.age %>歳
+            </td>
           </tr>
           <tr>
             <td class="font-weight-bolder table-bg-color col-3">
               自己紹介
             </td>
-            <td><%= @customer.biography %></td>
+            <td>
+              <%= @customer.biography %>
+            </td>
           </tr>
           <tr>
             <td class="font-weight-bolder table-bg-color col-3">
               メールアドレス
             </td>
-            <td><%= @customer.email %></td>
+            <td>
+              <%= @customer.email %>
+            </td>
           </tr>
           <tr>
             <td class="font-weight-bolder table-bg-color col-3">

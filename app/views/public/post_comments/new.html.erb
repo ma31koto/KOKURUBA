@@ -70,7 +70,9 @@
               <i class="fa-solid fa-chess-knight" style="color: red;"></i>
             </div>
             <% if @post_comment.errors.include?(:confession_result) %>
-              <a style="color: red;"><%= @post_comment.errors.full_messages_for(:confession_result).first %></a>
+              <a style="color: red;">
+                <%= @post_comment.errors.full_messages_for(:confession_result).first %>
+              </a>
             <% end %>
           </div>
         </div>

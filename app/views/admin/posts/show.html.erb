@@ -120,14 +120,20 @@
               <div class="content-body">
                 <%if @post.introduction.length > 95 %>
                   <div class="truncated">
-                    <a><%= @post.introduction.truncate(95)%></a>
+                    <a>
+                      <%= @post.introduction.truncate(95)%>
+                    </a>
                     <a class="see-more link-gold ml-5">&lt;more&gt;</a>
                   </div>
                   <div class="untruncated" style="display: none">
-                    <a><%= @post.introduction %></a>
+                    <a>
+                      <%= @post.introduction %>
+                    </a>
                   </div>
                 <% else %>
-                  <a><%= @post.introduction %></a>
+                  <a>
+                    <%= @post.introduction %>
+                  </a>
                 <% end %>
               </div>
             </div>
@@ -216,7 +222,11 @@
             <div class="col-5 mt-3">
               <div class="row">
                 <div class="col-9">
-                  <h5><strong><%= post_comment.title %></strong></h5>
+                  <h5>
+                    <strong>
+                      <%= post_comment.title %>
+                    </strong>
+                  </h5>
                 </div>
                 <div class="col-3">
                   <a><%= post_comment.created_at.strftime('%Y/%m/%d') %></a>

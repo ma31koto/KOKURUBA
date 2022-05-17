@@ -3,7 +3,9 @@
     <h2>エラーが発生しました。以下ご確認お願いいたします。</h2>
     <ul>
       <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li>
+          <%= message %>
+        </li>
       <% end %>
     </ul>
   </div>

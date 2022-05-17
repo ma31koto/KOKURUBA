@@ -94,7 +94,9 @@
               <td>
                 <%= f.text_field :email, size: 30 %>
                 <% if params[:email].nil?%>
-                  <p style="color: red;"><%= @customer.errors.full_messages_for(:email).first %></p>
+                  <p style="color: red;">
+                    <%= @customer.errors.full_messages_for(:email).first %>
+                  </p>
                 <% end %>
               </td>
             </tr>
