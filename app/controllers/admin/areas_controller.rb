@@ -17,8 +17,7 @@ class Admin::AreasController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @area.update(area_params)

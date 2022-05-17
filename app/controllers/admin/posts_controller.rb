@@ -30,8 +30,7 @@ class Admin::PostsController < ApplicationController
     session[:path] = request.path
   end
 
-  def show
-  end
+  def show; end
 
   def edit
     @tag_list = @post.tags.pluck(:name).join(',')

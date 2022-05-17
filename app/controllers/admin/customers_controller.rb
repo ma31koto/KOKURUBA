@@ -6,11 +6,9 @@ class Admin::CustomersController < ApplicationController
     @customers = Customer.all.page(params[:page]).per(8)
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @customer.update(customer_params)

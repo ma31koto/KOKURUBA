@@ -1,5 +1,6 @@
 class Public::FavoritesController < ApplicationController
   before_action :authenticate_customer!
+  before_action :set_post, only: [:create, :destroy]
 
   def index
     favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
@@ -31,18 +32,21 @@ class Public::FavoritesController < ApplicationController
   end
 
   def create
-    @post = Post.find(params[:post_id])
     favorite = current_customer.favorites.new(post_id: @post.id)
     favorite.save
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
     favorite = current_customer.favorites.find_by(post_id: @post.id)
     favorite.destroy
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
   # ランキング検索の際、viewから送られてくる値
   def judgement_params(params)
     if params[:new_ranking].present?

@@ -38,17 +38,13 @@ class Public::PostsController < ApplicationController
     @posts = Kaminari.paginate_array(@posts_pre).page(params[:page]).per(8)
   end
 
-  def show
-    @posts = Post.all
-  end
+  def show; end
 
   def new
     @post = Post.new
-    @posts = Post.all
   end
 
   def create
-    @posts = Post.all
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
     @tag_list = params[:post][:name].split(',')
