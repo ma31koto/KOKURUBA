@@ -19,7 +19,7 @@
     </div>
   </div>
 
- <div class="row">
+  <div class="row">
     <div class="col-md-12 mt-md-5 mt-2 text-center spot-container">
       <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
         <div class="row text-left offset-md-2">
@@ -97,7 +97,7 @@
             <%= f.label :spot_image, "スポット画像" %>
           </div>
           <div class="col-md-6 col-7 post-form">
-            <%= f.file_field :spot_image, accept: "image/*" %>
+            <%= f.file_field :spot_image, accept: "image/*", style: "width: 95%;" %>
           </div>
         </div>
 
