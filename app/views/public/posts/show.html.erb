@@ -67,7 +67,8 @@
               </div>
               <div class="star show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
             <% else %>
-              <i class="fa-solid fa-key ml-md-4"></i>会員限定
+              <i class="fa-solid fa-key ml-md-4 mt-md-2"></i>
+              <div class="mt-1 seacret-font h5">会員限定</div>
             <% end %>
           </div>
 
@@ -119,7 +120,7 @@
                 </div>
               <% end %>
             <% else %>
-              <div style="transform: translate(0, 120%);margin: 0; text-align:center;" class="align-items-center avg-confession-result-seacret h4">
+              <div class="align-items-center avg-confession-result-seacret h5">
                 <i class="fa-solid fa-key"></i>会員限定
               </div>
             <% end %>
@@ -137,9 +138,9 @@
             <div class="col-10 px-md-2 p-0">
               <span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
               <div class="content-body">
-                <%if @post.introduction.length > 60 %>
+                <%if @post.introduction.length > 95 %>
                   <div class="truncated">
-                    <a><%= @post.introduction.truncate(60)%></a>
+                    <a><%= @post.introduction.truncate(95)%></a>
                     <p class="see-more link-gold">&lt;more&gt;</p>
                   </div>
                   <div class="untruncated" style="display: none">
@@ -214,7 +215,7 @@
                       <div class="h5 comment-review-integer">
                         <%= post_comment.all_rate.round(1).to_f %>
                       </div>
-                      <div class="star ml-md-2 ml-2" data-score="<%= post_comment.all_rate %>"></div>
+                      <div class="star ml-md-2 ml-2 comment-all-star" data-score="<%= post_comment.all_rate %>"></div>
                     </div>
                     <div class="d-flex">
                       <div class="ml-md-2">

@@ -188,6 +188,11 @@ body {
   height: 25px;
 }
 
+.comment-all-star img {
+  width: 20px;
+  height: 25px;
+}
+
 .avg-confession-result {
   background-image: url("../images/avg_confession_result.png");
   background-size: cover;
@@ -197,6 +202,12 @@ body {
 
 .avg-confession-result-position {
   transform: translate(0, 100%);
+  margin: 0;
+  text-align:center;
+}
+
+.avg-confession-result-seacret {
+  transform: translate(0, 150%);
   margin: 0;
   text-align:center;
 }
@@ -412,7 +423,6 @@ html {
   font-size: 13px;
 }
 
-
 @media screen and (max-width: 425px) {
   .home-title {
    font-size: 50px;
@@ -581,11 +591,6 @@ html {
     font-size: 20px;
   }
 
-  .avg-confession-result-seacret {
-    transform: translate(0, 120%);
-    font-size: 15px;
-  }
-
   .comment-title {
     font-size: 25px;
   }
@@ -672,5 +677,9 @@ html {
 
   .page-top {
     display: none;
- }
+  }
+
+  .seacret-font {
+    font-size: 16px;
+  }
 }

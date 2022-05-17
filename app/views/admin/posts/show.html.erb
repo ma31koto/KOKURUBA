@@ -53,26 +53,44 @@
       <div class="row">
         <div class="col-8">
           <div class="d-flex" style="height: 30px;">
-            <div style="width: 150px;"><h3>総合評価</h3></div>
-            <div class="mr-3"><h3><%= @post.avg_all_rate.round(1).to_f %></h3></div>
+            <div style="width: 150px;">
+              <h3>総合評価</h3>
+            </div>
+            <div class="mr-3">
+              <h3>
+                <%= @post.avg_all_rate.round(1).to_f %>
+              </h3>
+            </div>
             <div class="star  show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
           </div>
 
           <div class="d-flex mt-3 ml-4" style="height: 30px;">
-            <div style="width: 150px;"><p>雰囲気</p></div>
-            <div class="mr-3"><%= @post.avg_atmosphere_rate.round(1).to_f %></div>
+            <div style="width: 150px;">
+              <p>雰囲気</p>
+            </div>
+            <div class="mr-3">
+              <%= @post.avg_atmosphere_rate.round(1).to_f %>
+            </div>
             <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
           </div>
 
           <div class="d-flex ml-4" style="height: 30px;">
-            <div style="width: 150px;"><p>人の少なさ</p></div>
-            <div class="mr-3"><%= @post.avg_few_people_rate.round(1).to_f %></div>
+            <div style="width: 150px;">
+              <p>人の少なさ</p>
+            </div>
+            <div class="mr-3">
+              <%= @post.avg_few_people_rate.round(1).to_f %>
+            </div>
             <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
           </div>
 
           <div class="d-flex ml-4" style="height: 30px;">
-            <div style="width: 150px;"><p>定番度</p></div>
-            <div class="mr-3"><%= @post.avg_standard_rate.round(1).to_f %></div>
+            <div style="width: 150px;">
+              <p>定番度</p>
+            </div>
+            <div class="mr-3">
+              <%= @post.avg_standard_rate.round(1).to_f %>
+            </div>
             <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
           </div>
         </div>
@@ -80,9 +98,9 @@
         <div class="col-4">
           <div class="avg-confession-result ml-5">
             <% unless @post.avg_confession_result %>
-              <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">未回答</h3>
+              <h3 class="align-items-center avg-confession-result-position">未回答</h3>
             <% else %>
-              <h3 style="transform: translate(0, 100%);margin: 0; text-align:center;" class="align-items-center">
+              <h3 class="align-items-center avg-confession-result-position">
                 <%= @post.avg_confession_result %>％
               </h3>
             <% end %>
@@ -100,9 +118,9 @@
             <div class="col-10">
               <span class="mr-3">〒<%= @post.postal_code %></span><%= @post.address %><br/>
               <div class="content-body">
-                <%if @post.introduction.length > 60 %>
+                <%if @post.introduction.length > 95 %>
                   <div class="truncated">
-                    <a><%= @post.introduction.truncate(60)%></a>
+                    <a><%= @post.introduction.truncate(95)%></a>
                     <p class="see-more link-gold">&lt;more&gt;</p>
                   </div>
                   <div class="untruncated" style="display: none">
@@ -158,28 +176,38 @@
 
             <div class="col-3" style="border-left: 1px dotted #808000;">
               <div class="row mt-3">
-                <div class="col-5">
-                  <div style=""><h5>総合評価</h5></div>
-                  <div style=""><a>雰囲気</a></div>
-                  <div style=""><a>人の少なさ</a></div>
-                  <div style=""><a>定番度</a></div>
+                <div class="col-5 px-2">
+                  <h5>総合評価</h5>
+                  <div>雰囲気</div>
+                  <div>人の少なさ</div>
+                  <div>定番度</div>
                 </div>
-                <div class="col-7">
+                <div class="col-7 p-0">
                   <div class="d-flex">
-                    <div><h5><%= post_comment.all_rate.round(1).to_f %><h5></div>
-                    <div class="star" data-score="<%= post_comment.all_rate %>"></div>
+                    <div>
+                      <h5>
+                        <%= post_comment.all_rate.round(1).to_f %>
+                      <h5>
+                    </div>
+                    <div class="star ml-2 comment-all-star" data-score="<%= post_comment.all_rate %>"></div>
                   </div>
                   <div class="d-flex">
-                    <div><%= post_comment.atmosphere_rate.round(1).to_f %></div>
-                    <div class="star" data-score="<%= post_comment.atmosphere_rate %>"></div>
+                    <div class="ml-2">
+                      <%= post_comment.atmosphere_rate.round(1).to_f %>
+                    </div>
+                    <div class="star ml-2" data-score="<%= post_comment.atmosphere_rate %>"></div>
                   </div>
                   <div class="d-flex">
-                    <div><%= post_comment.few_people_rate.round(1).to_f %></div>
-                    <div class="star" data-score="<%= post_comment.few_people_rate %>"></div>
+                    <div class="ml-2">
+                      <%= post_comment.few_people_rate.round(1).to_f %>
+                    </div>
+                    <div class="star ml-2" data-score="<%= post_comment.few_people_rate %>"></div>
                   </div>
                   <div class="d-flex">
-                    <div><%= post_comment.standard_rate.round(1).to_f %></div>
-                    <div class="star" data-score="<%= post_comment.standard_rate %>"></div>
+                    <div class="ml-2">
+                      <%= post_comment.standard_rate.round(1).to_f %>
+                    </div>
+                    <div class="star ml-2" data-score="<%= post_comment.standard_rate %>"></div>
                   </div>
                 </div>
               </div>
