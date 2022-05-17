@@ -52,8 +52,8 @@
     <div class="col-7 mt-3">
       <div class="row">
         <div class="col-8">
-          <div class="d-flex" style="height: 30px;">
-            <div style="width: 150px;">
+          <div class="d-flex star-box">
+            <div class="star-item">
               <h3>総合評価</h3>
             </div>
             <div class="mr-3">
@@ -61,37 +61,37 @@
                 <%= @post.avg_all_rate.round(1).to_f %>
               </h3>
             </div>
-            <div class="star  show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
+            <div class="star show-all-star" data-score="<%= @post.avg_all_rate %>"></div>
           </div>
 
-          <div class="d-flex mt-3 ml-4" style="height: 30px;">
-            <div style="width: 150px;">
+          <div class="d-flex mt-3 ml-4 star-box">
+            <div class="star-item">
               <p>雰囲気</p>
             </div>
             <div class="mr-3">
               <%= @post.avg_atmosphere_rate.round(1).to_f %>
             </div>
-            <div class="star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
+            <div class="star show-star" data-score="<%= @post.avg_atmosphere_rate %>"></div>
           </div>
 
-          <div class="d-flex ml-4" style="height: 30px;">
-            <div style="width: 150px;">
+          <div class="d-flex ml-4 star-box">
+            <div class="star-item">
               <p>人の少なさ</p>
             </div>
             <div class="mr-3">
               <%= @post.avg_few_people_rate.round(1).to_f %>
             </div>
-            <div class="star" data-score="<%= @post.avg_few_people_rate %>"></div>
+            <div class="star show-star" data-score="<%= @post.avg_few_people_rate %>"></div>
           </div>
 
-          <div class="d-flex ml-4" style="height: 30px;">
-            <div style="width: 150px;">
+          <div class="d-flex ml-4 star-box">
+            <div class="star-item">
               <p>定番度</p>
             </div>
             <div class="mr-3">
               <%= @post.avg_standard_rate.round(1).to_f %>
             </div>
-            <div class="star" data-score="<%= @post.avg_standard_rate %>"></div>
+            <div class="star show-star" data-score="<%= @post.avg_standard_rate %>"></div>
           </div>
         </div>
 
