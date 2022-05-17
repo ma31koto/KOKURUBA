@@ -16,71 +16,98 @@
           <mark class="bg-secondary text-light">・会員でない方はこちらから会員登録</mark>
         </p>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <div class="mt-md-5 mb-2">
-            <%= f.label :name, "名前", class: "col-md-3 col-12"%>
-            <%= f.text_field :name, autofocus: true, :placeholder =>"例：東京太郎", size: 30 %>
+          <div class="row mt-md-5 mb-2">
+            <div class="col-md-3 col-12">
+              <%= f.label :name, "名前" %>
+            </div>
+            <div class="col-md-9 col-12">
+              <%= f.text_field :name, autofocus: true, :placeholder =>"例：東京太郎", size: 30 %>
+            </div>
             <% if @customer.errors.include?(:name) %>
-              <p style="color: red;" class="offset-3">
+              <p style="color: red;" class="offset-md-3 pl-3">
                 <%= @customer.errors.full_messages_for(:name).first %>
               </p>
             <% end %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :email, "メールアドレス", class: "col-md-3 col-12" %>
-            <%= f.email_field :email, :placeholder =>"例：sample@example.com", size: 30 %>
+          <div class="row mb-2">
+            <div class="col-md-3 col-12">
+              <%= f.label :email, "メールアドレス" %>
+            </div>
+            <div class="col-md-9 col-12">
+              <%= f.email_field :email, :placeholder =>"例：sample@example.com", size: 30 %>
+            </div>
             <% if @customer.errors.include?(:email) %>
-              <p style="color: red;" class="offset-3">
+              <p style="color: red;" class="offset-md-3 pl-3">
                 <%= @customer.errors.full_messages_for(:email).first %>
               </p>
             <% end %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :gender, "性別", class: "col-md-3 col-12" %>
-            <%= f.radio_button :gender, Customer.genders.key(0) %>
-            <%= f.label :gender, Customer.genders_i18n[:man], class: "mr-3", checked: true %>
+          <div class="row mb-2">
+            <div class="col-md-3 col-12">
+              <%= f.label :gender, "性別" %>
+            </div>
+            <div class="col-md-9 col-12">
+              <%= f.radio_button :gender, Customer.genders.key(0) %>
+              <%= f.label :gender, Customer.genders_i18n[:man], class: "mr-3", checked: true %>
 
-            <%= f.radio_button :gender, Customer.genders.key(1) %>
-            <%= f.label :gender, Customer.genders_i18n[:woman], class: "mr-3" %>
+              <%= f.radio_button :gender, Customer.genders.key(1) %>
+              <%= f.label :gender, Customer.genders_i18n[:woman], class: "mr-3" %>
 
-            <%= f.radio_button :gender, Customer.genders.key(2) %>
-            <%= f.label :gender, Customer.genders_i18n[:another], class: "mr-3" %>
+              <%= f.radio_button :gender, Customer.genders.key(2) %>
+              <%= f.label :gender, Customer.genders_i18n[:another], class: "mr-3" %>
 
-            <%= f.radio_button :gender, Customer.genders.key(3) %>
-            <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
+              <%= f.radio_button :gender, Customer.genders.key(3) %>
+              <%= f.label :gender, Customer.genders_i18n[:no_answer] %>
+            </div>
             <% if @customer.errors.include?(:gender) %>
-              <p style="color: red;" class="offset-3">
+              <p style="color: red;" class="offset-md-3 pl-3">
                 <%= @customer.errors.full_messages_for(:gender).first %>
               </p>
             <% end %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :age, "年齢", class: "col-md-3 col-12" %>
-            <%= f.text_field :age, autofocus: true, :placeholder =>"例：27", size: 10 %>歳
+          <div class="row mb-2">
+            <div class="col-md-3 col-12">
+              <%= f.label :age, "年齢" %>
+            </div>
+            <div class="col-md-9 col-12 d-flex">
+              <div>
+                <%= f.text_field :age, autofocus: true, :placeholder =>"例：27", size: 10 %>
+              </div>
+              <div class="ml-2">歳</div>
+            </div>
             <% if @customer.errors.include?(:age) %>
-              <p style="color: red;" class="offset-3">
+              <p style="color: red;" class="offset-md-3 pl-3">
                 <%= @customer.errors.full_messages_for(:age).first %>
               </p>
             <% end %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :password, "パスワード(#{@minimum_password_length}文字以上)", class: "col-md-3 col-12" %>
-            <%= f.password_field :password, autocomplete: "new-password", size: 30 %>
+          <div class="row mb-2">
+            <div class="col-md-3 col-12">
+              <%= f.label :password, "パスワード(#{@minimum_password_length}文字以上)" %>
+            </div>
+            <div class="col-md-9 col-12">
+              <%= f.password_field :password, autocomplete: "new-password", size: 30 %>
+            </div>
             <% if @customer.errors.include?(:password) %>
-              <p style="color: red;" class="offset-3">
+              <p style="color: red;" class="offset-md-3 pl-3">
                 <%= @customer.errors.full_messages_for(:password).first %>
               </p>
             <% end %>
           </div>
 
-          <div class="mb-2">
-            <%= f.label :password_confirmation, "パスワード(確認用)", class: "col-md-3 col-12" %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", size: 30 %>
+          <div class="row mb-2">
+            <div class="col-md-3 col-12">
+              <%= f.label :password_confirmation, "パスワード(確認用)" %>
+            </div>
+            <div class="col-md-9 col-12">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", size: 30 %>
+            </div>
             <% if @customer.errors.include?(:password) %>
-              <p style="color: red;" class="offset-3">
+              <p style="color: red;" class="offset-md-3 pl-3">
                 <%= @customer.errors.full_messages_for(:password).first %>
               </p>
             <% end %>
