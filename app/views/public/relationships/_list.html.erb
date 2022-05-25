@@ -1,0 +1,49 @@
+  <div class="row">
+    <div class="col-12 mt-5 ml-5">
+      <div class="d-flex">
+        <div>
+          <%= image_tag customer.get_profile_image, size: "100x100" %>
+        </div>
+        <div class="d-flex align-items-end ml-3">
+          【名前】<%= customer.name %><br/>
+          【性別】<%= customer.gender_i18n %><br/>
+          【年齢】<%= customer.age %>歳
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 mt-5">
+      <div class="offset-md-1">
+        <% if customers.exists? %>
+          <table class="table text-light ">
+            <tbody>
+              <% customers.each do |list_customer| %>
+                <tr>
+                  <th class="text-center">
+                    <%= link_to customer_path(list_customer), class: "link-white" do %>
+                      <%= image_tag list_customer.get_profile_image, size: "80x80", class:"img-filter follow-img" %>
+                    <% end %>
+                  </th>
+                  <th class="align-middle">
+                    <%= link_to customer_path(list_customer), class: "link-white" do %>
+                      <%= list_customer.name %>
+                    <% end %>
+                  </th>
+                  <th class="align-middle">
+                    <%= list_customer.followings.count %> フォロー
+                  </th>
+                  <th class="align-middle">
+                    <%= list_customer.followers.count %> フォロワー
+                  </th>
+                </tr>
+              <% end %>
+            </tbody>
+          <% else %>
+            <p>ユーザーはいません</p>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
