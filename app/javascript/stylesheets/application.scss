@@ -44,16 +44,21 @@ body {
   font-family: 'Shippori Mincho', serif;
 }
 
+.home-title {
+  padding-top: 150px;
+}
+
+.home-sub-title {
+  font-size: 30px;
+  background-color: rgba(0,0,0,0.6);
+}
+
 .home-top-image {
   background-image: url("../images/home_top.png");
   background-size: cover;
   width: 1000px;
   height: 550px;
   margin:0 auto;
-}
-
-.home-sub-title {
-  font-size: 30px;
 }
 
 .tabbox-contents{
