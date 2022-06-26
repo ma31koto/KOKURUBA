@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho&display=swap');
+@import "mixin";
 
 @charset "UTF-8";
 
@@ -106,20 +107,20 @@ body {
   color: red;
 }
 
-.animate-title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  opacity: 0;
-  font-size: 50px;
+// .animate-title {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   color: white;
+//   opacity: 0;
+//   font-size: 50px;
 
-    // &.inview {
-    // opacity: 1;
+  // &.inview {
+  //   opacity: 1;
 
-    // & .char {
-    //   display: inline-block;
+  //   & .char {
+  //     display: inline-block;
 
   //     @include animation(
   //       $name: kf-animate-chars,
@@ -135,7 +136,7 @@ body {
   //     }
   //   }
   // }
-}
+// }
 
 .tabbox-contents{
   color: black;
