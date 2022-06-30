@@ -126,13 +126,3 @@ class Public::PostsController < ApplicationController
   end
 
 end
-
-
-ef create
-
-@buy =  Buy.find(params )
-@buy.create
-
-end
-
-private
