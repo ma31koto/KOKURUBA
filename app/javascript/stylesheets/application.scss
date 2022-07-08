@@ -107,52 +107,6 @@ body {
   color: red;
 }
 
-// .animate-title {
-//   position: absolute;
-//   top: 0%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   color: white;
-//   opacity: 0;
-//   width: 700px;
-
-//   &.inview {
-//     opacity: 1;
-
-//     & .char {
-//       display: inline-block;
-
-//       @include animation(
-//         $name: kf-animate-chars,
-//         $duration: 0.5s,
-//         $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1),
-//         $fill-mode: both
-//       );
-
-//       @for $i from 1 through 18 {
-//           &:nth-child(#{$i}) {
-//               animation-delay: $i * 0.1s;
-//           }
-//       }
-//     }
-//   }
-// }
-
-// @keyframes kf-animate-chars {
-//   0% {
-//     opacity: 0;
-//     transform: translateY(-50%);
-//   }
-
-//   100% {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-// }
-
-// .home-about-explanation {
-//   margin-top: 100px;
-// }
 
 .tabbox-contents{
   color: black;
